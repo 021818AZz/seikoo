@@ -142,7 +142,7 @@
 
     <div class="card">
       <h2>Meu link de convite</h2>
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=280x280&data=https://seiko-7vz.pages.dev/register?invitCode=" id="qrCode" class="qr-code" />
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=280x280&data=https://seikoo.pages.dev/register?invitCode=" id="qrCode" class="qr-code" />
     </div>
 
     <div class="buttons">
@@ -172,7 +172,7 @@
       const inviteCode = userData.inviteCode || '';
 
       // Gerar link de convite com o código
-      const inviteLink = `https://seiko-7vz.pages.dev/register?invitCode=${inviteCode}`;
+      const inviteLink = `https://seikoo.pages.dev/register?invitCode=${inviteCode}`;
       
       // Atualizar QR Code com o link completo
       document.getElementById('qrCode').src = `https://api.qrserver.com/v1/create-qr-code/?size=280x280&data=${encodeURIComponent(inviteLink)}`;
