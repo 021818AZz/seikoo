@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Minha equipe</title>
+    <style>
+        :root {
+            --primary: #00fdfc;
+            --secondary: #1c2230;
+            --accent: #00ff80;
+            --text: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --card-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #1c2230 0%, #2c3e50 100%);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.5;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .container {
+            max-width: 100%;
+            width: 100%;
+            margin: 0 auto;
+            padding: 16px;
+            position: relative;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 32px;
+            padding-top: 12px;
+            position: relative;
+        }
+
+        .back-button {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            z-index: 10;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .back-button:active {
+            transform: scale(0.95);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .back-button svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--primary);
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+            position: absolute;
+            left: 0;
+            right: 0;
+            text-align: center;
+            pointer-events: none;
+            padding: 0 60px;
+        }
+
+        /* Circles Section */
+        .circles-container {
+            position: relative;
+            height: 280px;
+            margin-bottom: 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .main-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: conic-gradient(
+                from -90deg, 
+                var(--primary) 0%, 
+                var(--accent) 25%, 
+                #80ff00 50%, 
+                #ffff00 75%, 
+                #ff8000 90%, 
+                var(--primary) 100%
+            );
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+            box-shadow: 0 10px 30px rgba(0, 253, 252, 0.2);
+            margin-bottom: 24px;
+        }
+
+        .main-circle-inner {
+            width: calc(100% - 8px);
+            height: calc(100% - 8px);
+            border-radius: 50%;
+            background: var(--secondary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .total-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .total-value {
+            font-size: 36px;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 4px;
+            line-height: 1;
+        }
+
+        .total-currency {
+            font-size: 16px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .small-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: conic-gradient(
+                from -90deg, 
+                var(--primary) 0%, 
+                var(--accent) 100%
+            );
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px;
+            box-shadow: 0 5px 15px rgba(0, 253, 252, 0.2);
+        }
+
+        .small-circle-inner {
+            width: calc(100% - 6px);
+            height: calc(100% - 6px);
+            border-radius: 50%;
+            background: var(--secondary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+        }
+
+        .small-circle-text {
+            font-size: 11px;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .small-circle-value {
+            font-size: 24px;
+            color: var(--primary);
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        /* Level Cards */
+        .level-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+
+        .level-card:active {
+            transform: scale(0.98);
+        }
+
+        .trophy {
+            width: 48px;
+            height: 48px;
+            margin-right: 16px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .trophy-b {
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+        }
+
+        .trophy-c {
+            background: linear-gradient(135deg, #ffd93d, #ffed4e);
+        }
+
+        .trophy-d {
+            background: linear-gradient(135deg, #4ecdc4, #6bcf7f);
+        }
+
+        .level-info {
+            flex: 1;
+        }
+
+        .level-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .level-stats {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+
+        .stat-value {
+            font-size: 14px;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .stat-value-gray {
+            color: var(--text-secondary);
+        }
+
+        /* Loading */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (min-width: 400px) {
+            .container {
+                max-width: 400px;
+            }
+            
+            .circles-container {
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+                height: 200px;
+            }
+            
+            .main-circle {
+                margin-bottom: 0;
+            }
+        }
+        /* Adicione este estilo ao seu CSS existente */
+    .loading-dots {
+        display: inline-block;
+        position: relative;
+        width: 80px;
+        height: 20px;
+        text-align: center;
+    }
+    .loading-dots span {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--primary);
+        position: absolute;
+        animation-timing-function: cubic-bezier(0, 1, 1, 0);
+    }
+    .loading-dots span:nth-child(1) {
+        left: 8px;
+        animation: loading-dots1 0.6s infinite;
+    }
+    .loading-dots span:nth-child(2) {
+        left: 8px;
+        animation: loading-dots2 0.6s infinite;
+    }
+    .loading-dots span:nth-child(3) {
+        left: 32px;
+        animation: loading-dots2 0.6s infinite;
+    }
+    .loading-dots span:nth-child(4) {
+        left: 56px;
+        animation: loading-dots3 0.6s infinite;
+    }
+    @keyframes loading-dots1 {
+        0% { transform: scale(0); }
+        100% { transform: scale(1); }
+    }
+    @keyframes loading-dots2 {
+        0% { transform: translate(0, 0); }
+        100% { transform: translate(24px, 0); }
+    }
+    @keyframes loading-dots3 {
+        0% { transform: scale(1); }
+        100% { transform: scale(0); }
+    }
+    
+    .loading-text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        color: var(--primary);
+        font-size: 14px;
+    }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div class="back-button" onclick="window.history.back()">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+            </div>
+            <div class="header-title">Minha equipe</div>
+        </div>
+<div id="loading" class="loading">
+    <div class="loading-text">
+        <div class="loading-dots">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        Aguarde enquanto carregamos...
+    </div>
+</div>
+        <div class="circles-container">
+            <div class="main-circle">
+                <div class="main-circle-inner">
+                    <div class="total-text">Total das<br>receitas</div>
+                    <div class="total-value">0</div>
+                    <div class="total-currency">Kz</div>
+                </div>
+            </div>
+            <div class="small-circle">
+                <div class="small-circle-inner">
+                    <div class="small-circle-text">Número de<br>equipes</div>
+                    <div class="small-circle-value">0</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="level-card" id="nivelA-card">
+            <div class="trophy trophy-b">🏆</div>
+            <div class="level-info">
+                <div class="level-title">Nível A</div>
+                <div class="level-stats">
+                    <div class="stat-item">
+                        <div class="stat-label">Receita</div>
+                        <div class="stat-value" id="nivelA-receita">0 Kz</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Tamanho</div>
+                        <div class="stat-value stat-value-gray" id="nivelA-tamanho">0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="level-card" id="nivelB-card">
+            <div class="trophy trophy-c">🏆</div>
+            <div class="level-info">
+                <div class="level-title">Nível B</div>
+                <div class="level-stats">
+                    <div class="stat-item">
+                        <div class="stat-label">Receita</div>
+                        <div class="stat-value" id="nivelB-receita">0 Kz</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Tamanho</div>
+                        <div class="stat-value stat-value-gray" id="nivelB-tamanho">0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="level-card" id="nivelC-card">
+            <div class="trophy trophy-d">🏆</div>
+            <div class="level-info">
+                <div class="level-title">Nível C</div>
+                <div class="level-stats">
+                    <div class="stat-item">
+                        <div class="stat-label">Receita</div>
+                        <div class="stat-value" id="nivelC-receita">0 Kz</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Tamanho</div>
+                        <div class="stat-value stat-value-gray" id="nivelC-tamanho">0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="loading" class="loading">Carregando dados da equipe...</div>
+    </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Obter dados do usuário do localStorage
+        const userData = JSON.parse(localStorage.getItem('userData'));
+        const phone = userData?.phone;
+        
+        if (!phone) {
+            alert('Usuário não identificado. Por favor, faça login novamente.');
+            window.location.href = 'index.html';
+            return;
+        }
+
+        // Elementos da UI
+        const loadingElement = document.getElementById('loading');
+        const totalValueElement = document.querySelector('.total-value');
+        const teamCountElement = document.querySelector('.small-circle-value');
+        const mainCircle = document.querySelector('.main-circle');
+        const smallCircle = document.querySelector('.small-circle');
+        
+        // Elementos para os níveis
+        const nivelAReceita = document.getElementById('nivelA-receita');
+        const nivelATamanho = document.getElementById('nivelA-tamanho');
+        const nivelBReceita = document.getElementById('nivelB-receita');
+        const nivelBTamanho = document.getElementById('nivelB-tamanho');
+        const nivelCReceita = document.getElementById('nivelC-receita');
+        const nivelCTamanho = document.getElementById('nivelC-tamanho');
+
+        // Elementos dos cards de nível
+        const nivelACard = document.getElementById('nivelA-card');
+        const nivelBCard = document.getElementById('nivelB-card');
+        const nivelCCard = document.getElementById('nivelC-card');
+
+        // Adicionar event listeners para os cards
+        nivelACard.addEventListener('click', function() {
+            window.location.href = 'equipe2.html';
+        });
+
+        nivelBCard.addEventListener('click', function() {
+            window.location.href = 'equipe2.html';
+        });
+
+        nivelCCard.addEventListener('click', function() {
+            window.location.href = 'equipe2.html';
+        });
+
+        // Variáveis para armazenar os dados
+        let totalReceitas = 0;
+        let totalEquipe = 0;
+        let nivel1Users = [];
+        let nivel2Users = [];
+        let nivel3Users = [];
+        let myInviteCode = '';
+        let currentUserData = null;
+
+        // Função para girar os círculos
+        function startSpinning() {
+            mainCircle.style.animation = 'spin 1s linear infinite';
+            smallCircle.style.animation = 'spin 1s linear infinite';
+            
+            const style = document.createElement('style');
+            style.innerHTML = `
+                @keyframes spin {
+                    from { transform: rotate(0deg); }
+                    to { transform: rotate(360deg); }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Função para parar de girar os círculos
+        function stopSpinning() {
+            mainCircle.style.animation = 'none';
+            smallCircle.style.animation = 'none';
+        }
+
+        // Função para animar valores
+        const animateValue = (element, start, end, duration, suffix = '') => {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                element.textContent = suffix ? `${value} ${suffix}` : value;
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        };
+
+        // Função para buscar o usuário atual em todas as APIs
+        async function findCurrentUserInApis(phone) {
+            const apiPromises = [];
+            
+            for (let i = 1; i <= 20; i++) {
+                apiPromises.push(
+                    fetch(`https://685720dc21f5d3463e54855f.mockapi.io/User/${i}`)
+                        .then(response => {
+                            if (!response.ok) return null;
+                            return response.json();
+                        })
+                        .then(data => {
+                            const users = Array.isArray(data) ? data : [data];
+                            return users.find(user => user.phone === phone);
+                        })
+                        .catch(error => {
+                            console.error(`Erro ao buscar na API ${i}:`, error);
+                            return null;
+                        })
+                );
+            }
+            
+            const results = await Promise.all(apiPromises);
+            return results.find(result => result !== null);
+        }
+
+        // Função para buscar todos os usuários
+        async function getAllUsers() {
+            const apiPromises = [];
+            
+            for (let i = 1; i <= 20; i++) {
+                apiPromises.push(
+                    fetch(`https://685720dc21f5d3463e54855f.mockapi.io/User/${i}`)
+                        .then(response => {
+                            if (!response.ok) return [];
+                            return response.json();
+                        })
+                        .then(data => Array.isArray(data) ? data : [data])
+                        .catch(error => {
+                            console.error(`Erro ao buscar na API ${i}:`, error);
+                            return [];
+                        })
+                );
+            }
+            
+            const results = await Promise.all(apiPromises);
+            return results.flat();
+        }
+
+        // Função para atualizar os dados do usuário no localStorage
+        async function updateUserData() {
+            try {
+                const updatedUser = await findCurrentUserInApis(phone);
+                if (updatedUser) {
+                    // Atualiza apenas os campos necessários mantendo outros dados
+                    userData.nivel1 = updatedUser.nivel1 || 0;
+                    userData.nivel2 = updatedUser.nivel2 || 0;
+                    userData.nivel3 = updatedUser.nivel3 || 0;
+                    userData.inviteCode = updatedUser.inviteCode;
+                    
+                    localStorage.setItem('userData', JSON.stringify(userData));
+                    return true;
+                }
+                return false;
+            } catch (error) {
+                console.error('Erro ao atualizar dados do usuário:', error);
+                return false;
+            }
+        }
+
+        // Função principal para carregar e exibir os dados
+        async function loadTeamData() {
+            loadingElement.style.display = 'flex';
+            startSpinning();
+            
+            try {
+                // 1. Atualizar os dados do usuário a partir da API
+                const updated = await updateUserData();
+                if (!updated) {
+                    throw new Error('Não foi possível atualizar os dados do usuário');
+                }
+                
+                // 2. Buscar o usuário atualizado do localStorage
+                currentUserData = JSON.parse(localStorage.getItem('userData'));
+                myInviteCode = currentUserData.inviteCode;
+                
+                // 3. Buscar todos os usuários para calcular a equipe
+                const allUsers = await getAllUsers();
+                
+                // 4. Calcular os níveis da equipe
+                nivel1Users = allUsers.filter(user => user.usedInviteCode === myInviteCode && user.phone !== phone);
+                const nivel1InviteCodes = nivel1Users.map(user => user.inviteCode);
+                nivel2Users = allUsers.filter(user => nivel1InviteCodes.includes(user.usedInviteCode));
+                const nivel2InviteCodes = nivel2Users.map(user => user.inviteCode);
+                nivel3Users = allUsers.filter(user => nivel2InviteCodes.includes(user.usedInviteCode));
+                
+                // 5. Calcular totais
+                totalEquipe = nivel1Users.length + nivel2Users.length + nivel3Users.length;
+                totalReceitas = (currentUserData.nivel1 || 0) + (currentUserData.nivel2 || 0) + (currentUserData.nivel3 || 0);
+                
+                // 6. Atualizar a UI
+                animateValue(totalValueElement, 0, totalReceitas, 1000);
+                animateValue(teamCountElement, 0, totalEquipe, 1000);
+                
+                animateValue(nivelAReceita, 0, currentUserData.nivel1 || 0, 1000, 'Kz');
+                animateValue(nivelBReceita, 0, currentUserData.nivel2 || 0, 1000, 'Kz');
+                animateValue(nivelCReceita, 0, currentUserData.nivel3 || 0, 1000, 'Kz');
+                
+                animateValue(nivelATamanho, 0, nivel1Users.length, 1000);
+                animateValue(nivelBTamanho, 0, nivel2Users.length, 1000);
+                animateValue(nivelCTamanho, 0, nivel3Users.length, 1000);
+                
+            } catch (error) {
+                console.error('Erro ao carregar dados da equipe:', error);
+                
+                // Tentar usar dados do cache em caso de erro
+                const cachedData = JSON.parse(localStorage.getItem('userData'));
+                if (cachedData) {
+                    const cachedTotal = (cachedData.nivel1 || 0) + (cachedData.nivel2 || 0) + (cachedData.nivel3 || 0);
+                    animateValue(totalValueElement, 0, cachedTotal, 1000);
+                    animateValue(nivelAReceita, 0, cachedData.nivel1 || 0, 1000, 'Kz');
+                    animateValue(nivelBReceita, 0, cachedData.nivel2 || 0, 1000, 'Kz');
+                    animateValue(nivelCReceita, 0, cachedData.nivel3 || 0, 1000, 'Kz');
+                }
+                
+                // Usar valores padrão para tamanhos
+                animateValue(nivelATamanho, 0, 0, 1000);
+                animateValue(nivelBTamanho, 0, 0, 1000);
+                animateValue(nivelCTamanho, 0, 0, 1000);
+                animateValue(teamCountElement, 0, 0, 1000);
+                
+            } finally {
+                stopSpinning();
+                loadingElement.style.display = 'none';
+            }
+        }
+
+        // Iniciar o carregamento dos dados
+        loadTeamData();
+
+        // Atualizar os dados periodicamente (a cada 30 segundos)
+        setInterval(loadTeamData, 30000);
+    });
+</script>

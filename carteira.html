@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carteira</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0b0e2a;
+      color: white;
+    }
+
+    .topo {
+  background: url('https://i.postimg.cc/Y2Z0BHT1/Figma-DDSSlice-PNG69dbc20b7a67a4afca4e1baa8f9cae73.png') no-repeat center top;
+  background-size: cover;
+  padding: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  text-align: center;
+  position: relative;
+}
+
+
+    .topo h1 {
+      font-size: 20px;
+      color: #000;
+    }
+
+    .saldo {
+      font-size: 32px;
+      font-weight: bold;
+      margin: 10px 0;
+      color: #000;
+    }
+
+    .topo p {
+      color: #000;
+    }
+
+    .menu-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .menu-btn img {
+      width: 28px;
+      height: 28px;
+    }
+
+    .menu-popup {
+      position: absolute;
+      top: 60px;
+      right: 15px;
+      background-color: #1e1e2f;
+      padding: 10px;
+      border-radius: 10px;
+      width: 200px;
+      display: none;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .menu-popup div {
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      color: white;
+    }
+
+    .menu-popup div:hover {
+      background-color: #2e2e3f;
+      border-radius: 6px;
+    }
+
+    .menu-popup hr {
+      border: 0.5px solid #444;
+      margin: 8px 0;
+    }
+
+    .botoes {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 15px;
+    }
+
+    .botoes button {
+      padding: 10px 20px;
+      background-color: #0b0e2a;
+      color: white;
+      border-radius: 25px;
+      border: none;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .botoes button img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .info {
+      background-color: #1d223c;
+      margin: 20px;
+      padding: 15px;
+      border-radius: 15px;
+    }
+
+    .info div {
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .icon-text {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #00f7ff;
+    }
+
+    .icon-text img {
+      width: 24px;
+      height: 24px;
+    }
+
+    .recompensa {
+      background-color: #132a3d;
+      margin: 0 20px 80px;
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid #00f7ff;
+    }
+
+    .recompensa h3 {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .recompensa p {
+      font-size: 14px;
+    }
+
+    .partilhar-btn {
+      margin-top: 15px;
+      background-color: #00f7ff;
+      color: #000;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .partilhar-btn img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #0b0e2a;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      border-top: 1px solid #333;
+    }
+
+    .nav div {
+      text-align: center;
+      color: white;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .nav img {
+      width: 24px;
+      height: 24px;
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOPO -->
+  <div class="topo">
+    <h1>Carteira</h1>
+    <button class="menu-btn" onclick="toggleMenu()">
+      <img src="https://i.postimg.cc/vB7hFhZn/Figma-DDSSlice-PNG7edf00eb6b9e94bee8d11019bd178ecb.png" alt="menu">
+    </button>
+    <div class="menu-popup" id="menuPopup">
+      <div onclick="window.location.href='registro.html'"><img src="https://i.postimg.cc/YCVb1jPv/Figma-DDSSlice-PNGebd6f683f62f9d3e0e7084b716a2e457.png" width="20"> Registo Geral</div>
+      <hr>
+      <div onclick="window.location.href='registro.html'"><img src="https://i.postimg.cc/qqzNXBS7/Figma-DDSSlice-PNG3e653f5e485d60da5ea875376d4a8f5d.png" width="20"> Registo de Retirada</div>
+    </div>
+    <div class="saldo">Carregando... Kz</div>
+    <p>Recarregar a Carteira 0.00 Kz</p>
+    <div class="botoes">
+      <button onclick="window.location.href='deposito.html'"><img src="https://i.postimg.cc/YCVb1jPv/Figma-DDSSlice-PNGebd6f683f62f9d3e0e7084b716a2e457.png" alt="recarga">Recarga</button>
+      <button onclick="window.location.href='retirar.html'"><img src="https://i.postimg.cc/qqzNXBS7/Figma-DDSSlice-PNG3e653f5e485d60da5ea875376d4a8f5d.png" alt="retirada">Retirada</button>
+    </div>
+  </div>
+
+  <!-- INFORMAÇÕES -->
+  <div class="info">
+    <div>ID: 929250130</div>
+    <div class="icon-text">
+      <img src="https://i.postimg.cc/5NDCgvxW/Figma-DDSSlice-PNGe072538eefae813a3164055c797d8f16.png" alt="ícone">
+      <span>Total de ativos: 0 Kz</span>
+    </div>
+    <div class="icon-text">
+      <img src="https://i.postimg.cc/YS6Yh9BK/Figma-DDSSlice-PNGc7e6cf5086366f53bb88672458c4758f.png" alt="ícone">
+      <span>Ganhe hoje mesmo: 0 Kz</span>
+    </div>
+    <div>Total das receitas: 0 Kz</div>
+    <div>Retirada total: 0 Kz</div>
+    <div>Recarga total: 0 Kz</div>
+    <div>Valor energético: 0.00</div>
+  </div>
+
+  <!-- RECOMPENSAS -->
+  <div class="recompensa">
+    <h3>Recompensas recomendadas</h3>
+    <p>Compartilhar este trabalho com amigos pode ganhar maior renda</p>
+    <button class="partilhar-btn" onclick="window.location.href='endereco.html'">
+      <img src="https://i.postimg.cc/cJnTT0qX/Figma-DDSSlice-PNGb146de41ba7d1a7f16da96d5dd8ee5fc.png" alt="partilhar">
+      Partilhar
+    </button>
+  </div>
+
+  <!-- MENU INFERIOR -->
+  <div class="nav">
+    <div onclick="window.location.href='home.html'">
+      <img src="https://i.postimg.cc/bvWWNmPF/home.png" alt="home">
+      <div>Home</div>
+    </div>
+    <div onclick="window.location.href='produto.html'">
+      <img src="https://i.postimg.cc/bwFF3mZN/product.png" alt="produto">
+      <div>Produto</div>
+    </div>
+    <div onclick="window.location.href='carteira.html'">
+      <img src="https://i.postimg.cc/3R2Sr7nd/walletactive.png" alt="carteira">
+      <div>Carteira</div>
+    </div>
+    <div onclick="window.location.href='meu.html'">
+      <img src="https://i.postimg.cc/8cB04D6q/my.png" alt="meu">
+      <div>Meu</div>
+    </div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('menuPopup');
+      menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+    }
+
+    // Fechar o menu se clicar fora
+    document.addEventListener('click', function(event) {
+      const menu = document.getElementById('menuPopup');
+      const btn = document.querySelector('.menu-btn');
+      if (!menu.contains(event.target) && !btn.contains(event.target)) {
+        menu.style.display = 'none';
+      }
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Obter userData do localStorage
+        const userDataString = localStorage.getItem('userData');
+        if (!userDataString) {
+            alert('Dados do usuário não encontrados. Por favor, faça login novamente.');
+            window.location.href = 'index.html';
+            return;
+        }
+
+        const userData = JSON.parse(userDataString);
+        const userPhone = userData.phone;
+
+        if (!userPhone) {
+            alert('Número de telefone não encontrado. Por favor, faça login novamente.');
+            window.location.href = 'index.html';
+            return;
+        }
+
+        // Atualizar o ID para mostrar o phone
+        document.querySelector('.info div:first-child').textContent = `Telefone: ${userPhone}`;
+
+        // Função otimizada para buscar o usuário nas APIs de 1 a 20 em paralelo
+        async function findUserByPhone(phone) {
+            const apiPromises = [];
+            
+            // Criar todas as promessas de busca
+            for (let i = 1; i <= 20; i++) {
+                apiPromises.push(
+                    fetch(`https://685720dc21f5d3463e54855f.mockapi.io/User/${i}`)
+                        .then(response => response.ok ? response.json() : null)
+                        .then(data => {
+                            if (!data) return null;
+                            const userArray = Array.isArray(data) ? data : [data];
+                            return userArray.find(user => user.phone === phone);
+                        })
+                        .catch(error => {
+                            console.error(`Erro ao buscar na API ${i}:`, error);
+                            return null;
+                        })
+                );
+            }
+            
+            // Esperar todas as requisições
+            const results = await Promise.all(apiPromises);
+            
+            // Retornar o primeiro usuário encontrado
+            return results.find(result => result !== null);
+        }
+
+        // Função otimizada para buscar os produtos do usuário em paralelo
+        async function findUserProducts(phone) {
+            const apiPromises = [];
+            
+            // Criar todas as promessas de busca
+            for (let i = 1; i <= 20; i++) {
+                apiPromises.push(
+                    fetch(`https://685730c921f5d3463e54a877.mockapi.io/Pro/${i}`)
+                        .then(response => response.ok ? response.json() : [])
+                        .then(data => {
+                            const productArray = Array.isArray(data) ? data : [data];
+                            return productArray.filter(product => product.telefone === phone);
+                        })
+                        .catch(error => {
+                            console.error(`Erro ao buscar produtos na API ${i}:`, error);
+                            return [];
+                        })
+                );
+            }
+            
+            // Esperar todas as requisições e concatenar resultados
+            const results = await Promise.all(apiPromises);
+            return results.flat();
+        }
+
+        // Atualizar as informações da carteira de forma otimizada
+        async function updateWalletInfo() {
+            // Buscar usuário e produtos em paralelo
+            const [user, products] = await Promise.all([
+                findUserByPhone(userPhone),
+                findUserProducts(userPhone)
+            ]);
+            
+            // Atualizar saldo do usuário
+            const saldoElement = document.querySelector('.saldo');
+            if (user && user.saldo) {
+                saldoElement.textContent = `${parseFloat(user.saldo).toFixed(2)} Kz`;
+            } else {
+                saldoElement.textContent = '0.00 Kz';
+            }
+            
+            // Calcular ganhos hoje (soma de todos os totalRecebido)
+            let totalGanhos = 0;
+            if (products.length > 0) {
+                totalGanhos = products.reduce((sum, product) => {
+                    return sum + (parseFloat(product.totalRecebido) || 0);
+                }, 0);
+            }
+            
+            // Atualizar ganhos hoje
+            const ganhosElement = document.querySelector('.icon-text:nth-child(3) span');
+            ganhosElement.textContent = `Ganhe hoje mesmo: ${totalGanhos.toFixed(2)} Kz`;
+            
+            // Atualizar outros campos conforme necessário
+            if (user) {
+                const infoDivs = document.querySelectorAll('.info div');
+                if (user.saldo) {
+                    infoDivs[1].querySelector('span').textContent = `Total de ativos: ${parseFloat(user.saldo).toFixed(2)} Kz`;
+                }
+                if (user.totalRetirada) {
+                    infoDivs[4].textContent = `Retirada total: ${parseFloat(user.retirada).toFixed(2)} Kz`;
+                }
+                if (user.totalreceita) {
+                    infoDivs[5].textContent = `Recarga total: ${parseFloat(user.receita).toFixed(2)} Kz`;
+                }
+            }
+        }
+
+        // Iniciar o processo de atualização
+        updateWalletInfo();
+    });
+
+    function toggleMenu() {
+      const menu = document.getElementById('menuPopup');
+      menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+    }
+
+    // Fechar o menu se clicar fora
+    document.addEventListener('click', function(event) {
+      const menu = document.getElementById('menuPopup');
+      const btn = document.querySelector('.menu-btn');
+      if (!menu.contains(event.target) && !btn.contains(event.target)) {
+        menu.style.display = 'none';
+      }
+    });
+</script>
+</body>
+</html>

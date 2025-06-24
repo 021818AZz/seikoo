@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Contas de Recepção</title>
+    <style>
+        :root {
+            --primary: #1c2230;
+            --secondary: #00fdfc;
+            --text: #ffffff;
+            --card-bg: #b20d94;
+            --button-bg: #3a4357;
+            --error: #0f133e;
+            --success: #4caf50;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--primary);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 15px;
+            padding-bottom: 100px;
+        }
+        
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--secondary);
+        }
+        
+        .back-icon {
+            cursor: pointer;
+            margin-right: 15px;
+        }
+        
+        .header-content {
+            flex: 1;
+        }
+        
+        .header h1 {
+            color: var(--secondary);
+            margin-bottom: 5px;
+            font-size: 1.3em;
+        }
+        
+        .header p {
+            margin-top: 0;
+            opacity: 0.8;
+            font-size: 0.9em;
+        }
+        
+        .iban-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .iban-title {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+        
+        .iban-number {
+            font-family: monospace;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            word-break: break-all;
+        }
+        
+        .iban-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        
+        .action-button {
+            background-color: var(--button-bg);
+            border: none;
+            color: var(--secondary);
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        
+        .action-button.delete {
+            color: var(--error);
+        }
+        
+        .add-button {
+            background-color: var(--secondary);
+            color: var(--primary);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: var(--primary);
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+            border: 1px solid var(--secondary);
+        }
+        
+        .modal-title {
+            color: var(--secondary);
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid var(--secondary);
+            background-color: var(--card-bg);
+            color: var(--text);
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .cancel-button {
+            background-color: var(--button-bg);
+            color: var(--text);
+        }
+        
+        .confirm-button {
+            background-color: var(--secondary);
+            color: var(--primary);
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .spinner {
+            border: 4px solid rgba(0, 253, 252, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid rgba(0, 253, 252, 1);
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #0b0e2a;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            border-top: 1px solid #333;
+        }
+
+        .nav div {
+            text-align: center;
+            color: white;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .nav img {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="back-icon" onclick="window.history.back()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 18L9 12L15 6" stroke="#00FDFC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="header-content">
+                
+                <p>A minha Conta de Recepção</p>
+            </div>
+        </div>
+        
+        <div id="ibans-container">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Carregando suas contas...</p>
+            </div>
+        </div>
+        
+        <button id="add-iban-button" class="add-button">+ Adicionar Conta de Recepção</button>
+    </div>
+    
+    <!-- Modal para adicionar/editar IBAN -->
+    <div id="iban-modal" class="modal">
+        <div class="modal-content">
+            <h2 class="modal-title" id="modal-title">Adicionar</h2>
+            
+            <div class="form-group">
+                <label>Selecione o tipo de banco</label>
+                <select id="bank-type">
+                    <option value="BAI">BAI</option>
+                    <option value="BFA">BFA</option>
+                    <option value="ATL">ATL</option>
+                    <option value="BIC">BIC</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Nome do titular da conta</label>
+                <input type="text" id="account-holder" placeholder="Nome do titular da conta">
+            </div>
+            
+            <div class="form-group">
+                <label>Número da conta (IBAN)</label>
+                <input type="text" id="iban-number" placeholder="Número da conta">
+            </div>
+            
+            <div class="form-actions">
+                <button id="cancel-button" class="action-button cancel-button">Cancelar</button>
+                <button id="confirm-button" class="action-button confirm-button">Confirmar</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Navigation Bar -->
+    <div class="nav">
+        <div onclick="window.location.href='home.html'">
+            <img src="https://i.postimg.cc/bvWWNmPF/home.png" alt="home">
+            <div>Home</div>
+        </div>
+        <div onclick="window.location.href='produto.html'">
+            <img src="https://i.postimg.cc/bwFF3mZN/product.png" alt="produto">
+            <div>Produto</div>
+        </div>
+        <div onclick="window.location.href='carteira.html'">
+            <img src="https://i.postimg.cc/3R2Sr7nd/walletactive.png" alt="carteira">
+            <div>Carteira</div>
+        </div>
+        <div onclick="window.location.href='meu.html'">
+            <img src="https://i.postimg.cc/8cB04D6q/my.png" alt="meu">
+            <div>Meu</div>
+        </div>
+    </div>
+
+    <script>document.addEventListener('DOMContentLoaded', async function() {
+    const API_IBAN_BASE = 'https://68582f8c21f5d3463e576aeb.mockapi.io/Iban/';
+    const userId = localStorage.getItem('userId');
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    const ibansContainer = document.getElementById('ibans-container');
+    const addIbanButton = document.getElementById('add-iban-button');
+    const ibanModal = document.getElementById('iban-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const cancelButton = document.getElementById('cancel-button');
+    const confirmButton = document.getElementById('confirm-button');
+    
+    let currentEditingIban = null;
+    let userIbans = [];
+
+    // Validação do usuário
+    if (!userId || !userData || !userData.phone || userId !== userData.id) {
+        ibansContainer.innerHTML = '<div class="iban-card"><p>Dados do usuário inválidos. Redirecionando...</p></div>';
+        setTimeout(() => window.location.href = 'index.html', 2000);
+        return;
+    }
+
+    // Carrega os IBANs do usuário com base no telefone
+    async function loadUserIbans() {
+        ibansContainer.innerHTML = `
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Carregando suas contas...</p>
+            </div>
+        `;
+        
+        try {
+            // Busca em todas as APIs de IBAN (1-10) filtrando pelo telefone do usuário
+            const apiRequests = [];
+            for (let i = 1; i <= 10; i++) {
+                apiRequests.push(fetch(`${API_IBAN_BASE}${i}`));
+            }
+
+            const responses = await Promise.allSettled(apiRequests);
+            userIbans = [];
+
+            for (let i = 0; i < responses.length; i++) {
+                const response = responses[i];
+                if (response.status === 'fulfilled' && response.value.ok) {
+                    try {
+                        const ibans = await response.value.json();
+                        if (Array.isArray(ibans)) {
+                            // Filtra os IBANs pelo telefone do usuário
+                            const filteredIbans = ibans.filter(iban => iban.phone === userData.phone);
+                            userIbans = userIbans.concat(filteredIbans);
+                        }
+                    } catch (error) {
+                        console.error(`Erro ao processar API IBAN ${i + 1}:`, error);
+                    }
+                }
+            }
+
+            displayIbans(userIbans);
+
+        } catch (error) {
+            console.error('Erro ao carregar IBANs:', error);
+            ibansContainer.innerHTML = '<div class="iban-card"><p>Ocorreu um erro ao carregar suas contas.</p></div>';
+        }
+    }
+
+    // Restante do código permanece igual...
+    function displayIbans(ibans) {
+        if (ibans.length === 0) {
+            ibansContainer.innerHTML = `
+                <div class="iban-card">
+                    <p>Você ainda não tem contas cadastradas.</p>
+                    <p>Clique no botão "+ Adicionar Conta" para cadastrar sua primeira conta.</p>
+                </div>
+            `;
+            return;
+        }
+
+        let html = '';
+        
+        ibans.forEach(iban => {
+            html += `
+                <div class="iban-card" data-id="${iban.id}" data-api="${iban.apiNumber}">
+                    <div class="iban-title">${iban.bankType} - ${iban.accountHolder}</div>
+                    <div class="iban-number">${iban.ibanNumber}</div>
+                    <div class="iban-actions">
+                        <button class="action-button edit-button" data-id="${iban.id}">Editar</button>
+                        <button class="action-button delete-button" data-id="${iban.id}">Excluir</button>
+                    </div>
+                </div>
+            `;
+        });
+
+        ibansContainer.innerHTML = html;
+
+        document.querySelectorAll('.edit-button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const ibanId = e.target.getAttribute('data-id');
+                editIban(ibanId);
+            });
+        });
+
+        document.querySelectorAll('.delete-button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const ibanId = e.target.getAttribute('data-id');
+                deleteIban(ibanId);
+            });
+        });
+    }
+
+    function editIban(ibanId) {
+        const iban = userIbans.find(i => i.id === ibanId);
+        if (!iban) return;
+
+        currentEditingIban = iban;
+        modalTitle.textContent = 'Editar Conta de Recepção';
+        document.getElementById('bank-type').value = iban.bankType;
+        document.getElementById('account-holder').value = iban.accountHolder;
+        document.getElementById('iban-number').value = iban.ibanNumber;
+        ibanModal.style.display = 'flex';
+    }
+
+    async function deleteIban(ibanId) {
+        if (!confirm('Tem certeza que deseja excluir esta conta?')) return;
+
+        const iban = userIbans.find(i => i.id === ibanId);
+        if (!iban) return;
+
+        try {
+            const response = await fetch(`${API_IBAN_BASE}${iban.apiNumber}/${ibanId}`, {
+                method: 'DELETE'
+            });
+
+            if (response.ok) {
+                loadUserIbans();
+            } else {
+                alert('Erro ao excluir conta. Tente novamente.');
+            }
+        } catch (error) {
+            console.error('Erro ao excluir IBAN:', error);
+            alert('Erro ao excluir conta. Tente novamente.');
+        }
+    }
+
+    async function findAvailableApi() {
+        for (let i = 1; i <= 10; i++) {
+            try {
+                const response = await fetch(`${API_IBAN_BASE}${i}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    if (Array.isArray(data) && data.length < 100) {
+                        return i;
+                    }
+                }
+            } catch (error) {
+                console.error(`Erro ao verificar API ${i}:`, error);
+            }
+        }
+        return null;
+    }
+
+    async function saveIban() {
+        const bankType = document.getElementById('bank-type').value;
+        const accountHolder = document.getElementById('account-holder').value.trim();
+        const ibanNumber = document.getElementById('iban-number').value.trim();
+
+        if (!accountHolder || !ibanNumber) {
+            alert('Por favor, preencha todos os campos.');
+            return;
+        }
+
+        const ibanData = {
+            userId,
+            bankType,
+            accountHolder,
+            ibanNumber,
+            phone: userData.phone, // Garante que o telefone do usuário está incluído
+            createdAt: new Date().toISOString()
+        };
+
+        try {
+            if (currentEditingIban) {
+                const response = await fetch(`${API_IBAN_BASE}${currentEditingIban.apiNumber}/${currentEditingIban.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(ibanData)
+                });
+
+                if (response.ok) {
+                    ibanModal.style.display = 'none';
+                    loadUserIbans();
+                    currentEditingIban = null;
+                } else {
+                    alert('Erro ao atualizar conta. Tente novamente.');
+                }
+            } else {
+                const apiNumber = await findAvailableApi();
+                if (!apiNumber) {
+                    alert('Não foi possível cadastrar a conta no momento. Tente novamente mais tarde.');
+                    return;
+                }
+
+                const response = await fetch(`${API_IBAN_BASE}${apiNumber}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        ...ibanData,
+                        apiNumber
+                    })
+                });
+
+                if (response.ok) {
+                    ibanModal.style.display = 'none';
+                    loadUserIbans();
+                } else {
+                    alert('Erro ao cadastrar conta. Tente novamente.');
+                }
+            }
+        } catch (error) {
+            console.error('Erro ao salvar IBAN:', error);
+            alert('Erro ao salvar conta. Tente novamente.');
+        }
+    }
+
+    // Event Listeners
+    addIbanButton.addEventListener('click', () => {
+        currentEditingIban = null;
+        modalTitle.textContent = 'Adicionar Conta de Recepção';
+        document.getElementById('bank-type').value = 'BAI';
+        document.getElementById('account-holder').value = '';
+        document.getElementById('iban-number').value = '';
+        ibanModal.style.display = 'flex';
+    });
+
+    cancelButton.addEventListener('click', () => {
+        ibanModal.style.display = 'none';
+        currentEditingIban = null;
+    });
+
+    confirmButton.addEventListener('click', saveIban);
+
+    ibanModal.addEventListener('click', (e) => {
+        if (e.target === ibanModal) {
+            ibanModal.style.display = 'none';
+            currentEditingIban = null;
+        }
+    });
+
+    // Carrega os IBANs ao iniciar
+    loadUserIbans();
+});</script>

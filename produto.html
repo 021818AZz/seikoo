@@ -1,0 +1,2588 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no,maximum-scale=1.0,minimum-scale=1.0" />
+    <title>Complete Solaria</title>
+    <script src="https://completesolar.online/static/my/theme1/js/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="common.css" />
+    <style>
+        html {
+            font-size: 10vw;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            flex-direction: column;
+            overscroll-behavior-y: contain;
+            touch-action: manipulation;
+        }
+
+        .page {
+            min-height: 100vh;
+            background-color: rgba(28, 34, 48, 1) !important;
+        }
+
+        /* WebKit */
+        ::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+        }
+
+        /* Firefox/IE Edge */
+        * {
+            scrollbar-width: none;
+            scrollbar-color: transparent transparent;
+            -ms-overflow-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        a:link,
+        a:visited,
+        a:hover,
+        a:active {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        @media screen and (min-width: 769px) {
+            html {
+                font-size: 45px;
+            }
+        }
+    </style>
+    
+    
+<style>
+    .page {
+        background-color: rgba(28, 34, 48, 1);
+        position: relative;
+        width: 10rem;
+        height: 33.68rem;
+        overflow: hidden;
+    }
+
+    .text-wrapper_10 {
+        width: 3.067rem;
+        height: 0.56rem;
+        margin: 0.534rem 0 0 3.467rem;
+    }
+
+    .text_24 {
+        width: 0.64rem;
+        height: 0.534rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.533rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.534rem;
+    }
+
+    .text_25 {
+        width: 0.64rem;
+        height: 0.534rem;
+        overflow-wrap: break-word;
+        color: rgba(0, 253, 252, 0.6);
+        font-size: 0.533rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.534rem;
+        margin: 0.027rem 0 0 -0.614rem;
+    }
+
+    .text_26 {
+        width: 0.747rem;
+        height: 0.534rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.533rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.534rem;
+        margin-left: 1.654rem;
+    }
+
+    .box_1 {
+        background-color: rgba(0, 253, 252, 1);
+        border-radius: 8px;
+        width: 0.8rem;
+        height: 0.107rem;
+        margin: 0.08rem 0 0 3.387rem;
+    }
+
+    .box_2 {
+        width: 8.72rem;
+        height: 0.854rem;
+        margin: 0.64rem 0 0 0.534rem;
+    }
+
+    .text-wrapper_11 {
+        background-color: rgba(0, 253, 252, 1);
+        border-radius: 46px;
+        height: 0.854rem;
+        width: 1.574rem;
+    }
+
+    .text_27 {
+        width: 0.507rem;
+        height: 0.427rem;
+        overflow-wrap: break-word;
+        color: rgba(28, 34, 48, 1);
+        font-size: 0.426rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.427rem;
+        margin: 0.214rem 0 0 0.534rem;
+    }
+
+    .text-wrapper_12 {
+        border-radius: 46px;
+        height: 0.854rem;
+        border: 1px solid rgba(163, 163, 163, 1);
+        margin-left: 0.214rem;
+        width: 1.574rem;
+    }
+
+    .text_28 {
+        width: 0.294rem;
+        height: 0.427rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.426rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.427rem;
+        margin: 0.214rem 0 0 0.64rem;
+    }
+
+    .text-wrapper_13 {
+        border-radius: 46px;
+        height: 0.854rem;
+        border: 1px solid rgba(163, 163, 163, 1);
+        margin-left: 0.214rem;
+        width: 1.574rem;
+    }
+
+    .text_29 {
+        width: 0.294rem;
+        height: 0.427rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.426rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.427rem;
+        margin: 0.214rem 0 0 0.64rem;
+    }
+
+    .text-wrapper_14 {
+        border-radius: 46px;
+        height: 0.854rem;
+        border: 1px solid rgba(163, 163, 163, 1);
+        margin-left: 0.214rem;
+        width: 1.574rem;
+    }
+
+    .text_30 {
+        width: 0.294rem;
+        height: 0.427rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.426rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.427rem;
+        margin: 0.214rem 0 0 0.64rem;
+    }
+
+    .text-wrapper_15 {
+        border-radius: 46px;
+        height: 0.854rem;
+        border: 1px solid rgba(163, 163, 163, 1);
+        margin-left: 0.214rem;
+        width: 1.574rem;
+    }
+
+    .text_31 {
+        width: 0.294rem;
+        height: 0.427rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.426rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.427rem;
+        margin: 0.214rem 0 0 0.64rem;
+    }
+
+    .box_3 {
+        width: 5.227rem;
+        height: 0.587rem;
+        margin: 0.427rem 0 0 2.4rem;
+    }
+
+    .text_32 {
+        width: 2.107rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin-top: 0.107rem;
+    }
+
+    .text-wrapper_16 {
+        background-color: rgba(255, 204, 0, 0.04);
+        border-radius: 46px;
+        height: 0.587rem;
+        width: 3.12rem;
+    }
+
+    .text_33 {
+        width: 2.694rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 204, 0, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin: 0.107rem 0 0 0.214rem;
+    }
+
+    .box_4 {
+        width: 9.707rem;
+        height: 29.147rem;
+        margin: 0.427rem 0 0.32rem 0.427rem;
+    }
+
+    .group_7 {
+        width: 9.147rem;
+        height: 5.2rem;
+    }
+
+    .box_5 {
+        width: 9.147rem;
+        height: 3.147rem;
+    }
+
+    .section_5 {
+        height: 3.147rem;
+        background: url(https://i.postimg.cc/QN0n5x6g/Figma-DDSSlice-PNG5243db025333a6e80d6baa27f08ebe6e.png) 100% no-repeat;
+        background-size: 100% 100%;
+        width: 2.88rem;
+    }
+
+    .group_8 {
+        height: 0.48rem;
+        background: url(https://i.postimg.cc/L6WCCQFn/Figma-DDSSlice-PNGf13488b1516e0689091bb841077a24b8.png) 100% no-repeat;
+        background-size: 100% 100%;
+        width: 1.067rem;
+        position: relative;
+        margin: 0.214rem 0 0 1.92rem;
+    }
+
+    .text_34 {
+        width: 0.694rem;
+        height: 0.32rem;
+        overflow-wrap: break-word;
+        color: rgba(28, 34, 48, 1);
+        font-size: 0.32rem;
+        font-family: PingFang SC-Semibold;
+        font-weight: 600;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.32rem;
+        margin: 0.08rem 0 0 0.24rem;
+    }
+
+    .thumbnail_5 {
+        position: absolute;
+        left: -0.16rem;
+        top: 0;
+        width: 0.24rem;
+        height: 0.48rem;
+    }
+
+    .section_6 {
+        background-color: rgba(103, 87, 0, 1);
+        width: 0.107rem;
+        height: 0.08rem;
+        margin-top: 0.694rem;
+    }
+
+    .section_7 {
+        width: 1.574rem;
+        height: 1.12rem;
+        margin: 0.107rem 0 0 0.214rem;
+    }
+
+    .text_35 {
+        width: 0.987rem;
+        height: 0.427rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.426rem;
+        font-family: PingFang SC-Semibold;
+        font-weight: 600;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.427rem;
+    }
+
+    .image-text_6 {
+        width: 1.574rem;
+        height: 0.374rem;
+        margin-top: 0.32rem;
+    }
+
+    .thumbnail_6 {
+        width: 0.374rem;
+        height: 0.374rem;
+    }
+
+    .text-group_8 {
+        width: 1.147rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+    }
+
+    .text_36 {
+        width: 0.24rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin: 0.854rem 0 0 0.24rem;
+    }
+
+    .text-group_9 {
+        width: 2.134rem;
+        height: 0.96rem;
+        margin: 2.027rem 0 0 0.294rem;
+    }
+
+    .text_37 {
+        width: 0.907rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin-left: 1.227rem;
+    }
+
+    .text_38 {
+        width: 2.08rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin-top: 0.214rem;
+    }
+
+    .section_8 {
+        width: 1.44rem;
+        height: 2.934rem;
+        margin: 0.107rem 0 0 0.027rem;
+    }
+
+    .text_39 {
+        width: 1.44rem;
+        height: 0.427rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.426rem;
+        font-family: PingFang SC-Semibold;
+        font-weight: 600;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.427rem;
+    }
+
+    .text-group_10 {
+        width: 1.147rem;
+        height: 1.014rem;
+        margin: 1.494rem 0 0 0.294rem;
+    }
+
+    .text_40 {
+        width: 1.147rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(0, 253, 252, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+    }
+
+    .text_41 {
+        width: 0.96rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin-top: 0.267rem;
+    }
+
+    .box_6 {
+        background-image: linear-gradient(180deg,
+                rgba(0, 253, 252, 0.02) 0,
+                rgba(0, 253, 252, 0.08) 100%);
+        border-radius: 8px;
+        width: 9.147rem;
+        height: 1.494rem;
+        margin-top: 0.214rem;
+    }
+
+    .text-wrapper_17 {
+        width: 7.707rem;
+        height: 0.374rem;
+        margin: 0.214rem 0 0 0.32rem;
+    }
+
+    .text_42 {
+        width: 7.707rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+    }
+
+    .text_43 {
+        width: 4.507rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin: 0 0.16rem 0 -4.667rem;
+    }
+
+    .text-wrapper_18 {
+        width: 4.427rem;
+        height: 0.374rem;
+        margin: 0.267rem 0 0.267rem 0.827rem;
+    }
+
+    .text_44 {
+        width: 2.267rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+    }
+
+    .text_45 {
+        width: 1.894rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+    }
+
+    .box_7 {
+        background-color: rgba(0, 253, 252, 0.08);
+        border-radius: 12px;
+        width: 9.147rem;
+        height: 0.027rem;
+        margin-top: 0.32rem;
+    }
+
+    .group_9 {
+        width: 9.174rem;
+        height: 5.2rem;
+        margin-top: 0.32rem;
+    }
+
+    .box_8 {
+        width: 9.147rem;
+        height: 3.147rem;
+    }
+
+    .block_5 {
+        height: 3.147rem;
+        background: url(https://i.postimg.cc/QN0n5x6g/Figma-DDSSlice-PNG5243db025333a6e80d6baa27f08ebe6e.png) 100% no-repeat;
+        background-size: 100% 100%;
+        width: 2.88rem;
+    }
+
+    .box_9 {
+        height: 0.48rem;
+        background: url(https://i.postimg.cc/L6WCCQFn/Figma-DDSSlice-PNGf13488b1516e0689091bb841077a24b8.png) 100% no-repeat;
+        background-size: 100% 100%;
+        width: 1.067rem;
+        position: relative;
+        margin: 0.214rem 0 0 1.92rem;
+    }
+
+    .text_46 {
+        width: 0.694rem;
+        height: 0.32rem;
+        overflow-wrap: break-word;
+        color: rgba(28, 34, 48, 1);
+        font-size: 0.32rem;
+        font-family: PingFang SC-Semibold;
+        font-weight: 600;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.32rem;
+        margin: 0.08rem 0 0 0.24rem;
+    }
+
+    .thumbnail_7 {
+        position: absolute;
+        left: -0.16rem;
+        top: 0;
+        width: 0.24rem;
+        height: 0.48rem;
+    }
+
+    .block_6 {
+        background-color: rgba(103, 87, 0, 1);
+        width: 0.107rem;
+        height: 0.08rem;
+        margin-top: 0.694rem;
+    }
+
+    .block_7 {
+        width: 1.574rem;
+        height: 1.12rem;
+        margin: 0.107rem 0 0 0.214rem;
+    }
+
+    .text_47 {
+        width: 0.987rem;
+        height: 0.427rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.426rem;
+        font-family: PingFang SC-Semibold;
+        font-weight: 600;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.427rem;
+    }
+
+    .image-text_7 {
+        width: 1.574rem;
+        height: 0.374rem;
+        margin-top: 0.32rem;
+    }
+
+    .thumbnail_8 {
+        width: 0.374rem;
+        height: 0.374rem;
+    }
+
+    .text-group_11 {
+        width: 1.147rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+    }
+
+    .text_48 {
+        width: 0.24rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin: 0.854rem 0 0 0.24rem;
+    }
+
+    .text-group_12 {
+        width: 2.134rem;
+        height: 0.96rem;
+        margin: 2.027rem 0 0 0.294rem;
+    }
+
+    .text_49 {
+        width: 0.907rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin-left: 1.227rem;
+    }
+
+    .text_50 {
+        width: 2.08rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin-top: 0.214rem;
+    }
+
+    .block_8 {
+        width: 1.44rem;
+        height: 2.934rem;
+        margin: 0.107rem 0 0 0.027rem;
+    }
+
+    .text_51 {
+        width: 1.44rem;
+        height: 0.427rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.426rem;
+        font-family: PingFang SC-Semibold;
+        font-weight: 600;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.427rem;
+    }
+
+    .text-group_13 {
+        width: 1.147rem;
+        height: 1.014rem;
+        margin: 1.494rem 0 0 0.294rem;
+    }
+
+    .text_52 {
+        width: 1.147rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(0, 253, 252, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+    }
+
+    .text_53 {
+        width: 0.96rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin-top: 0.267rem;
+    }
+
+    .box_10 {
+        background-image: linear-gradient(180deg,
+                rgba(0, 253, 252, 0.02) 0,
+                rgba(0, 253, 252, 0.08) 100%);
+        border-radius: 8px;
+        position: relative;
+        width: 9.147rem;
+        height: 1.494rem;
+        margin-top: 0.214rem;
+    }
+
+    .text-wrapper_19 {
+        width: 7.707rem;
+        height: 0.374rem;
+        margin: 0.214rem 0 0 0.32rem;
+    }
+
+    .text_54 {
+        width: 7.707rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+    }
+
+    .text_55 {
+        width: 4.507rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin: 0 0.16rem 0 -4.667rem;
+    }
+
+    .text-wrapper_20 {
+        width: 4.427rem;
+        height: 0.374rem;
+        margin: 0.267rem 0 0.267rem 0.827rem;
+    }
+
+    .text_56 {
+        width: 2.267rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+    }
+
+    .text_57 {
+        width: 1.894rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+    }
+
+    .image-wrapper_2 {
+        background-color: rgba(0, 253, 252, 0.6);
+        border-radius: 50%;
+        height: 1.44rem;
+        width: 1.44rem;
+        position: absolute;
+        left: 7.707rem;
+        top: 0.214rem;
+    }
+
+    .label_4 {
+        width: 0.854rem;
+        height: 0.854rem;
+        margin: 0.294rem 0 0 0.294rem;
+    }
+
+    .box_11 {
+        background-color: rgba(0, 253, 252, 0.08);
+        border-radius: 12px;
+        width: 9.147rem;
+        height: 0.027rem;
+        margin-top: 0.32rem;
+    }
+
+    .group_10 {
+        width: 9.174rem;
+        height: 5.2rem;
+        margin-top: 0.32rem;
+    }
+
+    .box_12 {
+        width: 9.147rem;
+        height: 3.147rem;
+    }
+
+    .block_9 {
+        height: 3.147rem;
+        background: url(https://i.postimg.cc/QN0n5x6g/Figma-DDSSlice-PNG5243db025333a6e80d6baa27f08ebe6e.png) 100% no-repeat;
+        background-size: 100% 100%;
+        width: 2.88rem;
+    }
+
+    .box_13 {
+        height: 0.48rem;
+        background: url(https://i.postimg.cc/L6WCCQFn/Figma-DDSSlice-PNGf13488b1516e0689091bb841077a24b8.png) 100% no-repeat;
+        background-size: 100% 100%;
+        width: 1.067rem;
+        position: relative;
+        margin: 0.214rem 0 0 1.92rem;
+    }
+
+    .text_58 {
+        width: 0.694rem;
+        height: 0.32rem;
+        overflow-wrap: break-word;
+        color: rgba(28, 34, 48, 1);
+        font-size: 0.32rem;
+        font-family: PingFang SC-Semibold;
+        font-weight: 600;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.32rem;
+        margin: 0.08rem 0 0 0.24rem;
+    }
+
+    .thumbnail_9 {
+        position: absolute;
+        left: -0.16rem;
+        top: 0;
+        width: 0.24rem;
+        height: 0.48rem;
+    }
+
+    .block_10 {
+        background-color: rgba(103, 87, 0, 1);
+        width: 0.107rem;
+        height: 0.08rem;
+        margin-top: 0.694rem;
+    }
+
+    .block_11 {
+        width: 1.574rem;
+        height: 1.12rem;
+        margin: 0.107rem 0 0 0.214rem;
+    }
+
+    .text_59 {
+        width: 0.987rem;
+        height: 0.427rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.426rem;
+        font-family: PingFang SC-Semibold;
+        font-weight: 600;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.427rem;
+    }
+
+    .image-text_8 {
+        width: 1.574rem;
+        height: 0.374rem;
+        margin-top: 0.32rem;
+    }
+
+    .thumbnail_10 {
+        width: 0.374rem;
+        height: 0.374rem;
+    }
+
+    .text-group_14 {
+        width: 1.147rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+    }
+
+    .text_60 {
+        width: 0.24rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin: 0.854rem 0 0 0.24rem;
+    }
+
+    .text-group_15 {
+        width: 2.134rem;
+        height: 0.96rem;
+        margin: 2.027rem 0 0 0.294rem;
+    }
+
+    .text_61 {
+        width: 0.907rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin-left: 1.227rem;
+    }
+
+    .text_62 {
+        width: 2.08rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin-top: 0.214rem;
+    }
+
+    .block_12 {
+        width: 1.44rem;
+        height: 2.934rem;
+        margin: 0.107rem 0 0 0.027rem;
+    }
+
+    .text_63 {
+        width: 1.44rem;
+        height: 0.427rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.426rem;
+        font-family: PingFang SC-Semibold;
+        font-weight: 600;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.427rem;
+    }
+
+    .text-group_16 {
+        width: 1.147rem;
+        height: 1.014rem;
+        margin: 1.494rem 0 0 0.294rem;
+    }
+
+    .text_64 {
+        width: 1.147rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(0, 253, 252, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+    }
+
+    .text_65 {
+        width: 0.96rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin-top: 0.267rem;
+    }
+
+    .box_14 {
+        background-image: linear-gradient(180deg,
+                rgba(0, 253, 252, 0.02) 0,
+                rgba(0, 253, 252, 0.08) 100%);
+        border-radius: 8px;
+        width: 9.147rem;
+        height: 1.494rem;
+        margin-top: 0.214rem;
+    }
+
+    .text-wrapper_21 {
+        width: 7.707rem;
+        height: 0.374rem;
+        margin: 0.214rem 0 0 0.32rem;
+    }
+
+    .text_66 {
+        width: 7.707rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+    }
+
+    .text_67 {
+        width: 4.507rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin: 0 0.16rem 0 -4.667rem;
+    }
+
+    .text-wrapper_22 {
+        width: 4.427rem;
+        height: 0.374rem;
+        margin: 0.267rem 0 0.267rem 0.827rem;
+    }
+
+    .text_68 {
+        width: 2.267rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+    }
+
+    .text_69 {
+        width: 1.894rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+    }
+
+    .box_15 {
+        background-color: rgba(0, 253, 252, 0.08);
+        border-radius: 12px;
+        width: 9.147rem;
+        height: 0.027rem;
+        margin-top: 0.32rem;
+    }
+
+    .group_11 {
+        width: 9.174rem;
+        height: 5.2rem;
+        margin-top: 0.32rem;
+    }
+
+    .group_12 {
+        width: 9.147rem;
+        height: 3.147rem;
+    }
+
+    .group_13 {
+        height: 3.147rem;
+        background: url(https://i.postimg.cc/QN0n5x6g/Figma-DDSSlice-PNG5243db025333a6e80d6baa27f08ebe6e.png) 100% no-repeat;
+        background-size: 100% 100%;
+        width: 2.88rem;
+    }
+
+    .section_9 {
+        height: 0.48rem;
+        background: url(https://i.postimg.cc/L6WCCQFn/Figma-DDSSlice-PNGf13488b1516e0689091bb841077a24b8.png) 100% no-repeat;
+        background-size: 100% 100%;
+        width: 1.067rem;
+        position: relative;
+        margin: 0.214rem 0 0 1.92rem;
+    }
+
+    .text_70 {
+        width: 0.694rem;
+        height: 0.32rem;
+        overflow-wrap: break-word;
+        color: rgba(28, 34, 48, 1);
+        font-size: 0.32rem;
+        font-family: PingFang SC-Semibold;
+        font-weight: 600;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.32rem;
+        margin: 0.08rem 0 0 0.24rem;
+    }
+
+    .thumbnail_11 {
+        position: absolute;
+        left: -0.16rem;
+        top: 0;
+        width: 0.24rem;
+        height: 0.48rem;
+    }
+
+    .group_14 {
+        background-color: rgba(103, 87, 0, 1);
+        width: 0.107rem;
+        height: 0.08rem;
+        margin-top: 0.694rem;
+    }
+
+    .group_15 {
+        width: 1.574rem;
+        height: 1.12rem;
+        margin: 0.107rem 0 0 0.214rem;
+    }
+
+    .text_71 {
+        width: 0.987rem;
+        height: 0.427rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.426rem;
+        font-family: PingFang SC-Semibold;
+        font-weight: 600;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.427rem;
+    }
+
+    .image-text_9 {
+        width: 1.574rem;
+        height: 0.374rem;
+        margin-top: 0.32rem;
+    }
+
+    .thumbnail_12 {
+        width: 0.374rem;
+        height: 0.374rem;
+    }
+
+    .text-group_17 {
+        width: 1.147rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+    }
+
+    .text_72 {
+        width: 0.24rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin: 0.854rem 0 0 0.24rem;
+    }
+
+    .text-group_18 {
+        width: 2.134rem;
+        height: 0.96rem;
+        margin: 2.027rem 0 0 0.294rem;
+    }
+
+    .text_73 {
+        width: 0.907rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin-left: 1.227rem;
+    }
+
+    .text_74 {
+        width: 2.08rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin-top: 0.214rem;
+    }
+
+    .group_16 {
+        width: 1.44rem;
+        height: 2.934rem;
+        margin: 0.107rem 0 0 0.027rem;
+    }
+
+    .text_75 {
+        width: 1.44rem;
+        height: 0.427rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.426rem;
+        font-family: PingFang SC-Semibold;
+        font-weight: 600;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.427rem;
+    }
+
+    .text-group_19 {
+        width: 1.147rem;
+        height: 1.014rem;
+        margin: 1.494rem 0 0 0.294rem;
+    }
+
+    .text_76 {
+        width: 1.147rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(0, 253, 252, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+    }
+
+    .text_77 {
+        width: 0.96rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin-top: 0.267rem;
+    }
+
+    .group_17 {
+        background-image: linear-gradient(180deg,
+                rgba(0, 253, 252, 0.02) 0,
+                rgba(0, 253, 252, 0.08) 100%);
+        border-radius: 8px;
+        width: 9.147rem;
+        height: 1.494rem;
+        margin-top: 0.214rem;
+    }
+
+    .text-wrapper_23 {
+        width: 7.707rem;
+        height: 0.374rem;
+        margin: 0.214rem 0 0 0.32rem;
+    }
+
+    .text_78 {
+        width: 7.707rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+    }
+
+    .text_79 {
+        width: 4.507rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin: 0 0.16rem 0 -4.667rem;
+    }
+
+    .text-wrapper_24 {
+        width: 4.427rem;
+        height: 0.374rem;
+        margin: 0.267rem 0 0.267rem 0.827rem;
+    }
+
+    .text_80 {
+        width: 2.267rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+    }
+
+    .text_81 {
+        width: 1.894rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+    }
+
+    .group_18 {
+        background-color: rgba(0, 253, 252, 0.08);
+        border-radius: 12px;
+        width: 9.147rem;
+        height: 0.027rem;
+        margin-top: 0.32rem;
+    }
+
+    .group_19 {
+        width: 9.174rem;
+        height: 5.2rem;
+        margin-top: 0.32rem;
+    }
+
+    .block_13 {
+        width: 9.147rem;
+        height: 3.147rem;
+    }
+
+    .block_14 {
+        height: 3.147rem;
+        background: url(https://i.postimg.cc/QN0n5x6g/Figma-DDSSlice-PNG5243db025333a6e80d6baa27f08ebe6e.png) 100% no-repeat;
+        background-size: 100% 100%;
+        width: 2.88rem;
+    }
+
+    .section_10 {
+        height: 0.48rem;
+        background: url(https://i.postimg.cc/L6WCCQFn/Figma-DDSSlice-PNGf13488b1516e0689091bb841077a24b8.png) 100% no-repeat;
+        background-size: 100% 100%;
+        width: 1.067rem;
+        position: relative;
+        margin: 0.214rem 0 0 1.92rem;
+    }
+
+    .text_82 {
+        width: 0.694rem;
+        height: 0.32rem;
+        overflow-wrap: break-word;
+        color: rgba(28, 34, 48, 1);
+        font-size: 0.32rem;
+        font-family: PingFang SC-Semibold;
+        font-weight: 600;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.32rem;
+        margin: 0.08rem 0 0 0.24rem;
+    }
+
+    .thumbnail_13 {
+        position: absolute;
+        left: -0.16rem;
+        top: 0;
+        width: 0.24rem;
+        height: 0.48rem;
+    }
+
+    .block_15 {
+        background-color: rgba(103, 87, 0, 1);
+        width: 0.107rem;
+        height: 0.08rem;
+        margin-top: 0.694rem;
+    }
+
+    .block_16 {
+        width: 1.574rem;
+        height: 1.12rem;
+        margin: 0.107rem 0 0 0.214rem;
+    }
+
+    .text_83 {
+        width: 0.987rem;
+        height: 0.427rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.426rem;
+        font-family: PingFang SC-Semibold;
+        font-weight: 600;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.427rem;
+    }
+
+    .image-text_10 {
+        width: 1.574rem;
+        height: 0.374rem;
+        margin-top: 0.32rem;
+    }
+
+    .thumbnail_14 {
+        width: 0.374rem;
+        height: 0.374rem;
+    }
+
+    .text-group_20 {
+        width: 1.147rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+    }
+
+    .text_84 {
+        width: 0.24rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin: 0.854rem 0 0 0.24rem;
+    }
+
+    .text-group_21 {
+        width: 2.134rem;
+        height: 0.96rem;
+        margin: 2.027rem 0 0 0.294rem;
+    }
+
+    .text_85 {
+        width: 0.907rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin-left: 1.227rem;
+    }
+
+    .text_86 {
+        width: 2.08rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin-top: 0.214rem;
+    }
+
+    .block_17 {
+        width: 1.44rem;
+        height: 2.934rem;
+        margin: 0.107rem 0 0 0.027rem;
+    }
+
+    .text_87 {
+        width: 1.44rem;
+        height: 0.427rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.426rem;
+        font-family: PingFang SC-Semibold;
+        font-weight: 600;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.427rem;
+    }
+
+    .text-group_22 {
+        width: 1.147rem;
+        height: 1.014rem;
+        margin: 1.494rem 0 0 0.294rem;
+    }
+
+    .text_88 {
+        width: 1.147rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(0, 253, 252, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+    }
+
+    .text_89 {
+        width: 0.96rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin-top: 0.267rem;
+    }
+
+    .block_18 {
+        background-image: linear-gradient(180deg,
+                rgba(0, 253, 252, 0.02) 0,
+                rgba(0, 253, 252, 0.08) 100%);
+        border-radius: 8px;
+        width: 9.147rem;
+        height: 1.494rem;
+        margin-top: 0.214rem;
+    }
+
+    .text-wrapper_25 {
+        width: 7.707rem;
+        height: 0.374rem;
+        margin: 0.214rem 0 0 0.32rem;
+    }
+
+    .text_90 {
+        width: 7.707rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+    }
+
+    .text_91 {
+        width: 4.507rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin: 0 0.16rem 0 -4.667rem;
+    }
+
+    .text-wrapper_26 {
+        width: 4.427rem;
+        height: 0.374rem;
+        margin: 0.267rem 0 0.267rem 0.827rem;
+    }
+
+    .text_92 {
+        width: 2.267rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+    }
+
+    .text_93 {
+        width: 1.894rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+    }
+
+    .block_19 {
+        background-color: rgba(0, 253, 252, 0.08);
+        border-radius: 12px;
+        width: 9.147rem;
+        height: 0.027rem;
+        margin-top: 0.32rem;
+    }
+
+    .group_20 {
+        width: 9.174rem;
+        height: 1.12rem;
+        margin: 0.747rem 0 0 0.534rem;
+    }
+
+    .group_21 {
+        width: 8.107rem;
+        height: 1.12rem;
+    }
+
+    .image-text_11 {
+        width: 0.907rem;
+        height: 1.12rem;
+    }
+
+    .label_5 {
+        width: 0.64rem;
+        height: 0.64rem;
+        margin-left: 0.134rem;
+    }
+
+    .text-group_23 {
+        width: 0.907rem;
+        height: 0.32rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.32rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.32rem;
+        margin-top: 0.16rem;
+    }
+
+    .image-text_12 {
+        width: 1.2rem;
+        height: 1.014rem;
+        margin: 0.107rem 0 0 1.494rem;
+    }
+
+    .thumbnail_15 {
+        width: 0.48rem;
+        height: 0.454rem;
+        margin-left: 0.374rem;
+    }
+
+    .text-group_24 {
+        width: 1.2rem;
+        height: 0.32rem;
+        overflow-wrap: break-word;
+        color: rgba(0, 253, 252, 1);
+        font-size: 0.32rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.32rem;
+        margin-top: 0.24rem;
+    }
+
+    .image-text_13 {
+        width: 0.96rem;
+        height: 1.04rem;
+        margin: 0.08rem 0 0 1.494rem;
+    }
+
+    .thumbnail_16 {
+        width: 0.48rem;
+        height: 0.48rem;
+        margin-left: 0.24rem;
+    }
+
+    .text-group_25 {
+        width: 0.96rem;
+        height: 0.32rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.32rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.32rem;
+        margin-top: 0.24rem;
+    }
+
+    .image-text_14 {
+        width: 0.64rem;
+        height: 1.12rem;
+        margin-left: 1.414rem;
+    }
+
+    .label_6 {
+        width: 0.64rem;
+        height: 0.64rem;
+    }
+
+    .text-group_26 {
+        width: 0.48rem;
+        height: 0.32rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.32rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.32rem;
+        margin: 0.16rem 0 0 0.08rem;
+    }
+</style>
+
+<style>
+    .page {
+        height: auto;
+    }
+
+    .box_2 {
+        justify-content: flex-start;
+    }
+
+    .text-wrapper_11 {
+        background-color: rgba(0, 253, 252, 1);
+    }
+
+    .bgactive {
+        background-color: rgba(0, 253, 252, 1);
+    }
+
+    .active {
+        color: rgba(28, 34, 48, 1);
+    }
+
+    .text_28 {
+        text-align: center;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+    }
+
+    .box_4 {
+        height: auto;
+    }
+
+    .box_6 {
+        height: auto;
+        padding-bottom: 0.214rem;
+    }
+
+    .group_7 {
+        height: auto;
+    }
+
+    .text_37 {
+        margin-left: 0;
+    }
+
+    .text-group_9 {
+        width: auto;
+        margin: 2.027rem 0 0 -0.294rem;
+        padding-right: 0.6rem;
+    }
+
+    .text-group_10 {
+        text-align: right;
+        justify-content: right;
+        display: flex;
+        align-items: end;
+    }
+
+    .text_40 {
+        width: auto;
+    }
+
+    .text_41 {
+        width: auto;
+    }
+
+    .text_32 {
+        width: auto;
+    }
+
+    .section_5 {
+        background: none;
+    }
+
+    .box_1 {
+        width: 1.6rem;
+    }
+
+    .text_39 {
+        width: 4rem;
+        text-align: right;
+        margin-left: -2.6rem;
+    }
+</style>
+
+<style>
+    .box_1 {
+        width: 1.8rem;
+    }
+</style>
+
+
+</head>
+
+<body>
+    
+    
+    
+<div class="page flex-col">
+    <div class="text-wrapper_10 flex-row">
+        <span class="text_24"><a href="produto.html" target='_self'>Todos</a></span>
+        <span class="text_25"><a href="produto.html" target='_self'>Todos</a></span>
+        <span class="text_26"><a href="tarefa.html" target='_self'>Meu</a></span>
+    </div>
+    <div class="box_1 flex-col"></div>
+    <div class="box_2 flex-row justify-between">
+        <a href="produto.html" target='_self'>
+            <div class="text-wrapper_12 flex-col ">
+                <span class="text_28 ">Todos</span>
+            </div>
+        </a>
+                <a href="produto.html" target='_self'>
+            <div class="text-wrapper_12 flex-col bgactive">
+                <span class="text_28 active">S+</span>
+            </div>
+        </a>
+                <a href="produto.html" target='_self'>
+            <div class="text-wrapper_12 flex-col ">
+                <span class="text_28 ">VIP</span>
+            </div>
+        </a>
+                <a href="produto.html" target='_self'>
+            <div class="text-wrapper_12 flex-col ">
+                <span class="text_28 ">R</span>
+            </div>
+        </a>
+            </div>
+    <div id="list_content">
+                <div class="box_4 flex-col" onclick="click_id('27')">
+            <div class="group_7 flex-col">
+                <div class="box_5 flex-row">
+                    <div class="section_5 flex-col" style="background:url(https://i.postimg.cc/fLTYhdGJ/29720909-fpx-tif-qlt-80-0-res-Mode-sharp2-op-usm-1-75-0.webp) 100% no-repeat;background-size:100% 100%;height:3rem;width:3rem;border-radius:10%;">
+                        <div class="group_8 flex-col">
+                            <span class="text_34">New</span>
+                            <img class="thumbnail_5" referrerpolicy="no-referrer" src="https://i.postimg.cc/k41KM4Cw/064f9c885a154fc4a3d897e939751ef9-merge-Image.png" />
+                        </div>
+                    </div>
+
+                    <div class="section_7 flex-col justify-between">
+                        <span class="text_35">Tipo</span>
+                        <div class="image-text_6 flex-row justify-between">
+                            <img class="thumbnail_6" referrerpolicy="no-referrer" src="https://i.postimg.cc/FsJ3mNBg/Figma-DDSSlice-PNGb16c118cb7a6e7d2d6fbc29b5f5bf726.png" />
+                            <span class="text-group_8">
+                                Ciclo                                <span style="color:rgba(255, 255, 255, 1);">
+                                    45                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <span class="text_36"></span>
+                    <div class="text-group_9 flex-col justify-between">
+                        <span class="text_37">Preço</span>
+                        <span class="text_38">Taxa de retorno</span>
+                    </div>
+                    <div class="section_8 flex-col justify-between">
+                        <span class="text_39">S1+</span>
+                        <div class="text-group_10 flex-col justify-between">
+                            <span class="text_40">10000 Kz</span>
+                            <span class="text_41">
+                                                                203%
+                                                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="box_6 flex-col">
+                                        <div class="text-wrapper_17 flex-row">
+                        <span class="text_42">
+                            Total das receitas                            &nbsp;&nbsp;
+                            <span style="color:rgba(255, 255, 255, 1)">
+                                20250 Kz                            </span>
+                        </span>
+                    </div>
+                                    </div>
+                <div class="box_7 flex-col"></div>
+            </div>
+        </div>
+                <div class="box_4 flex-col" onclick="click_id('28')">
+            <div class="group_7 flex-col">
+                <div class="box_5 flex-row">
+                    <div class="section_5 flex-col" style="background:url(https://i.postimg.cc/fLTYhdGJ/29720909-fpx-tif-qlt-80-0-res-Mode-sharp2-op-usm-1-75-0.webp) 100% no-repeat;background-size:100% 100%;height:3rem;width:3rem;border-radius:10%;">
+                        <div class="group_8 flex-col">
+                            <span class="text_34">New</span>
+                            <img class="thumbnail_5" referrerpolicy="no-referrer" src="https://i.postimg.cc/k41KM4Cw/064f9c885a154fc4a3d897e939751ef9-merge-Image.png" />
+                        </div>
+                    </div>
+
+                    <div class="section_7 flex-col justify-between">
+                        <span class="text_35">Tipo</span>
+                        <div class="image-text_6 flex-row justify-between">
+                            <img class="thumbnail_6" referrerpolicy="no-referrer" src="https://i.postimg.cc/FsJ3mNBg/Figma-DDSSlice-PNGb16c118cb7a6e7d2d6fbc29b5f5bf726.png" />
+                            <span class="text-group_8">
+                                Ciclo                                <span style="color:rgba(255, 255, 255, 1);">
+                                    45                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <span class="text_36"></span>
+                    <div class="text-group_9 flex-col justify-between">
+                        <span class="text_37">Preço</span>
+                        <span class="text_38">Taxa de retorno</span>
+                    </div>
+                    <div class="section_8 flex-col justify-between">
+                        <span class="text_39">S2+</span>
+                        <div class="text-group_10 flex-col justify-between">
+                            <span class="text_40">30000 Kz</span>
+                            <span class="text_41">
+                                                                210%
+                                                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="box_6 flex-col">
+                                        <div class="text-wrapper_17 flex-row">
+                        <span class="text_42">
+                            Total das receitas                            &nbsp;&nbsp;
+                            <span style="color:rgba(255, 255, 255, 1)">
+                                63000 Kz                            </span>
+                        </span>
+                    </div>
+                                    </div>
+                <div class="box_7 flex-col"></div>
+            </div>
+        </div>
+                <div class="box_4 flex-col" onclick="click_id('29')">
+            <div class="group_7 flex-col">
+                <div class="box_5 flex-row">
+                    <div class="section_5 flex-col" style="background:url(https://i.postimg.cc/fLTYhdGJ/29720909-fpx-tif-qlt-80-0-res-Mode-sharp2-op-usm-1-75-0.webp) 100% no-repeat;background-size:100% 100%;height:3rem;width:3rem;border-radius:10%;">
+                        <div class="group_8 flex-col">
+                            <span class="text_34">New</span>
+                            <img class="thumbnail_5" referrerpolicy="no-referrer" src="https://i.postimg.cc/k41KM4Cw/064f9c885a154fc4a3d897e939751ef9-merge-Image.png" />
+                        </div>
+                    </div>
+
+                    <div class="section_7 flex-col justify-between">
+                        <span class="text_35">Tipo</span>
+                        <div class="image-text_6 flex-row justify-between">
+                            <img class="thumbnail_6" referrerpolicy="no-referrer" src="https://i.postimg.cc/FsJ3mNBg/Figma-DDSSlice-PNGb16c118cb7a6e7d2d6fbc29b5f5bf726.png" />
+                            <span class="text-group_8">
+                                Ciclo                                <span style="color:rgba(255, 255, 255, 1);">
+                                    45                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <span class="text_36"></span>
+                    <div class="text-group_9 flex-col justify-between">
+                        <span class="text_37">Preço</span>
+                        <span class="text_38">Taxa de retorno</span>
+                    </div>
+                    <div class="section_8 flex-col justify-between">
+                        <span class="text_39">S3+</span>
+                        <div class="text-group_10 flex-col justify-between">
+                            <span class="text_40">100000 Kz</span>
+                            <span class="text_41">
+                                                                216%
+                                                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="box_6 flex-col">
+                                        <div class="text-wrapper_17 flex-row">
+                        <span class="text_42">
+                            Total das receitas                            &nbsp;&nbsp;
+                            <span style="color:rgba(255, 255, 255, 1)">
+                                216000 Kz                            </span>
+                        </span>
+                    </div>
+                                    </div>
+                <div class="box_7 flex-col"></div>
+            </div>
+        </div>
+                <div class="box_4 flex-col" onclick="click_id('30')">
+            <div class="group_7 flex-col">
+                <div class="box_5 flex-row">
+                    <div class="section_5 flex-col" style="background:url(https://i.postimg.cc/fLTYhdGJ/29720909-fpx-tif-qlt-80-0-res-Mode-sharp2-op-usm-1-75-0.webp) 100% no-repeat;background-size:100% 100%;height:3rem;width:3rem;border-radius:10%;">
+                        <div class="group_8 flex-col">
+                            <span class="text_34">New</span>
+                            <img class="thumbnail_5" referrerpolicy="no-referrer" src="https://i.postimg.cc/k41KM4Cw/064f9c885a154fc4a3d897e939751ef9-merge-Image.png" />
+                        </div>
+                    </div>
+
+                    <div class="section_7 flex-col justify-between">
+                        <span class="text_35">Tipo</span>
+                        <div class="image-text_6 flex-row justify-between">
+                            <img class="thumbnail_6" referrerpolicy="no-referrer" src="https://i.postimg.cc/FsJ3mNBg/Figma-DDSSlice-PNGb16c118cb7a6e7d2d6fbc29b5f5bf726.png" />
+                            <span class="text-group_8">
+                                Ciclo                                <span style="color:rgba(255, 255, 255, 1);">
+                                    45                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <span class="text_36"></span>
+                    <div class="text-group_9 flex-col justify-between">
+                        <span class="text_37">Preço</span>
+                        <span class="text_38">Taxa de retorno</span>
+                    </div>
+                    <div class="section_8 flex-col justify-between">
+                        <span class="text_39">S4+</span>
+                        <div class="text-group_10 flex-col justify-between">
+                            <span class="text_40">200000 Kz</span>
+                            <span class="text_41">
+                                                                223%
+                                                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="box_6 flex-col">
+                                        <div class="text-wrapper_17 flex-row">
+                        <span class="text_42">
+                            Total das receitas                            &nbsp;&nbsp;
+                            <span style="color:rgba(255, 255, 255, 1)">
+                                445500 Kz                            </span>
+                        </span>
+                    </div>
+                                    </div>
+                <div class="box_7 flex-col"></div>
+            </div>
+        </div>
+                <div class="box_4 flex-col" onclick="click_id('31')">
+            <div class="group_7 flex-col">
+                <div class="box_5 flex-row">
+                    <div class="section_5 flex-col" style="background:url(https://i.postimg.cc/fLTYhdGJ/29720909-fpx-tif-qlt-80-0-res-Mode-sharp2-op-usm-1-75-0.webp
+) 100% no-repeat;background-size:100% 100%;height:3rem;width:3rem;border-radius:10%;">
+                        <div class="group_8 flex-col">
+                            <span class="text_34">New</span>
+                            <img class="thumbnail_5" referrerpolicy="no-referrer" src="https://i.postimg.cc/k41KM4Cw/064f9c885a154fc4a3d897e939751ef9-merge-Image.png" />
+                        </div>
+                    </div>
+
+                    <div class="section_7 flex-col justify-between">
+                        <span class="text_35">Tipo</span>
+                        <div class="image-text_6 flex-row justify-between">
+                            <img class="thumbnail_6" referrerpolicy="no-referrer" src="https://i.postimg.cc/FsJ3mNBg/Figma-DDSSlice-PNGb16c118cb7a6e7d2d6fbc29b5f5bf726.png" />
+                            <span class="text-group_8">
+                                Ciclo                                <span style="color:rgba(255, 255, 255, 1);">
+                                    45                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <span class="text_36"></span>
+                    <div class="text-group_9 flex-col justify-between">
+                        <span class="text_37">Preço</span>
+                        <span class="text_38">Taxa de retorno</span>
+                    </div>
+                    <div class="section_8 flex-col justify-between">
+                        <span class="text_39">S5+</span>
+                        <div class="text-group_10 flex-col justify-between">
+                            <span class="text_40">500000 Kz</span>
+                            <span class="text_41">
+                                                                225%
+                                                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="box_6 flex-col">
+                                        <div class="text-wrapper_17 flex-row">
+                        <span class="text_42">
+                            Total das receitas                            &nbsp;&nbsp;
+                            <span style="color:rgba(255, 255, 255, 1)">
+                                1125000 Kz                            </span>
+                        </span>
+                    </div>
+                                    </div>
+                <div class="box_7 flex-col"></div>
+            </div>
+        </div>
+        
+        <div class="list_dropdown"></div>
+    </div>
+
+    <div style="padding-bottom: 1.2rem;background: rgba(28, 34, 48, 1);"></div>
+</div>
+
+<style>
+    .group_foot {
+        position: fixed;
+        bottom: 0;
+        width: 10rem;
+        height: 1.32rem;
+        background: rgba(28, 34, 48, 1);
+        z-index: 999;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .image-text_foot {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .label_foot {
+        width: 0.64rem;
+        height: 0.64rem;
+        text-align: center;
+    }
+
+    .text-group_foot {
+        width: 2.5rem;
+        height: 0.32rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.32rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: center;
+        white-space: nowrap;
+        line-height: 0.32rem;
+        margin-top: 0.16rem;
+    }
+
+    .text-group_foot_active {
+        color: rgba(0, 253, 252, 1);
+    }
+</style>
+<div class="group_foot">
+    <a href="home.html" target='_self'>
+        <div class="image-text_foot">
+            <img class="label_foot" referrerpolicy="no-referrer" src="https://i.postimg.cc/664FsGtH/home.png" />
+            <span class="text-group_foot ">Home</span>
+        </div>
+    </a>
+    <a href="produto.html" target='_self'>
+        <div class="image-text_foot">
+            <img class="label_foot" referrerpolicy="no-referrer" src="https://i.postimg.cc/g2m76SR5/productactive.png" />
+            <span class="text-group_foot text-group_foot_active">Produto</span>
+        </div>
+    </a>
+    <a href="carteira.html" target='_self'>
+        <div class="image-text_foot">
+            <img class="label_foot" referrerpolicy="no-referrer" src="https://i.postimg.cc/90Vw1hJy/wallet.png" />
+            <span class="text-group_foot ">Carteira</span>
+        </div>
+    </a>
+    <a href="meu.html" target='_self'>
+        <div class="image-text_foot">
+            <img class="label_foot" referrerpolicy="no-referrer" src="https://i.postimg.cc/5NQWpCQq/my.png" />
+            <span class="text-group_foot ">Meu</span>
+        </div>
+    </a>
+</div>
+
+
+    
+    
+    
+<script>
+    next_page = 2;
+
+    document.addEventListener('DOMContentLoaded', function() {
+        let debounceTimeout;
+
+        window.addEventListener('scroll', function() {
+            clearTimeout(debounceTimeout);
+            debounceTimeout = setTimeout(function() {
+                if (isScrolledIntoView()) {
+                    loadAjaxNextPage(next_page++);
+                }
+            }, 500);
+        });
+
+        function isScrolledIntoView() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            return scrolled >= 80;
+        }
+
+    });
+
+    function loadAjaxNextPage(next_page) {
+
+        $.post("/product/id/0/type/5", {
+                page: next_page,
+            },
+            function(data, status) {
+
+                $res = JSON.stringify(data);
+                jsarr = JSON.parse($res);
+
+                if (jsarr['code'] == 0) {
+                    return false;
+                }
+                if (jsarr['code'] == 1) {
+
+                    for (let key in jsarr['data']) {
+                        var id = jsarr['data'][key]['id'];
+                        var end_time = jsarr['data'][key]['end_time'];
+                        var create_time = jsarr['data'][key]['create_time'];
+                        var cycle_type = jsarr['data'][key]['cycle_type'];
+                        var picture = jsarr['data'][key]['picture'];
+                        var tag = jsarr['data'][key]['tag'];
+                        var cycle_count = jsarr['data'][key]['cycle_count'];
+                        var name = jsarr['data'][key]['name'];
+                        var cash = jsarr['data'][key]['cash'];
+                        var return_rate = jsarr['data'][key]['return_rate'];
+                        var cycle_income = jsarr['data'][key]['cycle_income'];
+                        var total_income = jsarr['data'][key]['total_income'];
+                        var income_show = jsarr['data'][key]['income_show'];
+
+                        var cycle_type_show = '';
+                        if (cycle_type == 0) {
+                            cycle_type_show = "Ganhos em dias";
+                        } else if (cycle_type == 1) {
+                            cycle_type_show = "Ganhos por dia";
+                        } else if (cycle_type == 2) {
+                            cycle_type_show = "Ganhos por dia";
+                        } else if (cycle_type == 3) {
+                            cycle_type_show = "Ganhos por semana";
+                        } else if (cycle_type == 4) {
+                            cycle_type_show = "Ganhos horários";
+                        } else {
+                            cycle_type_show = "Ganhos por dia";
+                        }
+
+                        var income_show_js = '';
+                        if (income_show == 0) {
+                            income_show_js = `
+                    <div class="text-wrapper_17 flex-row">
+                        <span class="text_42">
+                            ${cycle_type_show}
+                            &nbsp;&nbsp;
+                            <span style="color:rgba(255, 255, 255, 1)">
+                            ${cycle_income} Kz                            </span>
+                        </span>
+                    </div>
+`;
+                        } else if (income_show == 1) {
+                            income_show_js = `
+                    <div class="text-wrapper_17 flex-row">
+                        <span class="text_42">
+                            Total das receitas                            &nbsp;&nbsp;
+                            <span style="color:rgba(255, 255, 255, 1)">
+                            ${total_income} Kz                            </span>
+                        </span>
+                    </div>
+`;
+                        } else {
+                            income_show_js = `
+                    <div class="text-wrapper_17 flex-row">
+                        <span class="text_42">
+                            ${cycle_type_show}
+                            &nbsp;&nbsp;
+                            <span style="color:rgba(255, 255, 255, 1)">
+                            ${cycle_income} Kz                            </span>
+                        </span>
+                    </div>
+                    <div class="text-wrapper_17 flex-row">
+                        <span class="text_42">
+                            Total das receitas                            &nbsp;&nbsp;
+                            <span style="color:rgba(255, 255, 255, 1)">
+                            ${total_income} Kz                            </span>
+                        </span>
+                    </div>
+`;
+                        }
+
+                        var time_show = '';
+                        if (cycle_type == 4) {
+                            time_show = `
+        <div class="box_3 flex-row justify-between">
+            <span class="text_32">Prazo：</span>
+            <div class="text-wrapper_16 flex-col">
+                <span class="text_33">
+                    <span id="countdown_hour${id}"></span>
+                    :
+                    <span id="countdown_minute${id}"></span>
+                    :
+                    <span id="countdown_second${id}"></span>
+                </span>
+            </div>
+        </div>
+`;
+                        }
+
+                        const list_dropdown = `
+        ${time_show}
+        <div class="box_4 flex-col" onclick="click_id('${id}')">
+            <div class="group_7 flex-col">
+                <div class="box_5 flex-row">
+                    <div class="section_5 flex-col" style="background:url(${picture}) 100% no-repeat;background-size:100% 100%;height:3rem;width:3rem;border-radius:10%;">
+                        <div class="group_8 flex-col">
+                            <span class="text_34">${tag}</span>
+                            <img class="thumbnail_5" referrerpolicy="no-referrer" src="/static/my/theme1/images/064f9c885a154fc4a3d897e939751ef9_mergeImage.png" />
+                        </div>
+                    </div>
+                
+                    <div class="section_7 flex-col justify-between">
+                        <span class="text_35">Tipo</span>
+                        <div class="image-text_6 flex-row justify-between">
+                            <img class="thumbnail_6" referrerpolicy="no-referrer" src="/static/my/theme1/images/FigmaDDSSlicePNGb16c118cb7a6e7d2d6fbc29b5f5bf726.png" />
+                            <span class="text-group_8">
+                                Ciclo                                <span style="color:rgba(255, 255, 255, 1);">
+                                ${cycle_count}
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <span class="text_36"></span>
+                    <div class="text-group_9 flex-col justify-between">
+                        <span class="text_37">Preço</span>
+                        <span class="text_38">Taxa de retorno</span>
+                    </div>
+                    <div class="section_8 flex-col justify-between">
+                        <span class="text_39">${name}</span>
+                        <div class="text-group_10 flex-col justify-between">
+                            <span class="text_40">${cash} Kz</span>
+                            <span class="text_41">
+                               ${return_rate}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="box_6 flex-col">
+                ${income_show_js}
+                </div>
+                <div class="box_7 flex-col"></div>
+            </div>
+        </div>
+`;
+                        $('#list_content').append(list_dropdown);
+
+
+
+                        var countdownId = id;
+                        var endTime = end_time;
+                        var nowTime = parseInt('1750435251', 10);
+                        startCountdown(countdownId, endTime);
+                        console.log(countdownId, endTime);
+
+                        function startCountdown(elementId, endTime) {
+                            try {
+                                var hourElement = document.getElementById('countdown_hour' + elementId);
+                                var minuteElement = document.getElementById('countdown_minute' + elementId);
+                                var secondElement = document.getElementById('countdown_second' + elementId);
+
+                                if (!hourElement || !minuteElement || !secondElement) {
+                                    return;
+                                }
+
+                                var timeDifference = endTime - nowTime;
+                                if (timeDifference > 0) {
+                                    var timer = setInterval(function() {
+                                        timeDifference--;
+                                        if (timeDifference <= 0) {
+                                            clearInterval(timer);
+                                            hourElement.innerHTML = '';
+                                            minuteElement.innerHTML = '';
+                                            secondElement.innerHTML = '';
+                                            return;
+                                        }
+
+                                        var hours = Math.floor(timeDifference / 60 / 60);
+                                        var minutes = Math.floor((timeDifference / 60) % 60);
+                                        var seconds = timeDifference % 60;
+
+                                        hourElement.innerHTML = hours.toString().padStart(2, '0');
+                                        minuteElement.innerHTML = minutes.toString().padStart(2, '0');
+                                        secondElement.innerHTML = seconds.toString().padStart(2, '0');
+                                    }, 1000);
+                                } else {
+                                    hourElement.innerHTML = '';
+                                    minuteElement.innerHTML = '';
+                                    secondElement.innerHTML = '';
+                                }
+                            } catch (error) {
+                                console.error("Error in startCountdown:", error);
+                            }
+                        }
+
+
+                    }
+                    return false;
+                }
+
+                return false;
+            });
+
+        return false;
+
+    }
+</script>
+<script>
+    function click_id(id = '') {
+    var url = id + '.html'; // Ex: '28' => '28.html'
+    window.location.href = url;
+    return false;
+}
+
+</script>
+
+    <script>
+        function click_button(style_status = true, title = 'language') {
+            const element = document.getElementById(title);
+            if (!element) {
+                console.error(`Element with id "${title}" not found.`);
+                return;
+            }
+
+            if (style_status && title === 'service') {
+                $.post("/service", {}, function(data) {
+                    if (data.code === 1) {
+                        ['service1', 'service2', 'service3'].forEach(id => {
+                            const serviceElement = document.getElementById(id);
+                            if (serviceElement && data.data[id]) {
+                                serviceElement.href = data.data[id];
+                                serviceElement.style.display = "block";
+                            }
+                        });
+                    } else {
+                        console.error(`Failed to fetch data: ${data.message || 'Unknown error'}`);
+                    }
+                }).fail(function() {
+                    console.error("An error occurred while making the POST request.");
+                });
+            }
+
+            element.style.display = style_status ? "block" : "none";
+        }
+
+        function goBack() {
+            try {
+                const isSameOrigin = () => {
+                    try {
+                        const ref = document.referrer;
+                        return ref && new URL(ref).hostname === location.hostname;
+                    } catch {
+                        return false;
+                    }
+                };
+
+                if (isSameOrigin()) {
+                    history.back();
+
+                    setTimeout(() => {
+
+                        if (!document.hidden && performance.timing.navigationStart === performance.now()) {
+                            location.replace('/');
+                        }
+                    }, 1500);
+                } else {
+                    location.replace('/');
+                }
+            } catch (e) {
+                location.replace('/');
+            }
+        }
+
+        function show_msg(message = '', tips_id = 'msg_tips', msg_id = 'msg') {
+            document.getElementById(tips_id).style.display = "block";
+            document.getElementById(msg_id).innerHTML = message;
+        }
+    </script>
+</body>
+
+</html>

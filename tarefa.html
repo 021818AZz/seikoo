@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Investimentos</title>
+    <style>
+        :root {
+            --primary: #1c2230;
+            --secondary: #00fdfc;
+            --text: #ffffff;
+            --card-bg: #2a3244;
+            --expired: #ff3b30;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--primary);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 15px;
+            padding-bottom: 100px; /* Espaço para o footer não cobrir conteúdo */
+        }
+        
+        /* Header Styles */
+        .header-container {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+        
+        .back-button {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            cursor: pointer;
+            width: fit-content;
+        }
+        
+        .back-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 5px;
+        }
+        
+        .header-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--secondary);
+        }
+        
+        .header-tab {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .header-tab.active {
+            color: var(--secondary);
+        }
+        
+        .header-icon {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .product-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .product-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .product-type {
+            font-weight: bold;
+            color: var(--secondary);
+        }
+        
+        .product-cycle {
+            font-size: 0.9em;
+        }
+        
+        .product-details {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+        }
+        
+        .detail-group {
+            text-align: center;
+        }
+        
+        .detail-label {
+            font-size: 0.8em;
+            opacity: 0.7;
+        }
+        
+        .detail-value {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .expired-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--expired);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.7em;
+        }
+        
+        .receive-btn {
+            background-color: var(--secondary);
+            color: var(--primary);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .receive-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            border: 2px solid var(--secondary);
+        }
+        
+        .modal-title {
+            color: var(--secondary);
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        
+        .modal-message {
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .modal-close {
+            background-color: var(--secondary);
+            color: var(--primary);
+            border: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        /* Loading Modal Styles */
+        .loading-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .loading-content {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 300px;
+            text-align: center;
+            border: 2px solid var(--secondary);
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 20px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            color: var(--secondary);
+            font-size: 1.2em;
+        }
+        
+        /* Nav Bar Styles */
+        .nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #0b0e2a;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            border-top: 1px solid #333;
+        }
+
+        .nav div {
+            text-align: center;
+            color: white;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .nav img {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header com botão de voltar e tabs -->
+        <div class="header-container">
+            <div class="back-button" onclick="window.history.back()">
+                <svg class="back-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+                <span>Voltar</span>
+            </div>
+            
+            <div class="header-tabs">
+                <div class="header-tab active" onclick="window.location.href='produto.html'">
+                    <svg class="header-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white">
+                        <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/>
+                    </svg>
+                    <span>Todos</span>
+                </div>
+                <div class="header-tab" onclick="window.location.href='tarefa.html'">
+                    <svg class="header-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                    </svg>
+                    <span>Meus</span>
+                </div>
+            </div>
+        </div>
+        
+        <div id="products-container">
+            <!-- Produtos serão carregados aqui via JavaScript -->
+        </div>
+    </div>
+    
+    <!-- Modal Structure -->
+    <div id="earningModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-title">Parabéns!</div>
+            <div class="modal-message" id="modalMessage"></div>
+            <button class="modal-close" id="modalClose">Fechar</button>
+        </div>
+    </div>
+    
+    <!-- Loading Modal -->
+    <div id="loadingModal" class="loading-modal">
+        <div class="loading-content">
+            <svg class="loading-spinner" viewBox="0 0 50 50">
+                <circle cx="25" cy="25" r="20" fill="none" stroke="#00fdfc" stroke-width="5" stroke-dasharray="31.415, 31.415" stroke-linecap="round">
+                    <animateTransform attributeName="transform" type="rotate" values="0 25 25;360 25 25" dur="1.5s" repeatCount="indefinite"/>
+                </circle>
+            </svg>
+            <div class="loading-text">Carregando produtos...</div>
+        </div>
+    </div>
+    
+    <!-- Navigation Bar -->
+    <div class="nav">
+        <div onclick="window.location.href='home.html'">
+            <img src="https://i.postimg.cc/bvWWNmPF/home.png" alt="home">
+            <div>Home</div>
+        </div>
+        <div onclick="window.location.href='produto.html'">
+            <img src="https://i.postimg.cc/bwFF3mZN/product.png" alt="produto">
+            <div>Produto</div>
+        </div>
+        <div onclick="window.location.href='carteira.html'">
+            <img src="https://i.postimg.cc/3R2Sr7nd/walletactive.png" alt="carteira">
+            <div>Carteira</div>
+        </div>
+        <div onclick="window.location.href='meu.html'">
+            <img src="https://i.postimg.cc/8cB04D6q/my.png" alt="meu">
+            <div>Meu</div>
+        </div>
+    </div>
+
+   <script>document.addEventListener('DOMContentLoaded', async function () {
+    const API_USER_BASE = 'https://685720dc21f5d3463e54855f.mockapi.io/User/';
+    const API_PRO_BASE = 'https://685730c921f5d3463e54a877.mockapi.io/Pro/';
+    
+    // Obter dados do usuário do localStorage
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    if (!userData || !userData.phone) {
+        alert('Usuário não logado');
+        window.location.href = 'index.html';
+        return;
+    }
+
+    // Elementos do modal
+    const modal = document.getElementById('earningModal');
+    const modalMessage = document.getElementById('modalMessage');
+    const modalClose = document.getElementById('modalClose');
+    const loadingModal = document.getElementById('loadingModal');
+
+    // Mostrar modal de carregamento
+    function showLoading() {
+        loadingModal.style.display = 'flex';
+    }
+
+    // Esconder modal de carregamento
+    function hideLoading() {
+        loadingModal.style.display = 'none';
+    }
+
+    // Modal functions
+    function showModal(message) {
+        modalMessage.textContent = message;
+        modal.style.display = 'flex';
+    }
+
+    modalClose.addEventListener('click', function() {
+        modal.style.display = 'none';
+    });
+
+    // Mostra o loading antes de começar as requisições
+    showLoading();
+
+    // === 1. Verifica de uma vez em todas as APIs de usuários ===
+    let userApiNumber = 0;
+    let foundUser = null;
+
+    try {
+        const userRequests = [];
+        for (let i = 1; i <= 20; i++) {
+            userRequests.push(fetch(`${API_USER_BASE}${i}`));
+        }
+
+        const userResponses = await Promise.allSettled(userRequests);
+
+        for (let i = 0; i < userResponses.length; i++) {
+            const result = userResponses[i];
+            if (result.status === 'fulfilled' && result.value.ok) {
+                try {
+                    const users = await result.value.json();
+                    if (Array.isArray(users)) {
+                        const user = users.find(u => u.phone === userData.phone);
+                        if (user) {
+                            foundUser = user;
+                            userApiNumber = i + 1;
+                            break;
+                        }
+                    }
+                } catch (e) {
+                    console.error(`Erro ao ler dados do usuário da API ${i + 1}`, e);
+                }
+            }
+        }
+
+        if (!foundUser) {
+            hideLoading();
+            alert('Dados do usuário não encontrados');
+            return;
+        }
+
+        // === 2. Busca de uma vez todos os produtos em paralelo ===
+        const productsContainer = document.getElementById('products-container');
+        let activeProducts = [];
+
+        const productRequests = [];
+        for (let i = 1; i <= 20; i++) {
+            productRequests.push(fetch(`${API_PRO_BASE}${i}?phone=${userData.phone}`));
+        }
+
+        const productResponses = await Promise.allSettled(productRequests);
+
+        for (let i = 0; i < productResponses.length; i++) {
+            const result = productResponses[i];
+            if (result.status === 'fulfilled' && result.value.ok) {
+                try {
+                    const products = await result.value.json();
+                    products.forEach(product => {
+                        product.apiNumber = i + 1; // marca de qual API veio
+                        // Verifica se já foi coletado hoje
+                        product.collectedToday = hasCollectedToday(product.ultimoPagamento);
+                    });
+                    activeProducts = activeProducts.concat(products);
+                } catch (e) {
+                    console.error(`Erro ao processar produtos da API ${i + 1}`, e);
+                }
+            }
+        }
+
+        // Função para verificar se já foi coletado hoje
+        function hasCollectedToday(lastPaymentDate) {
+            if (!lastPaymentDate) return false;
+            
+            const lastPayment = new Date(lastPaymentDate);
+            const today = new Date();
+            
+            return (
+                lastPayment.getDate() === today.getDate() &&
+                lastPayment.getMonth() === today.getMonth() &&
+                lastPayment.getFullYear() === today.getFullYear()
+            );
+        }
+
+        // === 3. Renderizar produtos ===
+        function renderProducts(products) {
+            productsContainer.innerHTML = '';
+
+            if (products.length === 0) {
+                productsContainer.innerHTML = '<div class="product-card">Nenhum investimento ativo</div>';
+                return;
+            }
+
+            const now = new Date();
+
+            products.forEach(product => {
+                const productDate = new Date(product.dataCompra);
+                const expireDate = new Date(product.dataExpiracao);
+                const isExpired = expireDate < now;
+                const daysLeft = Math.floor((expireDate - now) / (1000 * 60 * 60 * 24));
+                const alreadyCollected = product.collectedToday || false;
+
+                const productElement = document.createElement('div');
+                productElement.className = 'product-card';
+
+                if (isExpired) {
+                    productElement.innerHTML += '<div class="expired-badge">Expirado</div>';
+                }
+
+                productElement.innerHTML += `
+                    <div class="product-header">
+                        <div class="product-type">${product.tipo || '5 Free'}</div>
+                        <div class="product-cycle">O Ciclo ${product.ciclo || '3'}</div>
+                    </div>
+                    <div class="product-details">
+                        <div class="detail-group">
+                            <div class="detail-label">Capturar Lucro</div>
+                            <div class="detail-value">${product.valor.toFixed(2)} Kz</div>
+                        </div>
+                        <div class="detail-group">
+                            <div class="detail-label">Horas obtidas</div>
+                            <div class="detail-value">${product.horas || '2'}</div>
+                        </div>
+                    </div>
+                    <div class="product-details">
+                        <div class="detail-group">
+                            <div class="detail-label">Ganhos por dia</div>
+                            <div class="detail-value">${product.rendaDiaria.toFixed(2)} Kz</div>
+                        </div>
+                        <div class="detail-group">
+                            <div class="detail-label">Total das receitas</div>
+                            <div class="detail-value">${product.totalRecebido.toFixed(2)} Kz</div>
+                        </div>
+                    </div>
+                    <div class="product-footer">
+                        <div>
+                            <div class="detail-label">Tempo de pagamento</div>
+                            <div>${formatDate(product.dataExpiracao)}</div>
+                        </div>
+                        <button class="receive-btn" 
+                                ${isExpired || alreadyCollected ? 'disabled' : ''} 
+                                data-id="${product.id}" 
+                                data-api="${product.apiNumber}"
+                                data-product="${product.tipo || '5 Free'}">
+                            ${isExpired ? 'Expirado' : alreadyCollected ? 'Já coletado hoje' : 'Receber'}
+                        </button>
+                    </div>
+                `;
+
+                productsContainer.appendChild(productElement);
+            });
+
+            // Botões "Receber"
+            document.querySelectorAll('.receive-btn:not(:disabled)').forEach(btn => {
+                btn.addEventListener('click', async function () {
+                    const productId = this.getAttribute('data-id');
+                    const apiNumber = this.getAttribute('data-api');
+                    const productName = this.getAttribute('data-product');
+                    await collectEarnings(userApiNumber, foundUser.id, apiNumber, productId, productName);
+                });
+            });
+        }
+
+        // === 4. Coleta de ganhos manual ===
+        async function collectEarnings(userApi, userId, productApi, productId, productName) {
+            try {
+                showLoading(); // Mostra loading durante a coleta
+                
+                const product = activeProducts.find(p => p.id === productId);
+                
+                // Verifica se já foi coletado hoje (agora usando o campo da API)
+                if (product.ultimoPagamento && hasCollectedToday(product.ultimoPagamento)) {
+                    hideLoading();
+                    showModal(`Você já coletou os ganhos de ${productName} hoje. Tente novamente amanhã.`);
+                    return;
+                }
+                
+                const dailyEarning = product.rendaDiaria;
+                const newBalance = (parseFloat(foundUser.saldo) || 0) + dailyEarning;
+                const now = new Date().toISOString();
+
+                // Atualiza o usuário
+                const updateUser = await fetch(`${API_USER_BASE}${userApi}/${userId}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        ...foundUser,
+                        saldo: newBalance
+                    })
+                });
+
+                if (updateUser.ok) {
+                    // Atualiza o produto com o novo último pagamento
+                    const updateProduct = await fetch(`${API_PRO_BASE}${productApi}/${productId}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            ...product,
+                            totalRecebido: product.totalRecebido + dailyEarning,
+                            ultimoPagamento: now // Armazena diretamente na API
+                        })
+                    });
+
+                    if (updateProduct.ok) {
+                        hideLoading();
+                        showModal(`Parabéns! Você recebeu ${dailyEarning.toFixed(2)} Kz de renda do produto ${productName}.`);
+                        
+                        // Atualiza os dados locais
+                        const button = document.querySelector(`.receive-btn[data-id="${productId}"]`);
+                        if (button) {
+                            button.disabled = true;
+                            button.textContent = 'Já coletado hoje';
+                        }
+                        
+                        product.totalRecebido += dailyEarning;
+                        product.ultimoPagamento = now;
+                        product.collectedToday = true;
+                        foundUser.saldo = newBalance;
+                        
+                        // Atualiza o saldo exibido na página
+                        updateDisplayedBalance(newBalance);
+                    } else {
+                        hideLoading();
+                        throw new Error('Erro ao atualizar produto');
+                    }
+                } else {
+                    hideLoading();
+                    throw new Error('Erro ao atualizar saldo');
+                }
+            } catch (error) {
+                hideLoading();
+                console.error('Erro ao coletar ganhos:', error);
+                showModal('Erro ao coletar ganhos. Por favor, tente novamente.');
+            }
+        }
+
+        // Função para atualizar o saldo exibido na página
+        function updateDisplayedBalance(newBalance) {
+            const balanceElements = document.querySelectorAll('.balance-value');
+            balanceElements.forEach(el => {
+                el.textContent = newBalance.toFixed(2) + ' Kz';
+            });
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('pt-PT');
+        }
+
+        // Renderiza os produtos
+        renderProducts(activeProducts);
+        
+    } catch (error) {
+        console.error('Erro geral:', error);
+        showModal('Ocorreu um erro ao carregar os dados. Por favor, tente novamente.');
+    } finally {
+        hideLoading(); // Garante que o loading seja escondido mesmo se houver erro
+    }
+});</script>

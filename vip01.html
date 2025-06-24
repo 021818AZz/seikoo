@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Processando Compra</title>
+  <style>
+    body {
+      background-color: #1c2230;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      flex-direction: column;
+    }
+    .status {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .spinner {
+      border: 4px solid rgba(0, 253, 252, 0.3);
+      border-radius: 50%;
+      border-top: 4px solid rgba(0, 253, 252, 1);
+      width: 30px;
+      height: 30px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    #mensagemErro {
+      margin-top: 15px;
+      color: red;
+      font-weight: bold;
+      text-align: center;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="status" id="status">Verificando saldo...</div>
+  <div class="spinner"></div>
+  <div id="mensagemErro"></div>
+
+  <script>document.addEventListener('DOMContentLoaded', async function () {
+  const VALOR_COMPRA = 30000;
+  const RENDA_DIARIA = 1400;
+  const DIAS_EXPIRACAO = 45;
+  const NOME_PRODUTO = "Produto S2+"; // Nome do produto comprado
+  const API_USER_BASE = 'https://685720dc21f5d3463e54855f.mockapi.io/User/';
+  const API_PRO_BASE = 'https://685730c921f5d3463e54a877.mockapi.io/Pro/';
+  const API_REGISTRO_BASE = 'https://68581c8721f5d3463e572a1a.mockapi.io/Registro/';
+  
+  // Obter dados do usuário do localStorage
+  const userData = JSON.parse(localStorage.getItem('userData'));
+  if (!userData || !userData.phone) {
+    updateStatus('Usuário não logado. Redirecionando...');
+    return redirectTo27();
+  }
+
+  try {
+    updateStatus('Localizando sua conta...');
+    const { user, apiNumber } = await findUserInAllAPIs(userData.phone);
+
+    if (!user) {
+      showError('Conta não encontrada. Redirecionando...');
+      return setTimeout(redirectTo27, 3000);
+    }
+
+    updateStatus('Verificando saldo...');
+    const saldoAtual = parseFloat(user.saldo) || 0;
+
+    if (saldoAtual < VALOR_COMPRA) {
+      showError('Saldo insuficiente. Redirecionando...');
+      return setTimeout(redirectTo27, 3000);
+    }
+
+    updateStatus('Processando pagamento...');
+    const novoSaldo = saldoAtual - VALOR_COMPRA;
+    const updatedUser = { ...user, saldo: novoSaldo };
+
+    const updateSuccess = await updateUserBalance(apiNumber, user.id, updatedUser);
+    if (!updateSuccess) throw new Error('Falha ao atualizar saldo');
+
+    updateStatus('Registrando compra...');
+    const compraSuccess = await registerPurchase(userData.phone);
+    if (!compraSuccess) throw new Error('Falha ao registrar compra');
+
+    updateStatus('Registrando histórico...');
+    const registroSuccess = await registerPurchaseHistory(userData.phone, VALOR_COMPRA, NOME_PRODUTO);
+    if (!registroSuccess) console.warn('Aviso: Não foi possível registrar o histórico, mas a compra foi realizada');
+
+    updateStatus('Compra realizada! Redirecionando...');
+    localStorage.setItem('userData', JSON.stringify(updatedUser));
+
+  } catch (error) {
+    console.error('Erro:', error);
+    showError('Ocorreu um erro. Redirecionando...');
+  } finally {
+    setTimeout(redirectTo27, 3000);
+  }
+
+  // 🔁 Busca o usuário em todas APIs de uma vez
+  async function findUserInAllAPIs(phone) {
+    const checks = Array.from({ length: 20 }, (_, i) => i + 1).map(apiNum =>
+      fetch(`${API_USER_BASE}${apiNum}`)
+        .then(res => res.ok ? res.json() : null)
+        .then(users => {
+          if (Array.isArray(users)) {
+            const user = users.find(u => u.phone === phone);
+            return user ? { user, apiNumber: apiNum } : null;
+          }
+          return null;
+        })
+        .catch(() => null)
+    );
+
+    const results = await Promise.all(checks);
+    return results.find(r => r !== null) || {};
+  }
+
+  // Atualiza saldo do usuário
+  async function updateUserBalance(apiNumber, userId, userData) {
+    try {
+      const response = await fetch(`${API_USER_BASE}${apiNumber}/${userId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(userData)
+      });
+      return response.ok;
+    } catch (error) {
+      console.error('Erro ao atualizar saldo:', error);
+      return false;
+    }
+  }
+
+  // Registrar a compra na primeira API com menos de 100 registros
+  async function registerPurchase(phone) {
+    const dataAtual = new Date();
+    const dataExpiracao = new Date();
+    dataExpiracao.setDate(dataAtual.getDate() + DIAS_EXPIRACAO);
+
+    const compraData = {
+      phone,
+      valor: VALOR_COMPRA,
+      dataCompra: dataAtual.toISOString(),
+      dataExpiracao: dataExpiracao.toISOString(),
+      rendaDiaria: RENDA_DIARIA,
+      diasRestantes: DIAS_EXPIRACAO,
+      totalRecebido: 0,
+      status: 'ativo'
+    };
+
+    const checks = Array.from({ length: 20 }, (_, i) => i + 1).map(async (i) => {
+      try {
+        const res = await fetch(`${API_PRO_BASE}${i}`);
+        if (!res.ok) return null;
+
+        const data = await res.json();
+        const count = Array.isArray(data) ? data.length : 1;
+
+        return { index: i, count };
+      } catch {
+        return null;
+      }
+    });
+
+    const results = await Promise.all(checks);
+    const available = results.find(r => r && r.count < 100);
+
+    if (available) {
+      try {
+        const postRes = await fetch(`${API_PRO_BASE}${available.index}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(compraData)
+        });
+
+        return postRes.ok;
+      } catch (error) {
+        console.error('Erro ao registrar compra:', error);
+        return false;
+      }
+    }
+
+    return false; // Nenhuma API disponível
+  }
+
+  // Registrar histórico da compra na API de registro
+  async function registerPurchaseHistory(phone, valor, nomeProduto) {
+    const registroData = {
+      phone,
+      valor,
+      nomeProduto,
+      dataCompra: new Date().toISOString(),
+      tipo: "compra"
+    };
+
+    // Verifica qual API de registro tem espaço (menos de 100 registros)
+    for (let i = 1; i <= 20; i++) {
+      try {
+        // Verifica quantos registros já existem nesta API
+        const res = await fetch(`${API_REGISTRO_BASE}${i}`);
+        if (!res.ok) continue;
+        
+        const registros = await res.json();
+        const count = Array.isArray(registros) ? registros.length : 0;
+        
+        if (count < 100) {
+          // Se tiver menos de 100, registra aqui
+          const postRes = await fetch(`${API_REGISTRO_BASE}${i}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(registroData)
+          });
+          
+          return postRes.ok;
+        }
+      } catch (error) {
+        console.error(`Erro ao verificar API de registro ${i}:`, error);
+        continue;
+      }
+    }
+    
+    return false; // Nenhuma API com espaço disponível
+  }
+
+  // Atualiza texto do status
+  function updateStatus(text) {
+    const statusEl = document.getElementById('status');
+    statusEl.textContent = text;
+  }
+
+  // Mostra erro na tela
+  function showError(msg) {
+    const msgEl = document.getElementById('mensagemErro');
+    msgEl.textContent = msg;
+    msgEl.style.display = 'block';
+    updateStatus(msg);
+  }
+
+  function redirectTo27() {
+    window.location.href = '28.html';
+  }
+});</script>

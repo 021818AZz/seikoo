@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retirada</title>
+    <style>
+        :root {
+            --primary: #1c2230;
+            --secondary: #00fdfc;
+            --text: #ffffff;
+            --card-bg: #2a3244;
+            --button-bg: #3a4357;
+            --error: #f44336;
+            --success: #4caf50;
+            --warning: #ff9800;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--primary);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 15px;
+            padding-bottom: 150px;
+        }
+        
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--secondary);
+        }
+        
+        .back-icon {
+            cursor: pointer;
+            margin-right: 15px;
+        }
+        
+        .header-content {
+            flex: 1;
+        }
+        
+        .header h1 {
+            color: var(--secondary);
+            margin-bottom: 5px;
+            font-size: 1.3em;
+        }
+        
+        .balance-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .balance-amount {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .balance-currency {
+            font-size: 1.2em;
+            opacity: 0.8;
+        }
+        
+        .withdrawal-section {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .section-title {
+            color: var(--secondary);
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 4px;
+            border: 1px solid var(--secondary);
+            background-color: var(--primary);
+            color: var(--text);
+            font-size: 1.1em;
+        }
+        
+        .info-text {
+            font-size: 0.8em;
+            opacity: 0.7;
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .withdraw-button {
+            background-color: var(--secondary);
+            color: var(--primary);
+            border: none;
+            padding: 15px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .attention-box {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+        
+        .attention-title {
+            color: var(--secondary);
+            margin-bottom: 10px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .attention-list {
+            padding-left: 20px;
+        }
+        
+        .attention-list li {
+            margin-bottom: 5px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: var(--primary);
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+            border: 1px solid var(--secondary);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .modal-title {
+            color: var(--secondary);
+            margin-top: 0;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .iban-option {
+            background-color: var(--card-bg);
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        
+        .iban-option:hover {
+            border: 1px solid var(--secondary);
+        }
+        
+        .iban-option.selected {
+            border: 1px solid var(--secondary);
+            background-color: rgba(0, 253, 252, 0.1);
+        }
+        
+        .iban-bank {
+            font-weight: bold;
+            color: var(--secondary);
+        }
+        
+        .iban-number {
+            font-family: monospace;
+            margin: 5px 0;
+        }
+        
+        .iban-name {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+        
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .modal-button {
+            padding: 8px 15px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .cancel-button {
+            background-color: var(--button-bg);
+            color: var(--text);
+        }
+        
+        .confirm-button {
+            background-color: var(--secondary);
+            color: var(--primary);
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .spinner {
+            border: 4px solid rgba(0, 253, 252, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid rgba(0, 253, 252, 1);
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #0b0e2a;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            border-top: 1px solid #333;
+        }
+
+        .nav div {
+            text-align: center;
+            color: white;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .nav img {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 4px;
+        }
+        
+        .calculation-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .calculation-label {
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .calculation-value {
+            font-weight: bold;
+        }
+        
+        .fee-value {
+            color: var(--error);
+        }
+        
+        .net-value {
+            color: var(--success);
+        }
+        
+        /* Modal de alerta */
+        .alert-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .alert-content {
+            background-color: var(--primary);
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+            border: 1px solid var(--secondary);
+            text-align: center;
+        }
+        
+        .alert-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+        
+        .alert-success {
+            color: var(--success);
+        }
+        
+        .alert-error {
+            color: var(--error);
+        }
+        
+        .alert-warning {
+            color: var(--warning);
+        }
+        
+        .alert-message {
+            margin-bottom: 20px;
+        }
+        
+        .alert-button {
+            padding: 8px 15px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            background-color: var(--secondary);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="back-icon" onclick="window.history.back()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 18L9 12L15 6" stroke="#00FDFC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="header-content">
+                <h1>Retirada</h1>
+            </div>
+        </div>
+        
+        <div class="balance-card">
+            <div>Saldo Disponível</div>
+            <div class="balance-amount" id="user-balance">0.00</div>
+            <div class="balance-currency">Kz</div>
+        </div>
+        
+        <div class="withdrawal-section">
+            <div class="section-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 1V23M17 5H9.5C8.57174 5 7.6815 5.36875 7.02513 6.02513C6.36875 6.6815 6 7.57174 6 8.5C6 9.42826 6.36875 10.3185 7.02513 10.9749C7.6815 11.6313 8.57174 12 9.5 12H14.5C15.4283 12 16.3185 12.3687 16.9749 13.0251C17.6313 13.6815 18 14.5717 18 15.5C18 16.4283 17.6313 17.3185 16.9749 17.9749C16.3185 18.6313 15.4283 19 14.5 19H6" stroke="#00FDFC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Valor da Retirada
+            </div>
+            <div class="input-group">
+                <input type="number" id="withdrawal-amount" placeholder="Digite o valor">
+                <div class="info-text">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 16V12M12 8H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Mínimo: 1.200 Kz | Máximo: 5.000.000 Kz
+                </div>
+            </div>
+            
+            <div class="calculation-row">
+                <div class="calculation-label">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M14 2V8H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M16 13H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M16 17H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M10 9H9H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Taxa (7%)
+                </div>
+                <div class="calculation-value fee-value" id="fee-amount">0.00 Kz</div>
+            </div>
+            
+            <div class="calculation-row">
+                <div class="calculation-label">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2V22M17 5H9.5C8.57174 5 7.6815 5.36875 7.02513 6.02513C6.36875 6.6815 6 7.57174 6 8.5C6 9.42826 6.36875 10.3185 7.02513 10.9749C7.6815 11.6313 8.57174 12 9.5 12H14.5C15.4283 12 16.3185 12.3687 16.9749 13.0251C17.6313 13.6815 18 14.5717 18 15.5C18 16.4283 17.6313 17.3185 16.9749 17.9749C16.3185 18.6313 15.4283 19 14.5 19H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Valor Líquido
+                </div>
+                <div class="calculation-value net-value" id="net-amount">0.00 Kz</div>
+            </div>
+        </div>
+        
+        <div class="withdrawal-section">
+            <div class="section-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17 9V7C17 6.46957 16.7893 5.96086 16.4142 5.58579C16.0391 5.21071 15.5304 5 15 5H5C4.46957 5 3.96086 5.21071 3.58579 5.58579C3.21071 5.96086 3 6.46957 3 7V13C3 13.5304 3.21071 14.0391 3.58579 14.4142C3.96086 14.7893 4.46957 15 5 15H7M9 19H19C19.5304 19 20.0391 18.7893 20.4142 18.4142C20.7893 18.0391 21 17.5304 21 17V11C21 10.4696 20.7893 9.96086 20.4142 9.58579C20.0391 9.21071 19.5304 9 19 9H9C8.46957 9 7.96086 9.21071 7.58579 9.58579C7.21071 9.96086 7 10.4696 7 11V17C7 17.5304 7.21071 18.0391 7.58579 18.4142C7.96086 18.7893 8.46957 19 9 19Z" stroke="#00FDFC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Método de Retirada
+            </div>
+            <div class="input-group">
+                <button id="select-iban-button" style="text-align: left; background-color: var(--card-bg); border: 1px solid var(--secondary); color: var(--text); padding: 12px; border-radius: 4px; width: 100%; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 21V5C19 4.46957 18.7893 3.96086 18.4142 3.58579C18.0391 3.21071 17.5304 3 17 3H7C6.46957 3 5.96086 3.21071 5.58579 3.58579C5.21071 3.96086 5 4.46957 5 5V21M19 21L21 21M19 21H14M5 21L3 21M5 21H10M9 7H10M9 11H10M14 7H15M14 11H15M10 21V17C10 16.4477 10.4477 16 11 16H13C13.5523 16 14 16.4477 14 17V21M10 21H14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Selecione uma conta bancária
+                </button>
+                <div id="selected-iban-display" style="margin-top: 10px; display: none;">
+                    <div id="selected-iban-details"></div>
+                </div>
+            </div>
+        </div>
+        
+        <button id="withdraw-button" class="withdraw-button">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 15V3M12 15L8 11M12 15L16 11M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Retirar
+        </button>
+        
+        <div class="attention-box">
+            <div class="attention-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 9V11M12 15H12.01M5.07183 19H18.9282C20.4678 19 21.4301 17.3333 20.6603 16L13.7321 4C12.9623 2.66667 11.0378 2.66667 10.268 4L3.33978 16C2.56998 17.3333 3.53223 19 5.07183 19Z" stroke="#00FDFC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Atenção por favor
+            </div>
+            <ul class="attention-list">
+                <li>O valor mínimo de retirada para uma única transação é 1200 Kz.</li>
+                <li>O valor máximo de retirada para uma única transação é 5000000 Kz.</li>
+                <li>Retiradas só podem ser inteiros, múltiplos de cem.</li>
+                <li>Por exemplo, o montante da retirada é 1200 Kz. O montante ativamente recebido é 1116 Kz.</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Modal para selecionar IBAN -->
+    <div id="iban-modal" class="modal">
+        <div class="modal-content">
+            <h2 class="modal-title">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 21V5C19 4.46957 18.7893 3.96086 18.4142 3.58579C18.0391 3.21071 17.5304 3 17 3H7C6.46957 3 5.96086 3.21071 5.58579 3.58579C5.21071 3.96086 5 4.46957 5 5V21M19 21L21 21M19 21H14M5 21L3 21M5 21H10M9 7H10M9 11H10M14 7H15M14 11H15M10 21V17C10 16.4477 10.4477 16 11 16H13C13.5523 16 14 16.4477 14 17V21M10 21H14" stroke="#00FDFC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Selecione a Conta Bancária
+            </h2>
+            <div id="ibans-list">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Carregando suas contas...</p>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button id="cancel-iban-button" class="modal-button cancel-button">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 18L18 6M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Cancelar
+                </button>
+                <button id="confirm-iban-button" class="modal-button confirm-button">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Selecionar
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal de Alerta -->
+    <div id="alert-modal" class="alert-modal">
+        <div class="alert-content">
+            <div class="alert-icon" id="alert-icon"></div>
+            <div class="alert-message" id="alert-message"></div>
+            <button id="alert-button" class="alert-button">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 13L9 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                OK
+            </button>
+        </div>
+    </div>
+    
+    <!-- Navigation Bar -->
+    <div class="nav">
+        <div onclick="window.location.href='home.html'">
+            <img src="https://i.postimg.cc/bvWWNmPF/home.png" alt="home">
+            <div>Home</div>
+        </div>
+        <div onclick="window.location.href='produto.html'">
+            <img src="https://i.postimg.cc/bwFF3mZN/product.png" alt="produto">
+            <div>Produto</div>
+        </div>
+        <div onclick="window.location.href='carteira.html'">
+            <img src="https://i.postimg.cc/3R2Sr7nd/walletactive.png" alt="carteira">
+            <div>Carteira</div>
+        </div>
+        <div onclick="window.location.href='meu.html'">
+            <img src="https://i.postimg.cc/8cB04D6q/my.png" alt="meu">
+            <div>Meu</div>
+        </div>
+    </div>
+
+   <script>document.addEventListener('DOMContentLoaded', async function() {
+    const API_USER_BASE = 'https://685720dc21f5d3463e54855f.mockapi.io/User/';
+    const API_IBAN_BASE = 'https://68582f8c21f5d3463e576aeb.mockapi.io/Iban/';
+    const API_WITHDRAWAL_BASE = 'https://685839af21f5d3463e578873.mockapi.io/Retirada/';
+    const API_REGISTRO_BASE = 'https://68581c8721f5d3463e572a1a.mockapi.io/Registro/';
+    
+    // Obter dados do usuário do localStorage
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    if (!userData || !userData.phone) {
+        showAlert('error', 'Usuário não logado. Redirecionando...', () => {
+            window.location.href = 'index.html';
+        });
+        return;
+    }
+
+    // Elementos da interface
+    const userBalanceElement = document.getElementById('user-balance');
+    const withdrawalAmountInput = document.getElementById('withdrawal-amount');
+    const feeAmountElement = document.getElementById('fee-amount');
+    const netAmountElement = document.getElementById('net-amount');
+    const selectIbanButton = document.getElementById('select-iban-button');
+    const selectedIbanDisplay = document.getElementById('selected-iban-display');
+    const selectedIbanDetails = document.getElementById('selected-iban-details');
+    const withdrawButton = document.getElementById('withdraw-button');
+    const ibanModal = document.getElementById('iban-modal');
+    const ibansList = document.getElementById('ibans-list');
+    const cancelIbanButton = document.getElementById('cancel-iban-button');
+    const confirmIbanButton = document.getElementById('confirm-iban-button');
+    const alertModal = document.getElementById('alert-modal');
+    const alertIcon = document.getElementById('alert-icon');
+    const alertMessage = document.getElementById('alert-message');
+    const alertButton = document.getElementById('alert-button');
+    
+    let userBalance = 0;
+    let userApiNumber = 1;
+    let userIbans = [];
+    let selectedIban = null;
+    let selectedIbanElement = null;
+
+    // Mostra alerta modal
+    function showAlert(type, message, callback = null) {
+        alertIcon.className = 'alert-icon';
+        alertMessage.textContent = message;
+        
+        switch(type) {
+            case 'success':
+                alertIcon.classList.add('alert-success');
+                alertIcon.innerHTML = `
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="currentColor" stroke-width="2"/>
+                        <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                `;
+                break;
+            case 'error':
+                alertIcon.classList.add('alert-error');
+                alertIcon.innerHTML = `
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2"/>
+                        <path d="M15 9L9 15M9 9L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                `;
+                break;
+            case 'warning':
+                alertIcon.classList.add('alert-warning');
+                alertIcon.innerHTML = `
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 9V11M12 15H12.01M5.07183 19H18.9282C20.4678 19 21.4301 17.3333 20.6603 16L13.7321 4C12.9623 2.66667 11.0378 2.66667 10.268 4L3.33978 16C2.56998 17.3333 3.53223 19 5.07183 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                `;
+                break;
+        }
+        
+        alertModal.style.display = 'flex';
+        
+        alertButton.onclick = function() {
+            alertModal.style.display = 'none';
+            if (callback && typeof callback === 'function') {
+                callback();
+            }
+        };
+    }
+
+    // Encontra uma API de registro com espaço disponível (1-20)
+    async function findAvailableRegistroApi() {
+        for (let i = 1; i <= 20; i++) {
+            try {
+                const response = await fetch(`${API_REGISTRO_BASE}${i}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    if (Array.isArray(data) && data.length < 100) {
+                        return i;
+                    }
+                }
+            } catch (error) {
+                console.error(`Erro ao verificar API de registro ${i}:`, error);
+            }
+        }
+        return null;
+    }
+
+    // Registra a retirada como uma compra negativa
+    async function registerWithdrawalAsPurchase(amount) {
+        try {
+            const registroApiNumber = await findAvailableRegistroApi();
+            if (!registroApiNumber) {
+                console.error('Nenhuma API de registro disponível');
+                return false;
+            }
+
+            const registroData = {
+                phone: userData.phone,
+                valor: -amount, // Valor negativo para representar retirada
+                data: new Date().toISOString(),
+                tipo: "Retirada",
+                descricao: "Retirada de saldo",
+                status: "Concluído"
+            };
+
+            const response = await fetch(`${API_REGISTRO_BASE}${registroApiNumber}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(registroData)
+            });
+
+            return response.ok;
+        } catch (error) {
+            console.error('Erro ao registrar retirada:', error);
+            return false;
+        }
+    }
+
+    // Carrega saldo do usuário
+    async function loadUserBalance() {
+        try {
+            // Busca em todas as APIs de User (1-20)
+            for (let i = 1; i <= 20; i++) {
+                const response = await fetch(`${API_USER_BASE}${i}`);
+                if (response.ok) {
+                    const users = await response.json();
+                    if (Array.isArray(users)) {
+                        const user = users.find(u => u.phone === userData.phone);
+                        if (user && user.saldo !== undefined) {
+                            userBalance = parseFloat(user.saldo) || 0;
+                            userApiNumber = i;
+                            updateBalanceDisplay();
+                            return;
+                        }
+                    }
+                }
+            }
+            showAlert('error', 'Usuário não encontrado.');
+        } catch (error) {
+            console.error('Erro ao carregar saldo:', error);
+            showAlert('error', 'Erro ao carregar saldo. Tente novamente.');
+        }
+    }
+
+    // Atualiza exibição do saldo
+    function updateBalanceDisplay() {
+        userBalanceElement.textContent = userBalance.toLocaleString('pt-PT', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+    }
+
+    // Carrega IBANs do usuário
+    async function loadUserIbans() {
+        try {
+            // Busca em todas as APIs de IBAN (1-10)
+            const apiRequests = [];
+            for (let i = 1; i <= 10; i++) {
+                apiRequests.push(fetch(`${API_IBAN_BASE}${i}?phone=${userData.phone}`));
+            }
+
+            const responses = await Promise.allSettled(apiRequests);
+            userIbans = [];
+
+            for (let i = 0; i < responses.length; i++) {
+                const response = responses[i];
+                if (response.status === 'fulfilled' && response.value.ok) {
+                    try {
+                        const ibans = await response.value.json();
+                        if (Array.isArray(ibans)) {
+                            userIbans = userIbans.concat(ibans);
+                        }
+                    } catch (error) {
+                        console.error(`Erro ao processar API IBAN ${i + 1}:`, error);
+                    }
+                }
+            }
+
+            if (userIbans.length === 0) {
+                showAlert('warning', 'Você precisa cadastrar uma conta bancária primeiro.', () => {
+                    window.location.href = 'conta_recepcao.html';
+                });
+            }
+
+        } catch (error) {
+            console.error('Erro ao carregar IBANs:', error);
+            showAlert('error', 'Erro ao carregar contas bancárias. Tente novamente.');
+        }
+    }
+
+    // Atualiza cálculos de taxa e valor líquido
+    function updateCalculations() {
+        const amount = parseFloat(withdrawalAmountInput.value) || 0;
+        const fee = amount * 0.07;
+        const net = amount - fee;
+        
+        feeAmountElement.textContent = fee.toLocaleString('pt-PT', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }) + ' Kz';
+        
+        netAmountElement.textContent = net.toLocaleString('pt-PT', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }) + ' Kz';
+    }
+
+    // Encontra uma API de retirada com espaço disponível
+    async function findAvailableWithdrawalApi() {
+        for (let i = 1; i <= 20; i++) {
+            try {
+                const response = await fetch(`${API_WITHDRAWAL_BASE}${i}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    if (Array.isArray(data) && data.length < 100) {
+                        return i;
+                    }
+                }
+            } catch (error) {
+                console.error(`Erro ao verificar API de retirada ${i}:`, error);
+            }
+        }
+        return null;
+    }
+
+    // Processa a retirada
+    async function processWithdrawal() {
+        const amount = parseFloat(withdrawalAmountInput.value);
+        
+        // Validações
+        if (!amount || isNaN(amount)) {
+            showAlert('error', 'Por favor, insira um valor válido.');
+            return;
+        }
+        
+        if (amount < 1200) {
+            showAlert('error', 'O valor mínimo de retirada é 1200 Kz.');
+            return;
+        }
+        
+        if (amount > 5000000) {
+            showAlert('error', 'O valor máximo de retirada é 5000000 Kz.');
+            return;
+        }
+        
+        if (amount % 100 !== 0) {
+            showAlert('error', 'O valor deve ser múltiplo de 100 (ex: 1200, 1500, 2000).');
+            return;
+        }
+        
+        if (amount > userBalance) {
+            showAlert('error', 'Saldo insuficiente para esta retirada.');
+            return;
+        }
+        
+        if (!selectedIban) {
+            showAlert('error', 'Por favor, selecione uma conta bancária.');
+            return;
+        }
+        
+        try {
+            // 1. Encontra API disponível para registrar a retirada
+            const withdrawalApiNumber = await findAvailableWithdrawalApi();
+            if (!withdrawalApiNumber) {
+                showAlert('error', 'Não foi possível processar a retirada no momento. Tente novamente mais tarde.');
+                return;
+            }
+            
+            // 2. Registra a retirada
+            const fee = amount * 0.07;
+            const netAmount = amount - fee;
+            
+            const withdrawalData = {
+                phone: userData.phone,
+                amount,
+                fee,
+                netAmount,
+                ibanId: selectedIban.id,
+                ibanDetails: `${selectedIban.bankType} - ${selectedIban.ibanNumber}`,
+                status: 'pending',
+                createdAt: new Date().toISOString(),
+                apiNumber: withdrawalApiNumber
+            };
+            
+            const withdrawalResponse = await fetch(`${API_WITHDRAWAL_BASE}${withdrawalApiNumber}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(withdrawalData)
+            });
+            
+            if (!withdrawalResponse.ok) {
+                throw new Error('Falha ao registrar retirada');
+            }
+            
+            // 3. Registra a retirada como compra negativa
+            const registroSuccess = await registerWithdrawalAsPurchase(amount);
+            if (!registroSuccess) {
+                console.warn('A retirada foi registrada, mas não foi possível registrar no histórico de compras');
+            }
+            
+            // 4. Atualiza saldo do usuário
+            const newBalance = userBalance - amount;
+            
+            // Primeiro precisamos encontrar o usuário para obter seu ID
+            let userToUpdate = null;
+            for (let i = 1; i <= 20; i++) {
+                const response = await fetch(`${API_USER_BASE}${i}`);
+                if (response.ok) {
+                    const users = await response.json();
+                    if (Array.isArray(users)) {
+                        userToUpdate = users.find(u => u.phone === userData.phone);
+                        if (userToUpdate) {
+                            userApiNumber = i;
+                            break;
+                        }
+                    }
+                }
+            }
+            
+            if (!userToUpdate) {
+                throw new Error('Usuário não encontrado para atualização');
+            }
+            
+            const updateResponse = await fetch(`${API_USER_BASE}${userApiNumber}/${userToUpdate.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    saldo: newBalance,
+                    phone: userData.phone
+                })
+            });
+            
+            if (updateResponse.ok) {
+                userBalance = newBalance;
+                updateBalanceDisplay();
+                
+                showAlert('success', `Retirada solicitada com sucesso! Valor líquido: ${netAmount.toLocaleString('pt-PT')} Kz`, () => {
+                    // Limpa o formulário
+                    withdrawalAmountInput.value = '';
+                    selectedIban = null;
+                    selectedIbanDisplay.style.display = 'none';
+                    updateCalculations();
+                });
+                
+            } else {
+                throw new Error('Falha ao atualizar saldo');
+            }
+            
+        } catch (error) {
+            console.error('Erro ao processar retirada:', error);
+            showAlert('error', 'Erro ao processar retirada. Tente novamente.');
+        }
+    }
+
+    // Mostra modal para selecionar IBAN
+    async function showIbanModal() {
+        if (userIbans.length === 0) {
+            await loadUserIbans();
+        }
+        
+        if (userIbans.length === 0) return;
+        
+        ibansList.innerHTML = '';
+        
+        userIbans.forEach(iban => {
+            const ibanElement = document.createElement('div');
+            ibanElement.className = 'iban-option';
+            ibanElement.innerHTML = `
+                <div class="iban-bank">${iban.bankType}</div>
+                <div class="iban-number">${iban.ibanNumber}</div>
+                <div class="iban-name">${iban.accountHolder}</div>
+            `;
+            
+            ibanElement.addEventListener('click', () => {
+                // Remove seleção anterior
+                if (selectedIbanElement) {
+                    selectedIbanElement.classList.remove('selected');
+                }
+                
+                // Seleciona novo IBAN
+                selectedIban = iban;
+                selectedIbanElement = ibanElement;
+                ibanElement.classList.add('selected');
+            });
+            
+            ibansList.appendChild(ibanElement);
+        });
+        
+        ibanModal.style.display = 'flex';
+    }
+
+    // Event Listeners
+    withdrawalAmountInput.addEventListener('input', updateCalculations);
+    selectIbanButton.addEventListener('click', showIbanModal);
+    
+    cancelIbanButton.addEventListener('click', () => {
+        ibanModal.style.display = 'none';
+    });
+    
+    confirmIbanButton.addEventListener('click', () => {
+        if (!selectedIban) {
+            showAlert('error', 'Por favor, selecione uma conta bancária.');
+            return;
+        }
+        
+        selectedIbanDetails.innerHTML = `
+            <div><strong>${selectedIban.bankType}</strong></div>
+            <div>${selectedIban.ibanNumber}</div>
+            <div>${selectedIban.accountHolder}</div>
+        `;
+        
+        selectedIbanDisplay.style.display = 'block';
+        ibanModal.style.display = 'none';
+    });
+    
+    withdrawButton.addEventListener('click', processWithdrawal);
+
+    // Inicialização
+    loadUserBalance();
+    loadUserIbans();
+    updateCalculations();
+});</script>

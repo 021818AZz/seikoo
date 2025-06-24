@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no,maximum-scale=1.0,minimum-scale=1.0" />
+    <title>Complete Solaria</title>
+    <link rel="stylesheet" type="text/css" href="common.css" />
+    <style>
+        html {
+            font-size: 10vw;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            flex-direction: column;
+            overscroll-behavior-y: contain;
+            touch-action: manipulation;
+        }
+
+        .page {
+            min-height: 100vh;
+            background-color: rgba(28, 34, 48, 1) !important;
+        }
+
+        /* WebKit */
+        ::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+        }
+
+        /* Firefox/IE Edge */
+        * {
+            scrollbar-width: none;
+            scrollbar-color: transparent transparent;
+            -ms-overflow-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        a:link,
+        a:visited,
+        a:hover,
+        a:active {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        @media screen and (min-width: 769px) {
+            html {
+                font-size: 45px;
+            }
+        }
+    </style>
+    
+    
+<style>
+    .page {
+        background-color: rgba(255, 255, 255, 1);
+        position: relative;
+        width: 10rem;
+        height: 21.654rem;
+        overflow: hidden;
+    }
+
+    .block_1 {
+        position: relative;
+        width: 10rem;
+        height: 21.654rem;
+        background: url(FigmaDDSSlicePNGc1bfdd33367a232100825178ed667ace.png) 100% no-repeat;
+        background-size: 100% 100%;
+    }
+
+    .box_5 {
+        width: 9.307rem;
+        height: 0.8rem;
+        margin: 0.534rem 0 0 0.534rem;
+    }
+
+    .thumbnail_1 {
+        width: 0.48rem;
+        height: 0.48rem;
+    }
+
+    .thumbnail_2 {
+        width: 0.4rem;
+        height: 0.454rem;
+        margin: 0.027rem 0 0 6.747rem;
+    }
+
+    .text_1 {
+        width: 0.587rem;
+        height: 0.427rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.426rem;
+        font-family: PingFang SC-Semibold;
+        font-weight: 600;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.427rem;
+        margin-left: 0.134rem;
+    }
+
+    .thumbnail_5 {
+        width: 0.374rem;
+        height: 0.4rem;
+        margin: 0.4rem 0 0 0.587rem;
+    }
+
+    .box_6 {
+        width: 9.387rem;
+        height: 2.987rem;
+        margin: 2.987rem 0 0 0.64rem;
+    }
+
+    .text_2 {
+        width: 2.587rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin-top: 2.614rem;
+    }
+
+    .block_2 {
+        height: 2.774rem;
+        background: url(https://i.postimg.cc/3xPv8t8p/d6f973834c607e9d3d77648661ea8795.png) 100% no-repeat;
+        background-size: 100% 100%;
+        width: 3.28rem;
+    }
+
+    .block_3 {
+        background-color: rgba(255, 223, 221, 1);
+        border-radius: 6px;
+        width: 8.72rem;
+        height: 1.014rem;
+        border: 1px solid rgba(255, 59, 48, 1);
+        margin: 1.28rem 0 0 -6.107rem;
+    }
+
+    .image-text_3 {
+        width: 4.747rem;
+        height: 0.427rem;
+        margin: 0.294rem 0 0 1.974rem;
+    }
+
+    .thumbnail_4 {
+        width: 0.427rem;
+        height: 0.427rem;
+    }
+
+    .text-group_1 {
+        width: 4.214rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(28, 34, 48, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin-top: 0.027rem;
+    }
+
+    .text-wrapper_1 {
+        background-color: rgba(0, 253, 252, 0.08);
+        border-radius: 32px;
+        height: 1.28rem;
+        border: 1px solid rgba(0, 253, 252, 1);
+        width: 8.72rem;
+        margin: 0.32rem 0 0 0.64rem;
+    }
+
+    .text_3 {
+        width: 2.587rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin: 0.454rem 0 0 0.534rem;
+    }
+
+    .text_4 {
+        width: 1.734rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin: 0.587rem 0 0 0.64rem;
+    }
+
+    .text-wrapper_2 {
+        background-color: rgba(0, 253, 252, 0.08);
+        border-radius: 32px;
+        height: 1.28rem;
+        border: 1px solid rgba(0, 253, 252, 1);
+        width: 8.72rem;
+        margin: 0.32rem 0 0 0.64rem;
+    }
+
+    .text_5 {
+        width: 4.027rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin: 0.454rem 0 0 0.534rem;
+    }
+
+    .text_6 {
+        width: 3.254rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin: 0.587rem 0 0 0.64rem;
+    }
+
+    .text-wrapper_3 {
+        background-color: rgba(0, 253, 252, 0.08);
+        border-radius: 32px;
+        height: 1.28rem;
+        border: 1px solid rgba(0, 253, 252, 1);
+        width: 8.72rem;
+        margin: 0.32rem 0 0 0.64rem;
+    }
+
+    .text_7 {
+        width: 6.027rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin: 0.454rem 0 0 0.534rem;
+    }
+
+    .text_8 {
+        width: 1.947rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin: 0.587rem 0 0 0.64rem;
+    }
+
+    .text-wrapper_4 {
+        background-color: rgba(0, 253, 252, 0.08);
+        border-radius: 32px;
+        height: 1.28rem;
+        border: 1px solid rgba(0, 253, 252, 1);
+        width: 8.72rem;
+        margin: 0.32rem 0 0 0.64rem;
+    }
+
+    .text_9 {
+        width: 5.627rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin: 0.454rem 0 0 0.534rem;
+    }
+
+    .text-wrapper_5 {
+        background-color: rgba(0, 253, 252, 1);
+        border-radius: 32px;
+        height: 1.387rem;
+        width: 8.72rem;
+        margin: 1.387rem 0 0 0.64rem;
+    }
+
+    .text_10 {
+        width: 1.894rem;
+        height: 0.48rem;
+        overflow-wrap: break-word;
+        color: rgba(28, 34, 48, 1);
+        font-size: 0.48rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.48rem;
+        margin: 0.454rem 0 0 3.414rem;
+    }
+
+    .text_11 {
+        width: 2.267rem;
+        height: 0.32rem;
+        overflow-wrap: break-word;
+        color: rgba(0, 253, 252, 1);
+        font-size: 0.32rem;
+        font-family: PingFang SC-Regular;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.32rem;
+        margin: 0.534rem 0 1.44rem 3.84rem;
+    }
+
+    .image_1 {
+        position: absolute;
+        left: 1.734rem;
+        top: 3.627rem;
+        width: 6.587rem;
+        height: 1.387rem;
+    }
+</style>
+
+<style>
+    .page {
+        height: auto;
+    }
+
+    .block_1 {
+        height: auto;
+    }
+
+    .thumbnail_2 {
+        margin: 0.027rem 0 0 5.747rem;
+    }
+
+    .box_6 {
+        margin: 2.987rem 0 -1rem 0.64rem;
+    }
+
+    .image-text_3 {
+        margin: 0.294rem 0 0 0.174rem;
+    }
+
+    .language-popup {
+        display: none;
+        position: absolute;
+        top: 1rem;
+        right: 0.5rem;
+        background-color: rgba(255, 255, 255, 1);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 0.2rem;
+        z-index: 1000;
+    }
+
+    .language-item {
+        padding: 0.2rem;
+        font-size: 0.4rem;
+        color: rgba(28, 34, 48, 1);
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .language-item:hover {
+        background-color: rgba(0, 253, 252, 0.1);
+    }
+
+    .text-wrapper_5 {
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .text-wrapper_5:hover {
+        background-color: rgba(0, 223, 222, 1);
+        box-shadow: 0 4px 12px rgba(0, 253, 252, 0.3);
+    }
+
+    .block_3 {
+        animation: fadeIn 0.3s ease;
+        box-shadow: 0 2px 6px rgba(255, 59, 48, 0.2);
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .language-popup {
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(0, 253, 252, 0.3);
+        transition: all 0.3s ease;
+    }
+
+    .text-wrapper_1,
+    .text-wrapper_2,
+    .text-wrapper_3,
+    .text-wrapper_4 {
+        transition: transform 0.2s ease;
+    }
+
+    .text-wrapper_1:hover,
+    .text-wrapper_2:hover,
+    .text-wrapper_3:hover,
+    .text-wrapper_4:hover {
+        transform: translateY(-2px);
+    }
+
+    .text_10 {
+        transition: color 0.3s ease;
+    }
+
+    .text-wrapper_5:hover .text_10 {
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    .block_3 {
+        background-color: rgba(255, 223, 221, 0.95);
+        animation: shake 0.4s ease;
+    }
+
+    @keyframes shake {
+
+        0%,
+        100% {
+            transform: translateX(0);
+        }
+
+        25% {
+            transform: translateX(-5px);
+        }
+
+        75% {
+            transform: translateX(5px);
+        }
+    }
+
+    .language-popup {
+        min-width: 0.3rem;
+        padding: 0.15rem;
+        transform-origin: top right;
+        animation: popupScale 0.3s ease;
+    }
+
+    .language-item {
+        padding: 0.15rem 0.3rem;
+        border-radius: 4px;
+        font-size: 0.35rem;
+    }
+
+    @keyframes popupScale {
+        from {
+            transform: scale(0.8);
+            opacity: 0;
+        }
+
+        to {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    .language-popup {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: rgba(255, 255, 255, 1);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 0.2rem;
+        z-index: 1000;
+        min-width: 100%;
+    }
+
+    .text_1 {
+        width: 2.487rem;
+        height: 0.427rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.426rem;
+        font-family: PingFang SC-Semibold;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.427rem;
+        margin-left: 0.134rem;
+        position: relative;
+        display: inline-block;
+    }
+
+    .text_10 {
+        width: 8.7rem;
+        text-align: center;
+        margin: 0.454rem auto;
+    }
+
+    .text_11 {
+        width: auto;
+        margin: 0.6rem auto;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .text-group_1 {
+        width: 8rem;
+        white-space: pre-wrap;
+    }
+
+    .box_6 {
+        margin: 0;
+        width: auto;
+    }
+
+    .block_2 {
+        width: 10rem;
+        margin: 2.6rem auto 0 auto;
+    }
+
+    .block_3 {
+        margin: 1.28rem auto 0 auto;
+    }
+
+    .image-text_3 {
+        width: auto;
+    }
+
+    .text_4 {
+        width: auto;
+    }
+
+    .text_3 {
+        width: auto;
+    }
+
+    .text-wrapper_1 {
+        margin: 0 auto;
+        margin-top: 0.32rem;
+    }
+
+    .text-wrapper_5 {
+        margin: 0 auto;
+        margin-top: 1rem;
+    }
+
+    .image_1 {
+        width: auto;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+    }
+
+    .input_style {
+        width: 7.72rem;
+        height: auto;
+        box-sizing: border-box;
+        padding: 0 0.134rem;
+        color: #ffffff;
+        font-size: 0.373rem;
+        font-weight: 500;
+        text-align: left;
+        border: none;
+        outline: none;
+        line-height: 0.374rem;
+        overflow: hidden;
+        transition: padding 0.3s ease;
+        background-color: transparent;
+    }
+
+    .input_style::placeholder {
+        color: rgba(255, 255, 255, 0.8);
+    }
+</style>
+
+</head>
+
+<body>
+    <div class="page flex-col">
+        <div class="block_1 flex-col">
+            <div class="box_5 flex-row">
+                <img class="thumbnail_1" referrerpolicy="no-referrer" src="https://i.postimg.cc/d1dDVCQ0/Figma-DDSSlice-PNG3e695f2a31f83d300ffe697687dcdfd0.png" />
+                <img class="thumbnail_2" referrerpolicy="no-referrer" src="https://i.postimg.cc/5tsW5RXQ/Figma-DDSSlice-PNGbf3fd37120d41f9c1bad74ae84ce20fb.png" />
+                <span class="text_1">
+                    língua
+                    <div id="languagePopup" class="language-popup">
+                        <div class="language-item">English</div>
+                        <div class="language-item">Français</div>
+                        <div class="language-item">Português</div>
+                    </div>
+                </span>
+            </div>
+            <div class="box_6 flex-row justify-between">
+                <div class="block_2 flex-col" style="display: none;" id="msg_tips_zcdl">
+                    <div class="block_3 flex-row">
+                        <div class="image-text_3 flex-row justify-between">
+                            <img class="thumbnail_4" referrerpolicy="no-referrer" src="https://i.postimg.cc/ncDZXHpG/29720929-fpx-tif-qlt-80-0-res-Mode-sharp2-op-usm-1-75-0.webp" />
+                            <span class="text-group_1" id="msg_zcdl"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 1.6rem;"></div>
+            <form>
+                <span class="text_4">Número de telefone</span>
+                <div class="text-wrapper_1 flex-col">
+                    <span class="text_3">
+                        <input type="text" id="phone" name="phone" value="" placeholder="Introduza o seu número de telefone" autocomplete="off" class="input_style" />
+                    </span>
+                </div>
+                <span class="text_4">Senha</span>
+                <div class="text-wrapper_1 flex-col">
+                    <span class="text_3">
+                        <input type="password" id="password" name="password" value="" placeholder="Introduza por favor uma senha" autocomplete="off" class="input_style" />
+                    </span>
+                </div>
+                <span class="text_4">Confirmar a senha</span>
+                <div class="text-wrapper_1 flex-col">
+                    <span class="text_3">
+                        <input type="password" id="confirm_password" name="confirm_password" value="" placeholder="Introduza novamente a sua senha" autocomplete="off" class="input_style" />
+                    </span>
+                </div>
+                <span class="text_4">Código do convite</span>
+                <div class="text-wrapper_1 flex-col">
+                    <span class="text_3">
+                        <input type="text" id="invite_code" name="invite_code" value="" placeholder="Indique por favor o código do convite" autocomplete="off" class="input_style" />
+                    </span>
+                </div>
+
+                <div class="text-wrapper_5 flex-col" id="submit">
+                    <span class="text_10">Registo</span>
+                </div>
+                <a href="index.html" target='_self'>
+                    <span class="text_11">Senha de autenticação</span>
+                </a>
+            </form>
+            <img class="image_1" referrerpolicy="no-referrer" src="https://www.seiko.co.jp/seiko_house_ginza/images/221001_share_footer_logo.svg" />
+        </div>
+    </div>
+
+   <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const submitBtn = document.getElementById('submit');
+    const phoneInput = document.getElementById('phone');
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput = document.getElementById('confirm_password');
+    const inviteCodeInput = document.getElementById('invite_code');
+    const msgTipsZcdl = document.getElementById('msg_tips_zcdl');
+    const msgZcdl = document.getElementById('msg_zcdl');
+    const loadingModal = document.createElement('div');
+    
+    // Configuração do modal de loading
+    loadingModal.id = 'loadingModal';
+    loadingModal.style.position = 'fixed';
+    loadingModal.style.top = '0';
+    loadingModal.style.left = '0';
+    loadingModal.style.width = '100%';
+    loadingModal.style.height = '100%';
+    loadingModal.style.backgroundColor = 'rgba(0,0,0,0.5)';
+    loadingModal.style.display = 'none';
+    loadingModal.style.justifyContent = 'center';
+    loadingModal.style.alignItems = 'center';
+    loadingModal.style.zIndex = '1000';
+    loadingModal.style.flexDirection = 'column';
+    loadingModal.innerHTML = `
+        <div style="background: white; padding: 20px; border-radius: 10px; text-align: center;">
+            <div class="loading-spinner" style="
+                width: 50px;
+                height: 50px;
+                border: 5px solid #f3f3f3;
+                border-top: 5px solid #3498db;
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+                margin: 0 auto 15px;
+            "></div>
+            <p style="font-size: 18px; margin: 0;">Registrando...</p>
+        </div>
+    `;
+    document.body.appendChild(loadingModal);
+
+    // Restringir o campo de telefone para aceitar apenas números
+    phoneInput.addEventListener('input', function() {
+        this.value = this.value.replace(/\D/g, ''); // Remove tudo que não é dígito
+    });
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const inviteCodeFromUrl = urlParams.get('invitCode');
+    if (inviteCodeFromUrl) {
+        inviteCodeInput.value = inviteCodeFromUrl;
+    }
+
+    function showMessage(message, isError = true) {
+        msgTipsZcdl.style.display = 'block';
+        msgZcdl.textContent = message;
+        const block = msgTipsZcdl.querySelector('.block_3');
+        block.style.backgroundColor = isError ? 'rgba(255, 223, 221, 1)' : 'rgba(221, 255, 221, 1)';
+        block.style.borderColor = isError ? 'rgba(255, 59, 48, 1)' : 'rgba(59, 255, 48, 1)';
+        setTimeout(() => {
+            msgTipsZcdl.style.display = 'none';
+        }, 3000);
+    }
+
+    function showLoading() {
+        loadingModal.style.display = 'flex';
+        // Adiciona animação de dança
+        setTimeout(() => {
+            loadingModal.querySelector('div').style.animation = 'bounce 0.5s infinite alternate';
+        }, 100);
+    }
+
+    function hideLoading() {
+        loadingModal.style.display = 'none';
+        loadingModal.querySelector('div').style.animation = '';
+    }
+
+    // Adiciona as animações CSS
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-20px); }
+        }
+    `;
+    document.head.appendChild(style);
+
+    function generateUniqueId() {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let id = '';
+        for (let i = 0; i < 10; i++) {
+            id += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return id;
+    }
+
+    function generateInviteCode() {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+        for (let i = 0; i < 8; i++) {
+            result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return result;
+    }
+
+    async function checkPhoneExists(phone) {
+        const baseUrl = 'https://685720dc21f5d3463e54855f.mockapi.io/User/';
+        const requests = [];
+
+        for (let i = 1; i <= 20; i++) {
+            requests.push(
+                fetch(`${baseUrl}${i}`)
+                    .then(res => res.ok ? res.json() : null)
+                    .catch(() => null)
+            );
+        }
+
+        const results = await Promise.all(requests);
+
+        for (const users of results) {
+            if (!users) continue;
+            const userList = Array.isArray(users) ? users : [users];
+            if (userList.some(user => user.phone === phone)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    async function checkIdExists(id) {
+        const baseUrl = 'https://685720dc21f5d3463e54855f.mockapi.io/User/';
+        const requests = [];
+
+        for (let i = 1; i <= 20; i++) {
+            requests.push(
+                fetch(`${baseUrl}${i}`)
+                    .then(res => res.ok ? res.json() : null)
+                    .catch(() => null)
+            );
+        }
+
+        const results = await Promise.all(requests);
+
+        for (const users of results) {
+            if (!users) continue;
+            const userList = Array.isArray(users) ? users : [users];
+            if (userList.some(user => user.id === id)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    async function findAvailableApi() {
+        const baseUrl = 'https://685720dc21f5d3463e54855f.mockapi.io/User/';
+        const requests = [];
+
+        for (let i = 1; i <= 20; i++) {
+            requests.push(
+                fetch(`${baseUrl}${i}`)
+                    .then(res => res.ok ? res.json().then(data => ({ index: i, data })) : null)
+                    .catch(() => null)
+            );
+        }
+
+        const results = await Promise.all(requests);
+
+        for (const result of results) {
+            if (!result) continue;
+            const count = Array.isArray(result.data) ? result.data.length : 1;
+            if (count < 100) {
+                return result.index;
+            }
+        }
+        return null;
+    }
+
+    async function registerUser(userData) {
+        const apiNumber = await findAvailableApi();
+        if (!apiNumber) {
+            showMessage('Todas as APIs estão cheias. Tente novamente mais tarde.');
+            return false;
+        }
+
+        const apiUrl = `https://685720dc21f5d3463e54855f.mockapi.io/User/${apiNumber}`;
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            });
+
+            return response.ok;
+        } catch (error) {
+            console.error('Erro ao registrar usuário:', error);
+            showMessage('Erro ao registrar usuário. Tente novamente.');
+            return false;
+        }
+    }
+
+    submitBtn.addEventListener('click', async function (e) {
+        e.preventDefault();
+
+        const phone = phoneInput.value.trim();
+        const password = passwordInput.value.trim();
+        const confirmPassword = confirmPasswordInput.value.trim();
+        const inviteCode = inviteCodeInput.value.trim();
+
+        if (!phone) {
+            showMessage('Por favor, insira seu número de telefone');
+            return;
+        }
+
+        if (phone.length !== 9) {
+            showMessage('O número de telefone deve ter exatamente 9 dígitos');
+            return;
+        }
+
+        if (!password) {
+            showMessage('Por favor, insira sua senha');
+            return;
+        }
+
+        if (password.length < 6 || password.length > 19) {
+            showMessage('A senha deve ter entre 6 e 19 caracteres');
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            showMessage('As senhas não coincidem');
+            return;
+        }
+
+        if (!inviteCode) {
+            showMessage('Por favor, insira o código de convite');
+            return;
+        }
+
+        showLoading(); // Mostra o modal de loading
+
+        try {
+            const phoneExists = await checkPhoneExists(phone);
+            if (phoneExists) {
+                hideLoading();
+                showMessage('Este número de telefone já está registrado');
+                return;
+            }
+
+            // Gerar um ID único que não existe em nenhuma API
+            let userId;
+            let idExists;
+            do {
+                userId = generateUniqueId();
+                idExists = await checkIdExists(userId);
+            } while (idExists);
+
+            const userInviteCode = generateInviteCode();
+
+            const userData = {
+                id: userId,
+                phone: phone,
+                password: password,
+                saldo: 0,
+                nivel1: 0,
+                nivel2: 0,
+                nivel3: 0,
+                inviteCode: userInviteCode,
+                usedInviteCode: inviteCode,
+                createdAt: new Date().toISOString()
+            };
+
+            const registrationSuccess = await registerUser(userData);
+
+            hideLoading();
+
+            if (registrationSuccess) {
+                showMessage('Registro bem-sucedido! Redirecionando...', false);
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+            }
+        } catch (error) {
+            hideLoading();
+            showMessage('Ocorreu um erro durante o registro. Tente novamente.');
+        }
+    });
+
+    const languageText = document.querySelector('.text_1');
+    const languagePopup = document.getElementById('languagePopup');
+
+    languageText.addEventListener('click', function () {
+        languagePopup.style.display = languagePopup.style.display === 'block' ? 'none' : 'block';
+    });
+
+    document.addEventListener('click', function (e) {
+        if (!languageText.contains(e.target)) {
+            languagePopup.style.display = 'none';
+        }
+    });
+});
+</script>

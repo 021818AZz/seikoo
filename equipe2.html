@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Minha Equipe</title>
+    <style>
+        :root {
+            --primary: #00fdfc;
+            --secondary: #1c2230;
+            --accent: #00ff80;
+            --text: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --card-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #1c2230 0%, #2c3e50 100%);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.5;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .container {
+            max-width: 100%;
+            width: 100%;
+            margin: 0 auto;
+            padding: 16px;
+            position: relative;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-top: 12px;
+            position: relative;
+        }
+
+        .back-button {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            z-index: 10;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .back-button:active {
+            transform: scale(0.95);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .back-button svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--primary);
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+            position: absolute;
+            left: 0;
+            right: 0;
+            text-align: center;
+            pointer-events: none;
+            padding: 0 60px;
+        }
+
+        /* Level Navigation */
+        .level-nav {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            gap: 8px;
+        }
+
+        .level-btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 12px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .level-btn.active {
+            background: var(--primary);
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        /* Member Card */
+        .member-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .member-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+
+        .member-info {
+            flex: 1;
+        }
+
+        .member-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .member-details {
+            display: flex;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .member-detail {
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .member-detail svg {
+            width: 14px;
+            height: 14px;
+            margin-right: 4px;
+            fill: var(--text-secondary);
+        }
+
+        /* Stats Card */
+        .stats-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stats-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .stats-title {
+            font-weight: 600;
+        }
+
+        .stats-value {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 3px;
+            width: 0;
+            transition: width 0.5s;
+        }
+
+        /* Loading */
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: var(--primary);
+            gap: 12px;
+        }
+
+        .loading-dots {
+            display: inline-flex;
+            gap: 6px;
+        }
+
+        .loading-dots span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--primary);
+            animation: loading-bounce 0.8s infinite alternate;
+        }
+
+        .loading-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .loading-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes loading-bounce {
+            to {
+                transform: translateY(-6px);
+                opacity: 0.5;
+            }
+        }
+
+        /* Load More Button */
+        .load-more {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            background: var(--primary);
+            color: var(--secondary);
+            font-weight: 600;
+            border: none;
+            margin-top: 16px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .load-more:active {
+            transform: scale(0.98);
+        }
+
+        /* Responsive */
+        @media (min-width: 400px) {
+            .container {
+                max-width: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="back-button" onclick="window.history.back()">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+            </div>
+            <div class="header-title">Minha Equipe</div>
+        </div>
+
+        <div class="level-nav">
+            <button class="level-btn active" data-level="1">Nível A</button>
+            <button class="level-btn" data-level="2">Nível B</button>
+            <button class="level-btn" data-level="3">Nível C</button>
+        </div>
+
+        <div class="stats-card">
+            <div class="stats-header">
+                <div class="stats-title">Total de Membros</div>
+                <div class="stats-value" id="total-members">0</div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="members-progress"></div>
+            </div>
+            <div class="stats-header">
+                <div class="stats-title">Receita Total</div>
+                <div class="stats-value" id="total-income">0 Kz</div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="income-progress"></div>
+            </div>
+        </div>
+
+        <div id="members-container"></div>
+
+        <button id="load-more-btn" class="load-more" style="display: none;">
+            Carregar Próximo Nível
+        </button>
+
+        <div id="loading" class="loading">
+            <div class="loading-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            Carregando membros...
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Obter userData do localStorage
+        const userDataString = localStorage.getItem('userData');
+        if (!userDataString) {
+            alert('Dados do usuário não encontrados. Por favor, faça login novamente.');
+            window.location.href = 'index.html';
+            return;
+        }
+
+        const userData = JSON.parse(userDataString);
+        const userPhone = userData.phone;
+
+        if (!userPhone) {
+            alert('Número de telefone não encontrado. Por favor, faça login novamente.');
+            window.location.href = 'index.html';
+            return;
+        }
+
+        // Elementos da UI
+        const loadingElement = document.getElementById('loading');
+        const membersContainer = document.getElementById('members-container');
+        const levelButtons = document.querySelectorAll('.level-btn');
+        const loadMoreBtn = document.getElementById('load-more-btn');
+        const totalMembersEl = document.getElementById('total-members');
+        const totalIncomeEl = document.getElementById('total-income');
+        const membersProgress = document.getElementById('members-progress');
+        const incomeProgress = document.getElementById('income-progress');
+
+        // Dados da equipe
+        let teamData = {
+            nivel1: { members: [], loaded: false },
+            nivel2: { members: [], loaded: false },
+            nivel3: { members: [], loaded: false }
+        };
+        let currentLevel = 1;
+        let myInviteCode = '';
+        let allUsersCache = null; // Cache para todos os usuários
+
+        // Função para animar valores
+        const animateValue = (element, start, end, duration, suffix = '') => {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                element.textContent = suffix ? `${value} ${suffix}` : value;
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        };
+
+        // Função otimizada para buscar usuário em todas as APIs pelo phone
+        async function findUserInApis(phone) {
+            const apiPromises = [];
+            
+            // Criar todas as promessas de busca em paralelo
+            for (let i = 1; i <= 20; i++) {
+                apiPromises.push(
+                    fetch(`https://685720dc21f5d3463e54855f.mockapi.io/User/${i}`)
+                        .then(response => response.ok ? response.json() : null)
+                        .catch(error => {
+                            console.error(`Erro ao buscar na API ${i}:`, error);
+                            return null;
+                        })
+                );
+            }
+            
+            // Esperar todas as requisições
+            const results = await Promise.all(apiPromises);
+            
+            // Processar resultados
+            for (const result of results) {
+                if (!result) continue;
+                
+                const userArray = Array.isArray(result) ? result : [result];
+                const foundUser = userArray.find(user => user.phone === phone);
+                if (foundUser) return foundUser;
+            }
+            
+            return null;
+        }
+
+        // Função otimizada para buscar todos os usuários de uma vez
+        async function fetchAllUsers() {
+            if (allUsersCache) return allUsersCache;
+            
+            const apiPromises = [];
+            for (let i = 1; i <= 20; i++) {
+                apiPromises.push(
+                    fetch(`https://685720dc21f5d3463e54855f.mockapi.io/User/${i}`)
+                        .then(response => response.ok ? response.json() : [])
+                        .then(data => Array.isArray(data) ? data : [data])
+                        .catch(error => {
+                            console.error(`Erro ao buscar na API ${i}:`, error);
+                            return [];
+                        })
+                );
+            }
+            
+            const results = await Promise.all(apiPromises);
+            allUsersCache = results.flat();
+            return allUsersCache;
+        }
+
+        // Função otimizada para buscar membros da equipe
+        async function fetchTeamMembers(level, inviteCode) {
+            try {
+                const allUsers = await fetchAllUsers();
+                
+                if (level === 1) {
+                    return allUsers.filter(user => 
+                        user.usedInviteCode === inviteCode && user.phone !== userPhone
+                    );
+                } else if (level === 2) {
+                    const nivel1Codes = teamData.nivel1.members.map(m => m.inviteCode);
+                    return allUsers.filter(user => 
+                        nivel1Codes.includes(user.usedInviteCode)
+                    );
+                } else if (level === 3) {
+                    const nivel2Codes = teamData.nivel2.members.map(m => m.inviteCode);
+                    return allUsers.filter(user => 
+                        nivel2Codes.includes(user.usedInviteCode)
+                    );
+                }
+                
+                return [];
+            } catch (error) {
+                console.error('Erro ao buscar membros:', error);
+                return [];
+            }
+        }
+
+        // Função para renderizar membros (mantida igual)
+        function renderMembers(level) {
+            const members = teamData[`nivel${level}`].members;
+            membersContainer.innerHTML = '';
+            
+            if (members.length === 0) {
+                membersContainer.innerHTML = '<div style="text-align: center; color: var(--text-secondary); padding: 20px;">Nenhum membro encontrado</div>';
+                return;
+            }
+            
+            members.forEach((member, index) => {
+                const memberCard = document.createElement('div');
+                memberCard.className = 'member-card';
+                
+                memberCard.innerHTML = `
+                    <div class="member-avatar">${member.phone ? member.phone.slice(0, 2) : '??'}</div>
+                    <div class="member-info">
+                        <div class="member-name">${member.phone || 'Usuário sem nome'}</div>
+                        <div class="member-details">
+                            <div class="member-detail">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                                </svg>
+                                ${member.phone || 'N/A'}
+                            </div>
+                            <div class="member-detail">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                                </svg>
+                                ${member.receita || 0} Kz
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                membersContainer.appendChild(memberCard);
+            });
+        }
+
+        // Função para atualizar estatísticas (mantida igual)
+        function updateStats() {
+            const totalMembers = teamData.nivel1.members.length + 
+                                teamData.nivel2.members.length + 
+                                teamData.nivel3.members.length;
+            
+            const totalIncome = teamData.nivel1.members.reduce((sum, m) => sum + (m.receita || 0), 0) +
+                                teamData.nivel2.members.reduce((sum, m) => sum + (m.receita || 0), 0) +
+                                teamData.nivel3.members.reduce((sum, m) => sum + (m.receita || 0), 0);
+            
+            animateValue(totalMembersEl, 0, totalMembers, 800);
+            animateValue(totalIncomeEl, 0, totalIncome, 800, 'Kz');
+            
+            const maxMembers = Math.max(1, totalMembers);
+            const maxIncome = Math.max(1, totalIncome);
+            
+            setTimeout(() => {
+                membersProgress.style.width = `${(totalMembers / maxMembers) * 100}%`;
+                incomeProgress.style.width = `${(totalIncome / maxIncome) * 100}%`;
+            }, 800);
+        }
+
+        // Função para carregar um nível específico
+        async function loadLevel(level, showLoading = true) {
+            if (showLoading) {
+                loadingElement.style.display = 'flex';
+                membersContainer.innerHTML = '';
+            }
+            
+            if (teamData[`nivel${level}`].loaded) {
+                renderMembers(level);
+                if (showLoading) loadingElement.style.display = 'none';
+                return;
+            }
+            
+            const members = await fetchTeamMembers(level, myInviteCode);
+            teamData[`nivel${level}`].members = members;
+            teamData[`nivel${level}`].loaded = true;
+            
+            renderMembers(level);
+            updateStats();
+            
+            if (showLoading) loadingElement.style.display = 'none';
+            
+            if (level < 3 && !teamData[`nivel${level + 1}`].loaded) {
+                loadMoreBtn.style.display = 'block';
+                loadMoreBtn.textContent = `Carregar Nível ${String.fromCharCode(64 + level + 1)}`;
+                loadMoreBtn.onclick = () => loadLevel(level + 1);
+            } else {
+                loadMoreBtn.style.display = 'none';
+            }
+        }
+
+        // Muda entre níveis (mantido igual)
+        levelButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const level = parseInt(btn.dataset.level);
+                currentLevel = level;
+                
+                levelButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                loadLevel(level);
+            });
+        });
+
+        // Inicialização otimizada
+        async function init() {
+            loadingElement.style.display = 'flex';
+            
+            // Buscar usuário atual e todos os usuários em paralelo
+            const [currentUser, _] = await Promise.all([
+                findUserInApis(userPhone),
+                fetchAllUsers() // Pré-carrega todos os usuários
+            ]);
+            
+            if (!currentUser) {
+                loadingElement.textContent = 'Usuário não encontrado';
+                return;
+            }
+            
+            myInviteCode = currentUser.inviteCode;
+            
+            // Carrega o nível 1 sem mostrar loading (já está carregando)
+            await loadLevel(1, false);
+            
+            loadingElement.style.display = 'none';
+        }
+
+        // Inicia a aplicação
+        init();
+    });
+</script>

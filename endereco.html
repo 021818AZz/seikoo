@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Convidar amigos</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background-image: url('https://i.postimg.cc/hGKxpDr9/Figma-DDSSlice-PNGd15231beb994698ddda522998f2bf23d.png');
+      background-size: cover;
+      background-position: center;
+      color: white;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .header {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .subheader {
+      font-size: 14px;
+      color: #ccc;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background-color: rgba(0, 0, 0, 0.5);
+      border: 2px solid #00d9ff;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+
+    .card h2 {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .qr-code {
+      width: 100%;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      flex: 1 1 45%;
+      background-color: #005753;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 12px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #00766c;
+    }
+
+    .button.secondary {
+      background-color: #00d9ff;
+      color: black;
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      padding: 16px;
+      background-color: #111;
+    }
+
+    .top-bar a {
+      text-decoration: none;
+      color: white;
+      font-size: 20px;
+      margin-right: 10px;
+    }
+
+    .top-bar span {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    /* Modal de código copiado */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 30px;
+      border-radius: 15px;
+      border: 2px solid #00d9ff;
+      text-align: center;
+      max-width: 80%;
+    }
+
+    .modal-content p {
+      font-size: 18px;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <a href="javascript:history.back()">
+      <img src="https://img.icons8.com/?size=80&id=47082&format=png" alt="Voltar" style="width: 24px; height: 24px;">
+    </a>
+  </div>
+
+  <div class="container">
+    <div class="header">Convidar amigos</div>
+    <div class="subheader">Aderir pode ganhar muito dinheiro</div>
+
+    <div class="card">
+      <h2>Meu link de convite</h2>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=280x280&data=https://seiko-7vz.pages.dev/register?invitCode=" id="qrCode" class="qr-code" />
+    </div>
+
+    <div class="buttons">
+      <button class="button" id="copyLinkBtn">Copiar o link</button>
+      <button class="button secondary" id="saveQrBtn">Gravar o código QR</button>
+    </div>
+  </div>
+
+  <!-- Modal de código copiado -->
+  <div class="modal" id="copyModal">
+    <div class="modal-content">
+      <p>Código copiado com sucesso!</p>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Obter userData do localStorage
+      const userDataString = localStorage.getItem('userData');
+      if (!userDataString) {
+        alert('Dados do usuário não encontrados. Por favor, faça login novamente.');
+        window.location.href = 'index.html';
+        return;
+      }
+
+      const userData = JSON.parse(userDataString);
+      const inviteCode = userData.inviteCode || '';
+
+      // Gerar link de convite com o código
+      const inviteLink = `https://seiko-7vz.pages.dev/register?invitCode=${inviteCode}`;
+      
+      // Atualizar QR Code com o link completo
+      document.getElementById('qrCode').src = `https://api.qrserver.com/v1/create-qr-code/?size=280x280&data=${encodeURIComponent(inviteLink)}`;
+
+      // Função para copiar o link de convite
+      document.getElementById('copyLinkBtn').addEventListener('click', function() {
+        navigator.clipboard.writeText(inviteLink)
+          .then(() => showCopyModal())
+          .catch(err => {
+            console.error('Erro ao copiar: ', err);
+            // Fallback para dispositivos mais antigos
+            const textarea = document.createElement('textarea');
+            textarea.value = inviteLink;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            showCopyModal();
+          });
+      });
+
+      // Função para salvar o QR Code
+      document.getElementById('saveQrBtn').addEventListener('click', function() {
+        // Primeiro copia o link
+        navigator.clipboard.writeText(inviteLink)
+          .then(() => {
+            showCopyModal();
+            // Depois baixa a imagem do QR Code
+            const qrCodeImg = document.getElementById('qrCode');
+            const link = document.createElement('a');
+            link.href = qrCodeImg.src;
+            link.download = `QRCode_Convite_${inviteCode}.png`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          })
+          .catch(err => {
+            console.error('Erro ao copiar: ', err);
+            showCopyModal();
+          });
+      });
+
+      // Função para mostrar o modal de código copiado
+      function showCopyModal() {
+        const modal = document.getElementById('copyModal');
+        modal.style.display = 'flex';
+        
+        setTimeout(() => {
+          modal.style.display = 'none';
+        }, 2000);
+      }
+    });
+
+    function toggleMenu() {
+      const menu = document.getElementById('menuPopup');
+      menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+    }
+
+    // Fechar o menu se clicar fora
+    document.addEventListener('click', function(event) {
+      const menu = document.getElementById('menuPopup');
+      const btn = document.querySelector('.menu-btn');
+      if (!menu.contains(event.target) && !btn.contains(event.target)) {
+        menu.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>

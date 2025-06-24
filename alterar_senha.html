@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alterar sua senha</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background-image: url('https://www.seiko.co.jp/seiko_house_ginza/images/Wako_floor.png');
+      background-size: cover;
+      background-position: center;
+      color: white;
+    }
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .back-button {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .back-button svg {
+      width: 24px;
+      height: 24px;
+      fill: white;
+      cursor: pointer;
+    }
+    h1 {
+      font-size: 22px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #ccc;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 2px solid #00e4e3;
+      border-radius: 25px;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      outline: none;
+      box-sizing: border-box;
+    }
+    input::placeholder {
+      color: #aaa;
+    }
+    input:disabled {
+      opacity: 0.7;
+    }
+    button {
+      width: 100%;
+      padding: 15px;
+      background-color: #00e4e3;
+      border: none;
+      border-radius: 25px;
+      color: black;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      box-sizing: border-box;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #00d9ff;
+    }
+
+    /* Modal de sucesso/erro */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 30px;
+      border-radius: 15px;
+      border: 2px solid #00d9ff;
+      text-align: center;
+      max-width: 80%;
+    }
+    .modal-content p {
+      font-size: 18px;
+      margin: 0;
+    }
+    .modal-success {
+      border-color: #00d9ff;
+    }
+    .modal-error {
+      border-color: #ff3d3d;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="back-button" onclick="window.history.back()">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+      </svg>
+    </div>
+    <h1>Alterar sua senha</h1>
+    
+    <label>Conta</label>
+    <input type="text" id="userPhone" disabled>
+
+    <label>Indique por favor a senha antiga</label>
+    <input type="password" id="oldPassword" placeholder="Indique por favor a senha antiga">
+
+    <label>Introduza uma nova senha</label>
+    <input type="password" id="newPassword" placeholder="Introduza uma nova senha">
+
+    <label>Introduza novamente a nova senha</label>
+    <input type="password" id="confirmPassword" placeholder="Introduza novamente a nova senha">
+
+    <button id="changePasswordBtn">Alterar sua senha</button>
+  </div>
+
+  <!-- Modal de feedback -->
+  <div class="modal" id="feedbackModal">
+    <div class="modal-content" id="modalContent">
+      <p id="modalMessage"></p>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Obter userData do localStorage
+      const userDataString = localStorage.getItem('userData');
+      if (!userDataString) {
+        alert('Dados do usuário não encontrados. Por favor, faça login novamente.');
+        window.location.href = 'index.html';
+        return;
+      }
+
+      const userData = JSON.parse(userDataString);
+      const userPhone = userData.phone || '';
+      
+      // Exibir telefone do usuário
+      document.getElementById('userPhone').value = userPhone;
+
+      // Função para buscar usuário em todas as APIs
+      async function findUserByPhone(phone) {
+        const apiPromises = [];
+        
+        for (let i = 1; i <= 20; i++) {
+          apiPromises.push(
+            fetch(`https://685720dc21f5d3463e54855f.mockapi.io/User/${i}`)
+              .then(response => response.ok ? response.json() : null)
+              .then(data => {
+                if (!data) return null;
+                const userArray = Array.isArray(data) ? data : [data];
+                return userArray.find(user => user.phone === phone);
+              })
+              .catch(error => {
+                console.error(`Erro ao buscar na API ${i}:`, error);
+                return null;
+              })
+          );
+        }
+        
+        const results = await Promise.all(apiPromises);
+        return results.find(result => result !== null);
+      }
+
+      // Função para atualizar senha do usuário
+      async function updateUserPassword(phone, newPassword) {
+        // Primeiro encontramos o usuário
+        const user = await findUserByPhone(phone);
+        if (!user) {
+          showModal('Usuário não encontrado!', false);
+          return false;
+        }
+
+        // Encontramos a API correta onde o usuário está
+        for (let i = 1; i <= 20; i++) {
+          try {
+            const response = await fetch(`https://685720dc21f5d3463e54855f.mockapi.io/User/${i}/${user.id}`, {
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                ...user,
+                password: newPassword
+              })
+            });
+
+            if (response.ok) {
+              return true;
+            }
+          } catch (error) {
+            console.error(`Erro ao atualizar na API ${i}:`, error);
+          }
+        }
+        
+        return false;
+      }
+
+      // Função para mostrar modal
+      function showModal(message, isSuccess) {
+        const modal = document.getElementById('feedbackModal');
+        const modalContent = document.getElementById('modalContent');
+        const modalMessage = document.getElementById('modalMessage');
+        
+        modalMessage.textContent = message;
+        modalContent.className = isSuccess ? 'modal-content modal-success' : 'modal-content modal-error';
+        modal.style.display = 'flex';
+        
+        setTimeout(() => {
+          modal.style.display = 'none';
+          if (isSuccess) {
+            window.history.back();
+          }
+        }, 2000);
+      }
+
+      // Evento do botão de alterar senha
+      document.getElementById('changePasswordBtn').addEventListener('click', async function() {
+        const oldPassword = document.getElementById('oldPassword').value;
+        const newPassword = document.getElementById('newPassword').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+
+        // Validações
+        if (!oldPassword || !newPassword || !confirmPassword) {
+          showModal('Por favor, preencha todos os campos!', false);
+          return;
+        }
+
+        if (newPassword !== confirmPassword) {
+          showModal('As novas senhas não coincidem!', false);
+          return;
+        }
+
+        if (newPassword.length < 6) {
+          showModal('A nova senha deve ter pelo menos 6 caracteres!', false);
+          return;
+        }
+
+        // Buscar usuário para verificar senha antiga
+        const user = await findUserByPhone(userPhone);
+        if (!user) {
+          showModal('Usuário não encontrado!', false);
+          return;
+        }
+
+        if (user.password !== oldPassword) {
+          showModal('Senha antiga incorreta!', false);
+          return;
+        }
+
+        // Atualizar senha
+        const success = await updateUserPassword(userPhone, newPassword);
+        if (success) {
+          showModal('Senha alterada com sucesso!', true);
+        } else {
+          showModal('Erro ao alterar senha. Tente novamente.', false);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

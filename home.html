@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no,maximum-scale=1.0,minimum-scale=1.0" />
+    <title>SAIKO</title>
+    <script src="https://completesolar.online/static/my/theme1/js/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="common.css" />
+    <style>
+        /* Base styles for the page */
+        html {
+            font-size: 10vw;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            flex-direction: column;
+            overscroll-behavior-y: contain;
+            touch-action: manipulation;
+        }
+        .page {
+            min-height: 100vh;
+            background-color: rgba(28, 34, 48, 1) !important;
+        }
+        /* Scrollbar styles */
+        ::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+        }
+        * {
+            scrollbar-width: none;
+            scrollbar-color: transparent transparent;
+            -ms-overflow-style: none;
+        }
+        /* Link styles */
+        a {
+            text-decoration: none;
+            color: inherit;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        a:link, a:visited, a:hover, a:active {
+            color: inherit;
+            text-decoration: none;
+        }
+        /* Desktop styles */
+        @media screen and (min-width: 769px) {
+            html {
+                font-size: 45px;
+            }
+        }
+    </style><style>
+    /* Main page container styles */
+    .page {
+        background-color: rgba(255, 255, 255, 1);
+        position: relative;
+        width: 10rem;
+        height: 30.187rem;
+        overflow: hidden;
+    }
+    .block_1 {
+        background-color: rgba(28, 34, 48, 1);
+        width: 10rem;
+        height: 36.827rem;
+    }
+    .box_2 {
+        width: 10rem;
+        height: 5.28rem;
+        background: url(https://www.seiko.co.jp/seiko_house_ginza/images/top_img_access.jpg) 100% no-repeat;
+        background-size: 100% 100%;
+    }
+    /* Header text styles */
+    .text-group_11 {
+        width: 4.72rem;
+        height: 1.92rem;
+        margin: 1.147rem 0 0 0.48rem;
+    }
+    .paragraph_2 {
+        text-shadow: 2px 2px 1px rgba(255, 255, 255, 1);
+        background-image: linear-gradient(90deg,
+                rgba(255, 149, 0, 1) 0,
+                rgba(29, 70, 127, 1) 100%);
+        width: 4.72rem;
+        height: 1.28rem;
+        overflow-wrap: break-word;
+        font-size: 0.64rem;
+        font-family: PingFang SC-Semibold;
+        font-weight: 600;
+        text-align: left;
+        line-height: 0.64rem;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .text_16 {
+        text-shadow: 0px 0px 3px rgba(0, 0, 0, 1);
+        width: 3.974rem;
+        height: 0.427rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.426rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.427rem;
+        margin-top: 0.214rem;
+    }
+        .group_19 {
+        width: 10rem;
+        height: 31.574rem;
+        margin-bottom: 0.027rem;
+    }
+    .group_20 {
+        width: 9.04rem;
+        height: 1.547rem;
+        margin: 0.587rem 0 0 0.48rem;
+    }
+    /* Circular icon styles */
+    .image-wrapper_6 {
+        background-image: linear-gradient(180deg,
+                rgba(0, 253, 252, 0.16) 0,
+                rgba(0, 253, 252, 0.04) 100%);
+        border-radius: 30px;
+        height: 1.547rem;
+        width: 1.547rem;
+    }
+    .label_9 {
+        width: 0.854rem;
+        height: 0.854rem;
+        margin: 0.347rem 0 0 0.347rem;
+    }
+    .image-wrapper_7 {
+        background-image: linear-gradient(180deg,
+                rgba(0, 253, 252, 0.16) 0,
+                rgba(0, 253, 252, 0.04) 100%);
+        border-radius: 30px;
+        height: 1.547rem;
+        margin-left: 0.96rem;
+        width: 1.547rem;
+    }
+    .label_10 {
+        width: 0.854rem;
+        height: 0.854rem;
+        margin: 0.347rem 0 0 0.347rem;
+    }
+        .image-wrapper_8 {
+        background-image: linear-gradient(180deg,
+                rgba(0, 253, 252, 0.16) 0,
+                rgba(0, 253, 252, 0.04) 100%);
+        border-radius: 30px;
+        height: 1.547rem;
+        margin-left: 0.96rem;
+        width: 1.547rem;
+    }
+    .label_11 {
+        width: 0.854rem;
+        height: 0.854rem;
+        margin: 0.347rem 0 0 0.347rem;
+    }
+    .image-wrapper_9 {
+        background-image: linear-gradient(180deg,
+                rgba(0, 253, 252, 0.16) 0,
+                rgba(0, 253, 252, 0.04) 100%);
+        border-radius: 30px;
+        height: 1.547rem;
+        margin-left: 0.934rem;
+        width: 1.547rem;
+    }
+    .label_12 {
+        width: 0.854rem;
+        height: 0.854rem;
+        margin: 0.347rem 0 0 0.347rem;
+    }
+    /* Text wrapper styles */
+    .text-wrapper_6 {
+        width: 9.147rem;
+        height: 0.374rem;
+        margin: 0.214rem 0 0 0.427rem;
+    }
+    .text_17 {
+        width: 1.68rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+    }
+    .text_18 {
+        width: 1.654rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+    }
+        /* Main slider container */
+    .image-wrapper_10 {
+        height: 4.8rem;
+        background: url(https://i.postimg.cc/W4h0Q52H/Figma-DDSSlice-PNG27b390db37939c2922b903c40a3b50a0.png) 100% no-repeat;
+        background-size: 100% 100%;
+        width: 9.147rem;
+        margin: 0.854rem 0 0 0.427rem;
+    }
+    .image_6 {
+        width: 0.854rem;
+        height: 0.107rem;
+        margin: 4.534rem 0 0 4.16rem;
+    }
+    /* Information section styles */
+    .group_21 {
+        width: 9.147rem;
+        height: 1.44rem;
+        margin: 0.134rem 0 0 0.427rem;
+    }
+    .section_3 {
+        position: relative;
+        width: 2.64rem;
+        height: 0.587rem;
+        margin-top: 0.72rem;
+    }
+    .box_4 {
+        background-image: linear-gradient(90deg,
+                rgba(0, 253, 252, 0.6) 0,
+                rgba(0, 253, 252, 0) 100%);
+        border-radius: 8px;
+        width: 1.814rem;
+        height: 0.32rem;
+        margin-top: 0.267rem;
+    }
+    .text_19 {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 2.64rem;
+        height: 0.48rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.48rem;
+        font-family: PingFang SC-Semibold;
+        font-weight: 600;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.48rem;
+    }
+        /* Information card styles */
+    .image-wrapper_11 {
+        background-color: rgba(0, 253, 252, 0.6);
+        border-radius: 50%;
+        height: 1.44rem;
+        width: 1.44rem;
+    }
+    .label_13 {
+        width: 0.854rem;
+        height: 0.854rem;
+        margin: 0.294rem 0 0 0.294rem;
+    }
+    .group_15 {
+        height: 3.734rem;
+        background: url(https://www.seiko.co.jp/seiko_house_ginza/images/fv_2_sp.jpg) 100% no-repeat;
+        background-size: 100% 100%;
+        width: 7.014rem;
+        position: relative;
+        margin: 0.4rem 0 0 2.56rem;
+    }
+    .text_20 {
+        width: 4.774rem;
+        height: 1.6rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.426rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: left;
+        line-height: 0.534rem;
+        margin: 0.32rem 0 0 2.134rem;
+    }
+    .image_7 {
+        position: absolute;
+        left: -2.133rem;
+        top: 0;
+        width: 3.734rem;
+        height: 3.734rem;
+    }
+    /* Additional info card styles (repeated) */
+    .group_16 {
+        height: 3.734rem;
+        background: url(https://www.seiko.co.jp/seiko_house_ginza/images/fv_2_sp.jpg) 100% no-repeat;
+        background-size: 100% 100%;
+        width: 7.014rem;
+        position: relative;
+        margin: 0.64rem 0 0 2.56rem;
+    }
+    .text_21 {
+        width: 4.774rem;
+        height: 1.6rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.426rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: left;
+        line-height: 0.534rem;
+        margin: 0.32rem 0 0 2.134rem;
+    }
+        /* Footer navigation styles */
+    .group_22 {
+        width: 8.107rem;
+        height: 1.12rem;
+        margin: 0.64rem 0 6.987rem 0.96rem;
+    }
+    .image-text_9 {
+        width: 0.907rem;
+        height: 1.12rem;
+    }
+    .label_14 {
+        width: 0.64rem;
+        height: 0.64rem;
+        margin-left: 0.134rem;
+    }
+    .text-group_7 {
+        width: 0.907rem;
+        height: 0.32rem;
+        overflow-wrap: break-word;
+        color: rgba(0, 253, 252, 1);
+        font-size: 0.32rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.32rem;
+        margin-top: 0.16rem;
+    }
+    .image-text_10 {
+        width: 1.2rem;
+        height: 1.014rem;
+        margin: 0.107rem 0 0 1.494rem;
+    }
+    .thumbnail_3 {
+        width: 0.48rem;
+        height: 0.454rem;
+        margin-left: 0.374rem;
+    }
+    .text-group_8 {
+        width: 1.2rem;
+        height: 0.32rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.32rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.32rem;
+        margin-top: 0.24rem;
+    }
+        /* Exchange modal styles */
+    .block_2 {
+        background-color: rgba(0, 0, 0, 0.62);
+        height: 30.187rem;
+        width: 10rem;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    .box_1 {
+        background-color: rgba(28, 34, 48, 1);
+        border-radius: 8px;
+        width: 8.934rem;
+        height: 5.734rem;
+        margin: 6.934rem 0 0 0.534rem;
+    }
+    .group_23 {
+        width: 5.6rem;
+        height: 0.587rem;
+        margin: 0.427rem 0 0 2.907rem;
+    }
+    .text_12 {
+        width: 3.12rem;
+        height: 0.427rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.426rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: center;
+        white-space: nowrap;
+        line-height: 0.427rem;
+        margin-top: 0.08rem;
+    }
+    .label_8 {
+        width: 0.587rem;
+        height: 0.587rem;
+    }
+    /* Exchange form styles */
+    .text-wrapper_2 {
+        border-radius: 46px;
+        height: 1.227rem;
+        border: 1px solid rgba(0, 253, 252, 1);
+        width: 7.867rem;
+        margin: 0.774rem 0 0 0.534rem;
+    }
+    .text_13 {
+        width: 2.72rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(160, 160, 160, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: left;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin: 0.427rem 0 0 0.854rem;
+    }
+        /* Exchange modal button styles */
+    .group_24 {
+        width: 7.867rem;
+        height: 1.227rem;
+        margin: 0.64rem 0 0.854rem 0.534rem;
+    }
+    .text-wrapper_3 {
+        background-color: rgba(0, 77, 77, 1);
+        border-radius: 46px;
+        height: 1.227rem;
+        width: 3.84rem;
+    }
+    .text_14 {
+        width: 1.227rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(0, 253, 252, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: center;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin: 0.427rem 0 0 1.307rem;
+    }
+    .text-wrapper_4 {
+        background-color: rgba(0, 253, 252, 1);
+        border-radius: 46px;
+        height: 1.227rem;
+        width: 3.84rem;
+    }
+    .text_15 {
+        width: 1.414rem;
+        height: 0.374rem;
+        overflow-wrap: break-word;
+        color: rgba(28, 34, 48, 1);
+        font-size: 0.373rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: center;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin: 0.427rem 0 0 1.2rem;
+    }
+</style><style>
+    /* Responsive adjustments */
+    .page {
+        height: auto;
+    }
+    .block_1 {
+        height: auto;
+    }
+    .group_19 {
+        height: auto;
+        margin-bottom: 2.027rem;
+    }
+    .paragraph_2 {
+        width: 9rem;
+    }
+    /* Animation for circular icons */
+    @keyframes rotate360 {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+    .image-wrapper_6,
+    .image-wrapper_7,
+    .image-wrapper_8,
+    .image-wrapper_9 {
+        animation-name: rotate360;
+        animation-duration: 1s;
+        animation-iteration-count: 1;
+        animation-delay: 0s;
+    }
+    .image-wrapper_7 {
+        animation-delay: 1s;
+    }
+    .image-wrapper_8 {
+        animation-delay: 2s;
+    }
+    .image-wrapper_9 {
+        animation-delay: 3s;
+    }
+        /* Exchange modal positioning */
+    .block_exchange {
+        background-color: rgba(0, 0, 0, 0.62);
+        height: 30.187rem;
+        width: 10rem;
+        position: absolute;
+        left: 0;
+        top: 0;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 500;
+    }
+    .box_exchange {
+        background-color: rgba(28, 34, 48, 1);
+        border-radius: 8px;
+        width: 8.934rem;
+        height: 5.734rem;
+        margin: 6.934rem 0 0 0.534rem;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0;
+    }
+    /* Exchange modal content */
+    .group_1_exchange {
+        width: auto;
+        height: 0.587rem;
+        margin: 0;
+        margin-top: 0.427rem;
+        display: flex;
+        justify-content: space-between;
+    }
+    .text_1_exchange {
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.426rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: center;
+        white-space: nowrap;
+        line-height: 0.427rem;
+        margin-top: 0.08rem;
+        width: 8.934rem;
+        height: 0.427rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .label_8_exchange {
+        width: 0.587rem;
+        height: 0.587rem;
+        margin-left: 8rem;
+        position: absolute;
+    }
+        /* Toolbar navigation styles */
+    .group_tool {
+        width: 10rem;
+        height: 1.32rem;
+        background: rgba(28, 34, 48, 1);
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .image-text_tool {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .label_tool {
+        width: 1.6rem;
+        height: 1.6rem;
+        text-align: center;
+    }
+    .text-group_tool {
+        width: 2.5rem;
+        height: 0.62rem;
+        overflow-wrap: break-word;
+        color: rgba(255, 255, 255, 1);
+        font-size: 0.374rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: center;
+        white-space: pre-wrap;
+        line-height: 0.374rem;
+        margin-top: 0.16rem;
+    }
+    /* Animation classes for toolbar icons */
+    .animation_1,
+    .animation_2,
+    .animation_3,
+    .animation_4 {
+        animation-name: rotate360;
+        animation-duration: 1s;
+        animation-iteration-count: 1;
+        animation-delay: 0s;
+    }
+    .animation_2 {
+        animation-delay: 1s;
+    }
+    .animation_3 {
+        animation-delay: 2s;
+    }
+    .animation_4 {
+        animation-delay: 3s;
+    }
+        /* Slider container styles */
+    .slider-container {
+        width: 9.147rem;
+        height: 4.8rem;
+        margin: 0 auto;
+        position: relative;
+        overflow: hidden;
+        perspective: 1200px;
+    }
+    .slider-item {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 0.8s cubic-bezier(0.5, 0, 0.5, 1), transform 1s cubic-bezier(0.5, 0, 0.5, 1);
+        transform-style: preserve-3d;
+        backface-visibility: hidden;
+        transform: rotateY(90deg) scale(0.9);
+    }
+    .slider-item.active {
+        opacity: 1;
+        transform: rotateY(0deg) scale(1);
+        z-index: 1;
+    }
+
+.slider-container {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    margin: 1rem 0;
+}
+
+.slider-item {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+
+.slider-item.active {
+    opacity: 1;
+    z-index: 2;
+}
+
+.slider-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+</style></head>
+
+<body>
+    <!-- Main page container -->
+    <div class="page flex-col">
+        <div class="block_1 flex-col">
+            <div class="box_2 flex-row">
+                <div class="text-group_11 flex-col justify-between">
+                    <span class="paragraph_2">
+                        Bem-vindo<br />
+                        SAIKO
+                    </span>
+                    <span class="text_16">Comece a explorar agora</span>
+                </div>
+            </div>
+
+            <div style="padding-top:1rem;"></div>
+            <div class="group_19 flex-col">
+
+                <!-- Toolbar navigation -->
+                <div class="group_tool">
+                    <a href="deposito.html" target='_self'>
+                        <div class="image-text_tool">
+                            <img class="label_tool animation_1" referrerpolicy="no-referrer" src="https://i.postimg.cc/XJW7wvDk/recharge.png" />
+                            <span class="text-group_tool">Recarga</span>
+                        </div>
+                    </a>
+                    <a href="troca.html" target='_self'> <!-- Aqui adicionamos a tag <a> para o botão "Troca" -->
+        <div class="image-text_tool">
+            <img class="label_tool animation_2" referrerpolicy="no-referrer" src="https://i.postimg.cc/43gT0SbJ/exchange.png" />
+            <span class="text-group_tool">Troca</span>
+        </div>
+    </a>
+                    <a href="retirar.html" target='_self'>
+                        <div class="image-text_tool">
+                            <img class="label_tool animation_3" referrerpolicy="no-referrer" src="https://i.postimg.cc/Kz9SRvXz/withdraw.png" />
+                            <span class="text-group_tool">Retirada</span>
+                        </div>
+                    </a>
+                    <a href="equipe.html" target='_self'>
+                        <div class="image-text_tool">
+                            <img class="label_tool animation_4" referrerpolicy="no-referrer" src="https://i.postimg.cc/3NdMp57Z/team.png" />
+                            <span class="text-group_tool">Equipa</span>
+                        </div>
+                    </a>
+                </div>
+
+                <div style="padding-top:1rem;"></div>
+
+                <!-- Image slider -->
+               <!-- Image slider -->
+<!-- Image slider -->
+<div class="slider-container">
+    <div class="slider-item active">
+        <img src="https://www.seiko.co.jp/seiko_house_ginza/images/fv_3_sp.jpg" alt="Slide 1">
+    </div>
+    <div class="slider-item">
+        <img src="https://completesolar.online/uploads/images/20250213/34cdc95fd56c0e897fa1472fcff98f8a.jpg" alt="Slide 2">
+    </div>
+    <div class="slider-item">
+        <img src="https://completesolar.online/uploads/images/20250213/606c017ac7d1b6e567422313751e4861.jpg" alt="Slide 3">
+    </div>
+</div>
+
+
+                <!-- Information cards -->
+                <a href="informaçao.html" target='_self'>
+                    <div class="group_15 flex-col">
+                        <span class="text_20">
+                            A SAIKO é &eacute; um dos sete maiores fornecedores de Relógio do mundo
+                        </span>
+                        <img class="image_7" style="border-radius: 15%;" referrerpolicy="no-referrer" src="https://i.postimg.cc/RC6J43xN/29720929-fpx-tif-qlt-80-0-res-Mode-sharp2-op-usm-1-75-0.webp" loading="lazy" />
+                    </div>
+                </a>
+                <a href="informaçao.html" target='_self'>
+                    <div class="group_15 flex-col">
+                        <span class="text_20">
+                            SAIKO entra oficialmente em Suí&aacute;ça, &Eacute;UROPA
+                        </span>
+                        <img class="image_7" style="border-radius: 15%;" referrerpolicy="no-referrer" src="https://i.postimg.cc/qvhkSFtY/26101305-fpx-tif-qlt-80-0-res-Mode-sharp2-op-usm-1-75-0.webp" loading="lazy" />
+                    </div>
+                </a>
+                <a href="informaçao.html" target='_self'>
+                    <div class="group_15 flex-col">
+                        <span class="text_20">
+                         Saiko – Precisão e elegância que valorizam o seu tempo. Crie mais rendimento para si com cada segundo bem investido.
+                        </span>
+                        <img class="image_7" style="border-radius: 15%;" referrerpolicy="no-referrer" src="https://i.postimg.cc/WpHCC1MN/476900770-551004571297271-4949840554869492658-n.jpg" loading="lazy" />
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>    <!-- Exchange modal (hidden by default) -->
+    <div class="block_exchange flex-col" style="display: none;" id="exchange">
+        <div class="box_exchange flex-col">
+            <div class="group_1_exchange flex-row justify-between">
+                <span class="text_1_exchange">Código de troca</span>
+                <img onclick="click_button(false,'exchange')" class="label_8_exchange" referrerpolicy="no-referrer" src="https://i.postimg.cc/zD02Zc5J/Figma-DDSSlice-PNGa4ccf70a91c6cedfe9a258d37aa85e86.png" />
+            </div>
+            <div class="text-wrapper_2_exchange flex-col">
+                <span class="text_2_exchange">
+                    <input type="text" id='exchange_code' name='exchange_code' value="" placeholder="Código de troca" class="input_style" autocomplete="off" style="background-color: transparent; border: none; outline: none;" />
+                </span>
+            </div>
+            <div class="group_2_exchange flex-row justify-between">
+                <div class="text-wrapper_3_exchange flex-col" onclick="click_button(false,'exchange')">
+                    <span class="text_3_exchange">Cancelar</span>
+                </div>
+                <div class="text-wrapper_4_exchange flex-col" id="confirm_exchange">
+                    <span class="text_4_exchange">Confirmar</span>
+                </div>
+            </div>
+        </div>
+    </div><style>
+    /* Notification modal styles */
+    .box_image_notice {
+        background-color: rgba(0, 0, 0, 0.62);
+        height: 100%;
+        width: 10rem;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2000;
+    }
+    .block_image_notice {
+        background-color: rgba(28, 34, 48, 1);
+        border-radius: 0.5rem;
+        width: 8.934rem;
+        height: 8.107rem;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2000;
+    }
+    .text_1_image_notice {
+        overflow-wrap: break-word;
+        color: #ffffff;
+        font-size: 0.426rem;
+        font-family: 'PingFang SC-Semibold';
+        font-weight: 600;
+        text-align: center;
+        white-space: nowrap;
+        line-height: 0.427rem;
+        margin: 3.92rem auto 0 auto;
+        width: 4.614rem;
+        height: 0.427rem;
+    }
+    .text-wrapper_2_image_notice {
+        background-color: rgba(0, 253, 252, 1);
+        border-radius: 3rem;
+        height: 1.227rem;
+        width: 3.84rem;
+        margin: 0.24rem auto 0.854rem auto;
+    }
+    .text_2_image_notice {
+        overflow-wrap: break-word;
+        color: rgba(28, 34, 48, 1);
+        font-size: 0.373rem;
+        font-family: 'PingFang SC-Medium';
+        font-weight: 500;
+        text-align: center;
+        white-space: nowrap;
+        line-height: 0.374rem;
+        margin: 0.427rem auto 0 auto;
+        width: 1.174rem;
+        height: 0.374rem;
+    }
+</style><!-- Notification modal -->
+<div class="box_image_notice flex-col" style="display:block;" id="msg_tips_notice">
+    <div class="block_image_notice flex-col">
+        <div class="text-wrapper_1_image_notice flex-col" style="height: 5.227rem;background: url(https://i.postimg.cc/C5n48YrY/photo-2025-06-23-11-13-44.jpg) 100% no-repeat;background-size: 100% 100%;width: 5.227rem;margin: 0.56rem auto 0 auto;">
+            <span class="text_1_image_notice"></span>
+            <img onclick="click_button(false,'msg_tips_notice')" style="width: 0.587rem;height:0.587rem;margin-left: 6.2rem;position: absolute;" referrerpolicy="no-referrer" src="https://i.postimg.cc/zD02Zc5J/Figma-DDSSlice-PNGa4ccf70a91c6cedfe9a258d37aa85e86.png" />
+        </div>
+        <a href="https://chat.whatsapp.com/DfwAHYkM7lC75MvfiS62Tg" target='_self'>
+            <div class="text-wrapper_2_image_notice flex-col">
+                <span class="text_2_image_notice">Entrar</span>
+            </div>
+        </a>
+    </div>
+</div>
+
+<style>
+    /* Footer navigation styles */
+    .group_foot {
+        position: fixed;
+        bottom: 0;
+        width: 10rem;
+        height: 1.32rem;
+        background: rgba(28, 34, 48, 1);
+        z-index: 999;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .image-text_foot {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .label_foot {
+        width: 0.64rem;
+        height: 0.64rem;
+        text-align: center;
+    }
+    .text-group_foot {
+        width: 2.5rem;
+        height: 0.32rem;
+        overflow-wrap: break-word;
+        color: rgba(163, 163, 163, 1);
+        font-size: 0.32rem;
+        font-family: PingFang SC-Medium;
+        font-weight: 500;
+        text-align: center;
+        white-space: nowrap;
+        line-height: 0.32rem;
+        margin-top: 0.16rem;
+    }
+    .text-group_foot_active {
+        color: rgba(0, 253, 252, 1);
+    }
+</style>
+
+<!-- Footer navigation -->
+<div class="group_foot">
+    <a href="home.html" target='_self'>
+        <div class="image-text_foot">
+            <img class="label_foot" referrerpolicy="no-referrer" src="https://i.postimg.cc/MH8V4RKM/homeactive.png" />
+            <span class="text-group_foot text-group_foot_active">Home</span>
+        </div>
+    </a>
+    <a href="produto.html" target='_self'>
+        <div class="image-text_foot">
+            <img class="label_foot" referrerpolicy="no-referrer" src="https://i.postimg.cc/KcnnT9Jn/product.png" />
+            <span class="text-group_foot ">Produto</span>
+        </div>
+    </a>
+    <a href="carteira.html" target='_self'>
+        <div class="image-text_foot">
+            <img class="label_foot" referrerpolicy="no-referrer" src="https://i.postimg.cc/90Vw1hJy/wallet.png" />
+            <span class="text-group_foot ">Carteira</span>
+        </div>
+    </a>
+    <a href="meu.html" target='_self'>
+        <div class="image-text_foot">
+            <img class="label_foot" referrerpolicy="no-referrer" src="https://i.postimg.cc/5NQWpCQq/my.png" />
+            <span class="text-group_foot ">Meu</span>
+        </div>
+    </a>
+</div>
+
+
+<style>
+    /* Temporary message styles */
+    #temp_msg_tips {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.9);
+        color: #ffffff;
+        padding: 0.2rem 0.4rem;
+        border-radius: 0.2rem;
+        box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.6);
+        font-size: 0.426rem;
+        font-family: 'PingFang SC', sans-serif;
+        z-index: 2000;
+        box-sizing: border-box;
+        transition: opacity 0.5s ease-in-out;
+        width: 9rem;
+    }
+    #temp_msg {
+        margin: 0;
+        text-align: center;
+        overflow-wrap: break-word;
+    }
+    /* Loading spinner styles */
+    #loading {
+        border: 0.4rem solid rgba(255, 255, 255, 0.1);
+        border-top: 0.4rem solid rgba(0, 255, 255, 0.9);
+        border-left: 0.4rem solid rgba(0, 191, 255, 0.9);
+        border-right: 0.4rem solid rgba(238, 130, 238, 0.9);
+        border-bottom: 0.4rem solid rgba(144, 238, 144, 0.9);
+        border-radius: 50%;
+        width: 2rem;
+        height: 2rem;
+        animation: spin 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite, glow 2.2s ease-in-out infinite;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10000;
+        display: none;
+        box-shadow: 0 0 1rem rgba(0, 191, 255, 0.4), 0 0 1rem rgba(144, 238, 144, 0.3);
+        background: linear-gradient(45deg, rgba(0, 255, 255, 0.15) 25%, rgba(0, 191, 255, 0.15) 50%, rgba(238, 130, 238, 0.15) 75%);
+    }
+    @keyframes spin {
+        0%, 100% {
+            transform: translate(-50%, -50%) rotate(0deg) scale(0.95);
+            opacity: 0.8;
+        }
+        50% {
+            transform: translate(-50%, -50%) rotate(180deg) scale(1.1);
+            opacity: 1;
+            border-color: rgba(0, 191, 255, 0.9) rgba(144, 238, 144, 0.9) rgba(238, 130, 238, 0.9) rgba(0, 255, 255, 0.9);
+        }
+    }
+    @keyframes glow {
+        0%, 100% {
+            filter: drop-shadow(0 0 1rem rgba(0, 191, 255, 0.6));
+        }
+        50% {
+            filter: drop-shadow(0 0 2rem rgba(144, 238, 144, 0.8)) drop-shadow(0 0 1rem rgba(238, 130, 238, 0.6));
+        }
+    }
+</style>
+
+<!-- Temporary message container (hidden by default) -->
+<div style="display: none;" id="temp_msg_tips">
+    <p id="temp_msg"></p>
+</div>
+
+<!-- Loading spinner (hidden by default) -->
+<div style="display: none;" id="loading"></div>
+<script>
+    // Document ready handler
+    $(document).ready(function() {
+        // Exchange code submission handler
+        $("#confirm_exchange").click(function() {
+            var element = document.getElementById("temp_msg_tips");
+            setTimeout(function() {
+                element.style.display = "none";
+            }, 2000);
+
+            const exchange_code = $("#exchange_code").val().trim();
+
+            if (!exchange_code) {
+                show_msg("O código de troca está vazio", 'temp_msg_tips', 'temp_msg');
+                return false;
+            }
+
+            $.post("/exchange_code", {
+                exchange_code: exchange_code,
+            }).done(function(data) {
+                if (data.code === 0) {
+                    show_msg(data.msg, 'temp_msg_tips', 'temp_msg');
+                } else if (data.code === 1) {
+                    show_msg(data.msg, 'msg_tips_img', 'msg_jump_img');
+                    var jump_go = document.getElementById('msg_tips_img_go');
+                    jump_go.onclick = function() {
+                        location.reload(true);
+                    };
+                }
+            }).fail(function() {
+                show_msg("erro");
+            });
+
+            return false;
+        });
+
+        // Slider initialization
+        const sliderItems = $('.slider-item');
+        const dots = $('.slider-dot');
+        const prevBtn = $('.slider-arrow.prev');
+        const nextBtn = $('.slider-arrow.next');
+        let currentIndex = 0;
+        const SLIDE_INTERVAL_MS = 5000;
+        let slideInterval;
+
+        function startSlideInterval() {
+            slideInterval = setInterval(() => goToSlide((currentIndex + 1) % sliderItems.length), SLIDE_INTERVAL_MS);
+        }
+
+        // Slider control functions...
+        // (Rest of the slider JavaScript code would go here)
+    });
+
+    // Utility functions
+    function click_button(style_status = true, title = 'language') {
+        const element = document.getElementById(title);
+        if (!element) {
+            console.error(`Element with id "${title}" not found.`);
+            return;
+        }
+
+        if (style_status && title === 'service') {
+            $.post("/service", {}, function(data) {
+                if (data.code === 1) {
+                    ['service1', 'service2', 'service3'].forEach(id => {
+                        const serviceElement = document.getElementById(id);
+                        if (serviceElement && data.data[id]) {
+                            serviceElement.href = data.data[id];
+                            serviceElement.style.display = "block";
+                        }
+                    });
+                }
+            });
+        }
+
+        element.style.display = style_status ? "block" : "none";
+    }
+
+    function show_msg(message = '', tips_id = 'msg_tips', msg_id = 'msg') {
+        document.getElementById(tips_id).style.display = "block";
+        document.getElementById(msg_id).innerHTML = message;
+    }
+</script>
+<script>
+    $(document).ready(function() {
+        console.log("Document ready - initializing slider");
+        
+        // Teste básico - mostra todas as imagens
+        $('.slider-item').css({
+            'opacity': 1,
+            'transform': 'none',
+            'position': 'relative'
+        });
+        
+        // Se isso funcionar, o problema está na lógica do slider
+        // Se não funcionar, o problema é no carregamento das imagens
+    });
+
+    
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+$(document).ready(function () {
+    const slides = $('.slider-item');
+    let index = 0;
+
+    function showSlide(i) {
+        slides.removeClass('active');
+        slides.eq(i).addClass('active');
+    }
+
+    function nextSlide() {
+        index = (index + 1) % slides.length;
+        showSlide(index);
+    }
+
+    // Inicializa primeiro slide
+    showSlide(index);
+
+    // Troca a cada 5 segundos
+    setInterval(nextSlide, 5000);
+});
+</script>
+
+
+
+</body>
+</html>
