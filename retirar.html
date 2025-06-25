@@ -4,386 +4,390 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Retirada</title>
-    <style>
-        :root {
-            --primary: #1c2230;
-            --secondary: #00fdfc;
-            --text: #ffffff;
-            --card-bg: #2a3244;
-            --button-bg: #3a4357;
-            --error: #f44336;
-            --success: #4caf50;
-            --warning: #ff9800;
-        }
-        
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: var(--primary);
-            color: var(--text);
-            margin: 0;
-            padding: 0;
-        }
-        
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 15px;
-            padding-bottom: 150px;
-        }
-        
-        .header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--secondary);
-        }
-        
-        .back-icon {
-            cursor: pointer;
-            margin-right: 15px;
-        }
-        
-        .header-content {
-            flex: 1;
-        }
-        
-        .header h1 {
-            color: var(--secondary);
-            margin-bottom: 5px;
-            font-size: 1.3em;
-        }
-        
-        .balance-card {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .balance-amount {
-            font-size: 2.5em;
-            font-weight: bold;
-            margin: 10px 0;
-        }
-        
-        .balance-currency {
-            font-size: 1.2em;
-            opacity: 0.8;
-        }
-        
-        .withdrawal-section {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-        }
-        
-        .section-title {
-            color: var(--secondary);
-            font-size: 1.1em;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .input-group {
-            margin-bottom: 15px;
-        }
-        
-        .input-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-size: 0.9em;
-            opacity: 0.8;
-        }
-        
-        .input-group input {
-            width: 100%;
-            padding: 12px;
-            border-radius: 4px;
-            border: 1px solid var(--secondary);
-            background-color: var(--primary);
-            color: var(--text);
-            font-size: 1.1em;
-        }
-        
-        .info-text {
-            font-size: 0.8em;
-            opacity: 0.7;
-            margin-top: 5px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .withdraw-button {
-            background-color: var(--secondary);
-            color: var(--primary);
-            border: none;
-            padding: 15px;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 20px;
-            font-size: 1.1em;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        
-        .attention-box {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 20px;
-            font-size: 0.9em;
-        }
-        
-        .attention-title {
-            color: var(--secondary);
-            margin-bottom: 10px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .attention-list {
-            padding-left: 20px;
-        }
-        
-        .attention-list li {
-            margin-bottom: 5px;
-        }
-        
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .modal-content {
-            background-color: var(--primary);
-            padding: 20px;
-            border-radius: 8px;
-            width: 90%;
-            max-width: 400px;
-            border: 1px solid var(--secondary);
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-        
-        .modal-title {
-            color: var(--secondary);
-            margin-top: 0;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .iban-option {
-            background-color: var(--card-bg);
-            border-radius: 4px;
-            padding: 10px;
-            margin-bottom: 10px;
-            cursor: pointer;
-        }
-        
-        .iban-option:hover {
-            border: 1px solid var(--secondary);
-        }
-        
-        .iban-option.selected {
-            border: 1px solid var(--secondary);
-            background-color: rgba(0, 253, 252, 0.1);
-        }
-        
-        .iban-bank {
-            font-weight: bold;
-            color: var(--secondary);
-        }
-        
-        .iban-number {
-            font-family: monospace;
-            margin: 5px 0;
-        }
-        
-        .iban-name {
-            font-size: 0.9em;
-            opacity: 0.8;
-        }
-        
-        .modal-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        
-        .modal-button {
-            padding: 8px 15px;
-            border-radius: 4px;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .cancel-button {
-            background-color: var(--button-bg);
-            color: var(--text);
-        }
-        
-        .confirm-button {
-            background-color: var(--secondary);
-            color: var(--primary);
-        }
-        
-        .loading {
-            text-align: center;
-            padding: 20px;
-        }
-        
-        .spinner {
-            border: 4px solid rgba(0, 253, 252, 0.3);
-            border-radius: 50%;
-            border-top: 4px solid rgba(0, 253, 252, 1);
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .nav {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background-color: #0b0e2a;
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-            border-top: 1px solid #333;
-        }
-
-        .nav div {
-            text-align: center;
-            color: white;
-            font-size: 12px;
-            cursor: pointer;
-        }
-
-        .nav img {
-            width: 24px;
-            height: 24px;
-            margin-bottom: 4px;
-        }
-        
-        .calculation-row {
-            display: flex;
-            justify-content: space-between;
-            margin: 10px 0;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-        
-        .calculation-label {
-            opacity: 0.8;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .calculation-value {
-            font-weight: bold;
-        }
-        
-        .fee-value {
-            color: var(--error);
-        }
-        
-        .net-value {
-            color: var(--success);
-        }
-        
-        /* Modal de alerta */
-        .alert-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .alert-content {
-            background-color: var(--primary);
-            padding: 20px;
-            border-radius: 8px;
-            width: 90%;
-            max-width: 400px;
-            border: 1px solid var(--secondary);
-            text-align: center;
-        }
-        
-        .alert-icon {
-            font-size: 40px;
-            margin-bottom: 15px;
-        }
-        
-        .alert-success {
-            color: var(--success);
-        }
-        
-        .alert-error {
-            color: var(--error);
-        }
-        
-        .alert-warning {
-            color: var(--warning);
-        }
-        
-        .alert-message {
-            margin-bottom: 20px;
-        }
-        
-        .alert-button {
-            padding: 8px 15px;
-            border-radius: 4px;
-            border: none;
-            cursor: pointer;
-            background-color: var(--secondary);
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            margin: 0 auto;
-        }
-    </style>
+    <link rel="stylesheet" href="retirada.css">
 </head>
+<style>:root {
+    --primary: #1c2230;
+    --secondary: #00fdfc;
+    --text: #ffffff;
+    --card-bg: #2a3244;
+    --button-bg: #3a4357;
+    --error: #f44336;
+    --success: #4caf50;
+    --warning: #ff9800;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--primary);
+    color: var(--text);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 15px;
+    padding-bottom: 150px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--secondary);
+}
+
+.back-icon {
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+.header-content {
+    flex: 1;
+}
+
+.header h1 {
+    color: var(--secondary);
+    margin-bottom: 5px;
+    font-size: 1.3em;
+}
+
+.balance-card {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.balance-amount {
+    font-size: 2.5em;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.balance-currency {
+    font-size: 1.2em;
+    opacity: 0.8;
+}
+
+.withdrawal-section {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.section-title {
+    color: var(--secondary);
+    font-size: 1.1em;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+.amount-select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 4px;
+    border: 1px solid var(--secondary);
+    background-color: var(--primary);
+    color: var(--text);
+    font-size: 1.1em;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300FDFC' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M6 9l6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 15px;
+}
+
+.info-text {
+    font-size: 0.8em;
+    opacity: 0.7;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.withdraw-button {
+    background-color: var(--secondary);
+    color: var(--primary);
+    border: none;
+    padding: 15px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+    font-size: 1.1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.attention-box {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 20px;
+    font-size: 0.9em;
+}
+
+.attention-title {
+    color: var(--secondary);
+    margin-bottom: 10px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.attention-list {
+    padding-left: 20px;
+}
+
+.attention-list li {
+    margin-bottom: 5px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: var(--primary);
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    border: 1px solid var(--secondary);
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-title {
+    color: var(--secondary);
+    margin-top: 0;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.iban-option {
+    background-color: var(--card-bg);
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.iban-option:hover {
+    border: 1px solid var(--secondary);
+}
+
+.iban-option.selected {
+    border: 1px solid var(--secondary);
+    background-color: rgba(0, 253, 252, 0.1);
+}
+
+.iban-bank {
+    font-weight: bold;
+    color: var(--secondary);
+}
+
+.iban-number {
+    font-family: monospace;
+    margin: 5px 0;
+}
+
+.iban-name {
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.modal-button {
+    padding: 8px 15px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.cancel-button {
+    background-color: var(--button-bg);
+    color: var(--text);
+}
+
+.confirm-button {
+    background-color: var(--secondary);
+    color: var(--primary);
+}
+
+.loading {
+    text-align: center;
+    padding: 20px;
+}
+
+.spinner {
+    border: 4px solid rgba(0, 253, 252, 0.3);
+    border-radius: 50%;
+    border-top: 4px solid rgba(0, 253, 252, 1);
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #0b0e2a;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    border-top: 1px solid #333;
+}
+
+.nav div {
+    text-align: center;
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.nav img {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 4px;
+}
+
+.calculation-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.calculation-label {
+    opacity: 0.8;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.calculation-value {
+    font-weight: bold;
+}
+
+.fee-value {
+    color: var(--error);
+}
+
+.net-value {
+    color: var(--success);
+}
+
+/* Modal de alerta */
+.alert-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.alert-content {
+    background-color: var(--primary);
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    border: 1px solid var(--secondary);
+    text-align: center;
+}
+
+.alert-icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.alert-success {
+    color: var(--success);
+}
+
+.alert-error {
+    color: var(--error);
+}
+
+.alert-warning {
+    color: var(--warning);
+}
+
+.alert-message {
+    margin-bottom: 20px;
+}
+
+.alert-button {
+    padding: 8px 15px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    background-color: var(--secondary);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin: 0 auto;
+}</style>
 <body>
     <div class="container">
         <div class="header">
@@ -411,13 +415,26 @@
                 Valor da Retirada
             </div>
             <div class="input-group">
-                <input type="number" id="withdrawal-amount" placeholder="Digite o valor">
+                <select id="withdrawal-amount" class="amount-select">
+                    <option value="" disabled selected>Selecione um valor</option>
+                    <option value="1200">1.200 Kz</option>
+                    <option value="7000">7.000 Kz</option>
+                    <option value="12000">12.000 Kz</option>
+                    <option value="24000">24.000 Kz</option>
+                    <option value="44000">44.000 Kz</option>
+                    <option value="72000">72.000 Kz</option>
+                    <option value="100000">100.000 Kz</option>
+                    <option value="200000">200.000 Kz</option>
+                    <option value="350000">350.000 Kz</option>
+                    <option value="500000">500.000 Kz</option>
+                    <option value="1000000">1.000.000 Kz</option>
+                </select>
                 <div class="info-text">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M12 16V12M12 8H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    Mínimo: 1.200 Kz | Máximo: 5.000.000 Kz
+                    Retiradas apenas de Segunda a Sexta, das 10h às 16h
                 </div>
             </div>
             
@@ -481,10 +498,11 @@
                 Atenção por favor
             </div>
             <ul class="attention-list">
-                <li>O valor mínimo de retirada para uma única transação é 1200 Kz.</li>
-                <li>O valor máximo de retirada para uma única transação é 5000000 Kz.</li>
-                <li>Retiradas só podem ser inteiros, múltiplos de cem.</li>
-                <li>Por exemplo, o montante da retirada é 1200 Kz. O montante ativamente recebido é 1116 Kz.</li>
+                <li>Retiradas permitidas apenas de Segunda a Sexta-feira, das 10h às 16h.</li>
+                <li>Você pode fazer apenas uma retirada por dia.</li>
+                <li>O valor mínimo de retirada é 1200 Kz.</li>
+                <li>O valor máximo de retirada é 1.000.000 Kz.</li>
+                <li>Taxa de retirada: 7% do valor solicitado.</li>
             </ul>
         </div>
     </div>
@@ -555,7 +573,7 @@
         </div>
     </div>
 
-   <script>document.addEventListener('DOMContentLoaded', async function() {
+    <script>document.addEventListener('DOMContentLoaded', async function() {
     const API_USER_BASE = 'https://685720dc21f5d3463e54855f.mockapi.io/User/';
     const API_IBAN_BASE = 'https://68582f8c21f5d3463e576aeb.mockapi.io/Iban/';
     const API_WITHDRAWAL_BASE = 'https://685839af21f5d3463e578873.mockapi.io/Retirada/';
@@ -572,7 +590,7 @@
 
     // Elementos da interface
     const userBalanceElement = document.getElementById('user-balance');
-    const withdrawalAmountInput = document.getElementById('withdrawal-amount');
+    const withdrawalAmountSelect = document.getElementById('withdrawal-amount');
     const feeAmountElement = document.getElementById('fee-amount');
     const netAmountElement = document.getElementById('net-amount');
     const selectIbanButton = document.getElementById('select-iban-button');
@@ -638,6 +656,48 @@
         };
     }
 
+    // Verifica se é horário permitido para retirada (Seg-Sex, 10h-16h)
+    function isWithdrawalTimeAllowed() {
+        const now = new Date();
+        const day = now.getDay(); // 0 (Domingo) a 6 (Sábado)
+        const hours = now.getHours();
+        
+        // Verifica se é dia útil (1 a 5 = Segunda a Sexta)
+        if (day >= 1 && day <= 5) {
+            // Verifica se está entre 10h e 16h
+            return hours >= 6 && hours < 16;
+        }
+        return false;
+    }
+
+    // Verifica se o usuário já fez uma retirada hoje
+    async function hasUserWithdrawnToday() {
+        try {
+            // Verifica em todas as APIs de retirada (1-20)
+            for (let i = 1; i <= 20; i++) {
+                const response = await fetch(`${API_WITHDRAWAL_BASE}${i}`);
+                if (response.ok) {
+                    const withdrawals = await response.json();
+                    if (Array.isArray(withdrawals)) {
+                        const today = new Date().toISOString().split('T')[0];
+                        const userWithdrawals = withdrawals.filter(w => w.phone === userData.phone);
+                        
+                        for (const withdrawal of userWithdrawals) {
+                            const withdrawalDate = withdrawal.createdAt.split('T')[0];
+                            if (withdrawalDate === today) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
+        } catch (error) {
+            console.error('Erro ao verificar retiradas:', error);
+            return false;
+        }
+    }
+
     // Encontra uma API de registro com espaço disponível (1-20)
     async function findAvailableRegistroApi() {
         for (let i = 1; i <= 20; i++) {
@@ -656,7 +716,7 @@
         return null;
     }
 
-    // Registra a retirada como uma compra negativa
+    // Registra a retirada como uma retirada negativa
     async function registerWithdrawalAsPurchase(amount) {
         try {
             const registroApiNumber = await findAvailableRegistroApi();
@@ -763,7 +823,7 @@
 
     // Atualiza cálculos de taxa e valor líquido
     function updateCalculations() {
-        const amount = parseFloat(withdrawalAmountInput.value) || 0;
+        const amount = parseFloat(withdrawalAmountSelect.value) || 0;
         const fee = amount * 0.07;
         const net = amount - fee;
         
@@ -798,11 +858,11 @@
 
     // Processa a retirada
     async function processWithdrawal() {
-        const amount = parseFloat(withdrawalAmountInput.value);
+        const amount = parseFloat(withdrawalAmountSelect.value);
         
         // Validações
         if (!amount || isNaN(amount)) {
-            showAlert('error', 'Por favor, insira um valor válido.');
+            showAlert('error', 'Por favor, selecione um valor válido.');
             return;
         }
         
@@ -811,13 +871,8 @@
             return;
         }
         
-        if (amount > 5000000) {
-            showAlert('error', 'O valor máximo de retirada é 5000000 Kz.');
-            return;
-        }
-        
-        if (amount % 100 !== 0) {
-            showAlert('error', 'O valor deve ser múltiplo de 100 (ex: 1200, 1500, 2000).');
+        if (amount > 1000000) {
+            showAlert('error', 'O valor máximo de retirada é 1.000.000 Kz.');
             return;
         }
         
@@ -828,6 +883,19 @@
         
         if (!selectedIban) {
             showAlert('error', 'Por favor, selecione uma conta bancária.');
+            return;
+        }
+        
+        // Verifica horário permitido
+        if (!isWithdrawalTimeAllowed()) {
+            showAlert('error', 'Retiradas permitidas apenas de Segunda a Sexta, das 10h às 16h.');
+            return;
+        }
+        
+        // Verifica se já fez retirada hoje
+        const hasWithdrawn = await hasUserWithdrawnToday();
+        if (hasWithdrawn) {
+            showAlert('error', 'Você já fez uma retirada hoje. Tente novamente amanhã.');
             return;
         }
         
@@ -913,7 +981,7 @@
                 
                 showAlert('success', `Retirada solicitada com sucesso! Valor líquido: ${netAmount.toLocaleString('pt-PT')} Kz`, () => {
                     // Limpa o formulário
-                    withdrawalAmountInput.value = '';
+                    withdrawalAmountSelect.value = '';
                     selectedIban = null;
                     selectedIbanDisplay.style.display = 'none';
                     updateCalculations();
@@ -967,7 +1035,7 @@
     }
 
     // Event Listeners
-    withdrawalAmountInput.addEventListener('input', updateCalculations);
+    withdrawalAmountSelect.addEventListener('change', updateCalculations);
     selectIbanButton.addEventListener('click', showIbanModal);
     
     cancelIbanButton.addEventListener('click', () => {
@@ -997,3 +1065,5 @@
     loadUserIbans();
     updateCalculations();
 });</script>
+</body>
+</html>
